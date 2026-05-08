@@ -176,12 +176,12 @@
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function() {
-        if (navLinks.classList.contains('active')) {
-          // Trap focus inside menu
-          const firstLink = navLinks.querySelector('a');
-          const lastLink = navLinks.querySelectorAll('a').pop();
+     if (menuToggle && navLinks) {
+       menuToggle.addEventListener('click', function() {
+         if (navLinks.classList.contains('active')) {
+           // Trap focus inside menu
+           const firstLink = navLinks.querySelector('a');
+           const lastLink = Array.from(navLinks.querySelectorAll('a')).pop();
 
           firstLink.addEventListener('keydown', function trapFirst(e) {
             if (e.key === 'Tab' && e.shiftKey) {
@@ -258,15 +258,15 @@
   // ===========================
   // Initialize Everything
   // ===========================
-  function init() {
-    initCopyButtons();
-    initMobileMenu();
-    initSmoothScroll();
-    initKeyboardNav();
-    initScrollToTop();
-    initCodeBlocks();
-    initSyntaxHighlighting();
-  }
+   function init() {
+     initCopyButtons();
+     // initMobileMenu(); // Disabled: using inline script instead
+     initSmoothScroll();
+     initKeyboardNav();
+     initScrollToTop();
+     initCodeBlocks();
+     initSyntaxHighlighting();
+   }
 
   // Run on DOM ready
   if (document.readyState === 'loading') {

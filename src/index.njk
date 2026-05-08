@@ -6,7 +6,7 @@ layout: base.njk
 
 <section class="hero">
   <div class="container">
-    <h1>TerraPDF</h1>
+    <div><img src="/images/tp-logo.png" alt="TerraPDF Logo" style="width: 200px; height: auto;"></div>
     <p class="tagline">
       A lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. 
       No native binaries, no third-party packages — just pure C# power.
@@ -32,14 +32,14 @@ layout: base.njk
   </div>
 </section>
 
-<section class="content-section">
+<section class="content-section" id="why-terrapdf">
   <div class="container">
     <div class="section-header">
       <h2>Why TerraPDF?</h2>
       <p>Professional PDF generation made simple. Designed for developers who value simplicity, performance, and full control.</p>
     </div>
     
-    <div class="features-grid">
+     <div class="features-grid features-grid--two-col">
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
         <h3>Zero Dependencies</h3>
@@ -145,43 +145,111 @@ Document.Create(container =>
 <section class="content-section">
   <div class="container">
     <div class="section-header">
-      <h2>Core Features at a Glance</h2>
-      <p>Everything you need to generate professional PDF documents programmatically.</p>
+      <h2>Everything You Need to Build Amazing PDFs</h2>
+      <p>A complete toolkit for professional PDF generation in C#. No compromises, no hidden costs.</p>
     </div>
     
-    <div class="feature-list">
-      <li>Text styling — bold, italic, bold-italic, strikethrough, underline</li>
-      <li>Font size, colour, and line-height control per text block</li>
-      <li>Per-span formatting inside mixed-style text blocks</li>
-      <li>Margin and padding decorators with full unit support (pt, mm, cm, inch)</li>
-      <li>Background fills and borders (full, rounded, per-edge)</li>
-      <li>Rounded-corner borders and filled rounded boxes</li>
-      <li>Per-edge borders (BorderTop, BorderBottom, BorderLeft, BorderRight)</li>
-      <li>Horizontal and vertical alignment</li>
-      <li>Column, Row, and Table layouts</li>
-      <li>PNG and JPEG image embedding</li>
-      <li>Horizontal and vertical rule lines</li>
-      <li>Explicit page breaks via PageBreak()</li>
-      <li>Clickable hyperlink (URI) annotations via Hyperlink()</li>
-      <li>Internal document links (GoTo) via InternalLink()</li>
-      <li>Automatic Table of Contents from H1–H6 headings</li>
-      <li>PDF bookmarks / outlines with hierarchical nesting</li>
-      <li>Document metadata (Title, Author, Subject, Keywords, Creator)</li>
-      <li>Conditional rendering via ShowIf</li>
-      <li>Reusable components via IComponent</li>
-      <li>Headers, footers, and page numbers</li>
-      <li>Fluent, composable API</li>
+    <div class="features-showcase">
+      <!-- Text & Typography -->
+      <div class="feature-category">
+        <h3 class="category-label">Typography</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">🔤</span>
+            <span class="feature-title">Rich Text Styling</span>
+            <span class="feature-desc">Bold, italic, underline, strikethrough with full font control</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📏</span>
+            <span class="feature-title">Size & Scale</span>
+            <span class="feature-desc">Precise font sizing and line-height control</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎨</span>
+            <span class="feature-title">Color & Formatting</span>
+            <span class="feature-desc">Per-span formatting with custom colors and styles</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout & Structure -->
+      <div class="feature-category">
+        <h3 class="category-label">Layout</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Columns & Tables</span>
+            <span class="feature-desc">Flexible column, row, and table layouts</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Margins & Padding</span>
+            <span class="feature-desc">Full unit support: pt, mm, cm, inch</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🖼️</span>
+            <span class="feature-title">Images</span>
+            <span class="feature-desc">PNG and JPEG embedding with positioning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Features -->
+      <div class="feature-category">
+        <h3 class="category-label">Advanced</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">📑</span>
+            <span class="feature-title">Auto Table of Contents</span>
+            <span class="feature-desc">TOC generated from H1–H6 with clickable links</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔗</span>
+            <span class="feature-title">Links & Bookmarks</span>
+            <span class="feature-desc">URI hyperlinks, internal links, and bookmarks</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📄</span>
+            <span class="feature-title">Headers & Footers</span>
+            <span class="feature-desc">Reusable headers, footers, and page numbers</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Styling & Decorators -->
+      <div class="feature-category">
+        <h3 class="category-label">Styling</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">🟢</span>
+            <span class="feature-title">Backgrounds & Borders</span>
+            <span class="feature-desc">Full, rounded, per-edge borders with fills</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Alignment</span>
+            <span class="feature-desc">Horizontal and vertical alignment controls</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏗️</span>
+            <span class="feature-title">Components</span>
+            <span class="feature-desc">Reusable components and conditional rendering</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="content-section" style="background: linear-gradient(135deg, #1a5fb4 0%, #0d47a1 100%); color: white; padding: var(--space-2xl); border-radius: 12px;">
-  <div class="container text-center">
-    <h2 style="color: white;">Ready to Get Started?</h2>
-    <p style="font-size: 1.1rem; opacity: 0.9;">Join developers using TerraPDF for fast, reliable PDF generation.</p>
-    <div style="margin-top: var(--space-xl);">
-      <a href="/getting-started/" class="btn btn-large" style="background: white; color: var(--primary); border-color: white;">Read the Guide</a>
-       <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" style="border-color: white; color: white;" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Get Started?</h2>
+      <p>Generate PDFs in minutes with TerraPDF's simple, zero-dependency API.</p>
+      <div class="cta-buttons">
+        <a href="/getting-started/" class="btn btn-primary">Read the Guide</a>
+        <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Star on GitHub</a>
+      </div>
     </div>
   </div>
 </section>

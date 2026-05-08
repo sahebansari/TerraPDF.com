@@ -7,26 +7,159 @@ layout: base.njk
 <div class="container">
   <div class="section-header">
     <h1>TerraPDF Features</h1>
-    <p>A complete PDF generation library with zero dependencies. Everything you need to create professional documents.</p>
+    <p>A comprehensive PDF generation library built for C# developers. Zero dependencies, pure managed code, and designed for production use.</p>
   </div>
 
+  <!-- ==================== FEATURE CATEGORIES OVERVIEW ==================== -->
   <div class="content-section">
+    <h2>Feature Overview</h2>
+    <p>Explore TerraPDF's capabilities organized by functional area. Click any feature name to learn more.</p>
+    
+    <div class="features-categorized">
+      <!-- Text & Typography -->
+      <div class="category-group">
+        <h3 class="category-title">Text & Typography</h3>
+        <ul class="category-features">
+          <li><a href="#text-typography">Text styling</a> — bold, italic, underline, strikethrough</li>
+          <li><a href="#multi-span">Multi-span text</a> — inline formatting within text blocks</li>
+          <li><a href="#font-control">Font control</a> — size, color, line height</li>
+          <li><a href="#material-colors">Material Design colors</a> — built-in palette with darken/lighten</li>
+          <li><a href="#headings">Semantic headings</a> — H1–H6 with auto TOC integration</li>
+        </ul>
+      </div>
+
+      <!-- Layout System -->
+      <div class="category-group">
+        <h3 class="category-title">Layout System</h3>
+        <ul class="category-features">
+          <li><a href="#column-layout">Column layout</a> — vertical stacking with pagination</li>
+          <li><a href="#row-layout">Row layout</a> — horizontal arrangement with flexible sizing</li>
+          <li><a href="#table-layout">Table layout</a> — grids with headers, cell spanning</li>
+          <li><a href="#alignment">Alignment</a> — horizontal and vertical positioning</li>
+          <li><a href="#layers">Layers</a> — stacked content planes for overlays</li>
+          <li><a href="#inlined">Inlined flow</a> — paragraph-style text wrapping</li>
+        </ul>
+      </div>
+
+      <!-- Decorators & Styling -->
+      <div class="category-group">
+        <h3 class="category-title">Decorators & Styling</h3>
+        <ul class="category-features">
+          <li><a href="#spacing">Margin & padding</a> — full unit support (pt, mm, cm, inch)</li>
+          <li><a href="#backgrounds">Backgrounds</a> — solid fills, gradients</li>
+          <li><a href="#borders">Borders</a> — simple, rounded, per-edge</li>
+          <li><a href="#lines">Lines</a> — horizontal and vertical rules</li>
+          <li><a href="#rounded-boxes">Rounded boxes</a> — combined fill + border with radius</li>
+          <li><a href="#aspect-ratio">Aspect ratio</a> — content scaling constraints</li>
+        </ul>
+      </div>
+
+      <!-- Page & Document -->
+      <div class="category-group">
+        <h3 class="category-title">Page & Document</h3>
+        <ul class="category-features">
+          <li><a href="#page-config">Page configuration</a> — size, margins, orientation</li>
+          <li><a href="#headers-footers">Headers & footers</a> — repeating areas on every page</li>
+          <li><a href="#page-breaks">Page breaks</a> — forced breaks and pagination control</li>
+          <li><a href="#page-numbers">Page numbers</a> — current page and total count</li>
+          <li><a href="#page-orientation">Page orientation</a> — portrait and landscape</li>
+        </ul>
+      </div>
+
+      <!-- Navigation & Links -->
+      <div class="category-group">
+        <h3 class="category-title">Navigation & Links</h3>
+        <ul class="category-features">
+          <li><a href="#hyperlinks">Hyperlinks</a> — clickable URL and email links</li>
+          <li><a href="#internal-links">Internal links</a> — jump to specific pages</li>
+          <li><a href="#table-of-contents">Table of Contents</a> — auto-generated from headings</li>
+          <li><a href="#bookmarks">PDF bookmarks</a> — hierarchical outline navigation</li>
+        </ul>
+      </div>
+
+      <!-- Media & Graphics -->
+      <div class="category-group">
+        <h3 class="category-title">Media & Graphics</h3>
+        <ul class="category-features">
+          <li><a href="#images">Images</a> — PNG, JPEG with aspect ratio preservation</li>
+          <li><a href="#dynamic-components">Dynamic components</a> — defer content generation</li>
+          <li><a href="#debugging">Debug visualisation</a> — debug areas and pointers</li>
+        </ul>
+      </div>
+
+      <!-- Reusability -->
+      <div class="category-group">
+        <h3 class="category-title">Reusability</h3>
+        <ul class="category-features">
+          <li><a href="#icomponent">IComponent</a> — reusable content blocks</li>
+          <li><a href="#idocument">IDocument</a> — reusable document templates</li>
+          <li><a href="#conditional">Conditional rendering</a> — ShowIf for runtime logic</li>
+        </ul>
+      </div>
+
+      <!-- Metadata & Properties -->
+      <div class="category-group">
+        <h3 class="category-title">Metadata & Properties</h3>
+        <ul class="category-features">
+          <li><a href="#document-metadata">Document metadata</a> — title, author, subject, keywords</li>
+          <li><a href="#content-direction">Content direction</a> — LTR and RTL text support</li>
+          <li><a href="#lists">Lists</a> — ordered and unordered with custom markers</li>
+        </ul>
+      </div>
+
+      <!-- Output & Units -->
+      <div class="category-group">
+        <h3 class="category-title">Output & Units</h3>
+        <ul class="category-features">
+          <li><a href="#output-options">Output options</a> — file, stream, byte array</li>
+          <li><a href="#units">Length units</a> — points, millimetres, centimetres, inches</li>
+          <li><a href="#page-sizes">Built-in page sizes</a> — A0–A6, Letter, Legal, Tabloid</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DETAILED FEATURES ==================== -->
+
+  <!-- Text & Typography -->
+  <div class="content-section" id="text-typography">
     <h2>Text & Typography</h2>
-    <p>TerraPDF provides rich text styling capabilities with a fluent API that feels natural and expressive.</p>
+    <p>Full control over text presentation with an expressive fluent API. Style individual spans, manage line height, and apply Material Design colors.</p>
     
-    <h3>Text Styling</h3>
-    <ul class="feature-list">
-      <li><strong>Bold</strong> — Make text bold with <code>.Bold()</code></li>
-      <li><strong>Italic</strong> — Italicize with <code>.Italic()</code></li>
-      <li><strong>Strikethrough</strong> — Cross out text with <code>.Strikethrough()</code></li>
-      <li><strong>Underline</strong> — Underline text with <code>.Underline()</code></li>
-      <li><strong>Font Size</strong> — Customize size with <code>.FontSize(16)</code></li>
-      <li><strong>Font Color</strong> — Full Material Design palette plus hex colours</li>
-      <li><strong>Line Height</strong> — Control spacing with <code>.LineHeight(1.5)</code> multiplier</li>
-    </ul>
+    <h3 id="text-styling">Text Styling</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>Bold</h4>
+        <p>Emphasize text with <code>.Bold()</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Italic</h4>
+        <p>Add emphasis using <code>.Italic()</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Strikethrough</h4>
+        <p>Indicate removal with <code>.Strikethrough()</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Underline</h4>
+        <p>Add underline via <code>.Underline()</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Font Size</h4>
+        <p>Set exact size with <code>.FontSize(16)</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Font Color</h4>
+        <p>Material Design palette plus custom hex colors</p>
+      </div>
+      <div class="feature-card">
+        <h4>Line Height</h4>
+        <p>Adjust line spacing with <code>.LineHeight(1.5)</code></p>
+      </div>
+    </div>
     
-    <h3>Multi-Span Text</h3>
-    <p>Mix different styles within the same text block using <code>.Span()</code>:</p>
+    <h3 id="multi-span">Multi-Span Formatting</h3>
+    <p>Combine multiple styles within a single text block using <code>.Span()</code> for inline variations:</p>
     <pre><code class="language-csharp">container.Text(t =>
 {
     t.Span("Normal  ");
@@ -38,44 +171,64 @@ layout: base.njk
 });</code></pre>
     
     <div class="callout callout-info">
-      Each <code>SpanDescriptor</code> returned by <code>.Span()</code> applies styles only to that specific span, not the whole block.
+      Each <code>SpanDescriptor</code> returned by <code>.Span()</code> applies styles only to that span, allowing fine-grained control.
+    </div>
+
+    <h3 id="font-control">Font Control</h3>
+    <p>Control font properties per text block with chainable methods:</p>
+    <pre><code class="language-csharp">container.Text("Sample text")
+    .FontSize(14)
+    .FontColor(Color.Grey.Darken2)
+    .LineHeight(1.6)
+    .AlignJustify();</code></pre>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>Horizontal Alignment</h4>
+        <p><code>AlignLeft()</code>, <code>AlignCenter()</code>, <code>AlignRight()</code>, <code>AlignJustify()</code></p>
+      </div>
+      <div class="feature-card">
+        <h4>Vertical Alignment</h4>
+        <p><code>AlignMiddle()</code>, <code>AlignBottom()</code></p>
+      </div>
     </div>
   </div>
 
-  <div class="content-section">
-    <h2>Layout System</h2>
-    <p>Powerful layout containers for organizing content exactly how you want it.</p>
+  <!-- Layout Containers -->
+  <div class="content-section" id="layout-system">
+    <h2>Layout Containers</h2>
+    <p>Compose complex page layouts using flexible container elements that handle flow, alignment, and pagination automatically.</p>
     
-    <h3>Column Layout</h3>
-    <p>Stacks children vertically with configurable spacing and alignment.</p>
+    <h3 id="column-layout">Column Layout</h3>
+    <p>Stacks children vertically with configurable spacing and alignment options. Content flows naturally across pages.</p>
     <pre><code class="language-csharp">container.Column(col =>
 {
     col.Spacing(6);
-    col.AlignItemsLeft(); // or Center, Right
-    col.Item().Text("First");
-    col.Item().Text("Second");
+    col.AlignItemsLeft(); // Left, Center, or Right alignment
+    col.Item().Text("First section");
+    col.Item().Text("Second section");
 });</code></pre>
     
-    <h3>Row Layout</h3>
-    <p>Arranges children horizontally with flexible sizing options:</p>
+    <h3 id="row-layout">Row Layout</h3>
+    <p>Arranges children horizontally with flexible sizing: proportional, fixed, or auto-width based on content.</p>
     <pre><code class="language-csharp">container.Row(row =>
 {
     row.Spacing(8);
-    row.RelativeItem(2).Text("2x wide");  // proportional
-    row.RelativeItem(1).Text("1x wide");
-    row.AutoItem().Text("Auto width");    // natural content width
-    row.ConstantItem(80).Text("80 pt");   // fixed width
+    row.RelativeItem(2).Text("Takes 2/3 width");  // proportional sizing
+    row.RelativeItem(1).Text("Takes 1/3 width");
+    row.AutoItem().Text("Auto width");             // fits content
+    row.ConstantItem(80).Text("80 points");       // fixed width
 });</code></pre>
     
-    <h3>Table Layout</h3>
-    <p>Grid tables with repeating header rows, column definitions, and cell styling.</p>
+    <h3 id="table-layout">Table Layout</h3>
+    <p>Grid-based tables with column definitions, repeating header rows, cell spanning, and full styling control.</p>
     <pre><code class="language-csharp">container.Table(table =>
 {
     table.ColumnsDefinition(cols =>
     {
-        cols.RelativeColumn(4);
-        cols.RelativeColumn(1);
-        cols.ConstantColumn(60);
+        cols.RelativeColumn(4);   // 4 units
+        cols.RelativeColumn(1);   // 1 unit
+        cols.ConstantColumn(60);  // 60 points fixed
     });
 
     table.HeaderRow(row =>
@@ -92,13 +245,20 @@ layout: base.njk
         row.Cell().AlignRight().Text("$99.99");
     });
 });</code></pre>
+
+    <h3 id="layers">Layers</h3>
+    <p>Stack content in layers for backgrounds, watermarks, and foreground overlays. Useful for letterheads and decorative elements.</p>
+
+    <h3 id="inlined">Inlined Layout</h3>
+    <p>Inline flow layout where children wrap automatically like words in a paragraph. Elements arranged horizontally and wrap to next line when out of space.</p>
   </div>
 
-  <div class="content-section">
-    <h2>Decorators</h2>
-    <p>Chainable decorators for spacing, backgrounds, borders, and more. They compose from outside in: <strong>Margin → Background → Padding → Content</strong>.</p>
+  <!-- Decorators & Styling -->
+  <div class="content-section" id="decorators">
+    <h2>Decorators & Styling</h2>
+    <p>Chainable decorators for spacing, backgrounds, borders, and rounded corners. Composed from outside in: <strong>Margin → Background → Padding → Content</strong>.</p>
     
-    <h3>Spacing</h3>
+    <h3 id="spacing">Spacing</h3>
     <pre><code class="language-csharp">// Padding (inside border/background)
 container.Padding(10);
 container.PaddingTop(4).PaddingBottom(4);
@@ -109,82 +269,141 @@ container.Margin(10);
 container.MarginVertical(8);
 container.Margin(0.5, Unit.Centimetre);</code></pre>
     
-    <h3>Background & Borders</h3>
-    <pre><code class="language-csharp">container.Background("#1a4a8a");
-container.Border(1.5, "#1a4a8a");  // width + colour
+    <h3 id="backgrounds">Backgrounds</h3>
+    <pre><code class="language-csharp">container.Background("#1a4a8a");           // solid colour
+container.Background(Color.Blue.Medium);   // using Material palette</code></pre>
+    
+    <h3 id="borders">Borders</h3>
+    <pre><code class="language-csharp">// Simple border
+container.Border(1.5, "#1a4a8a");  // width + color
+container.Border(1);                 // 1pt black (default)
 
 // Rounded border
-container.RoundedBorder(radius: 8, lineWidth: 1, hexColor: "#1a4a8a");
+container.RoundedBorder(radius: 8, lineWidth: 1, color: "#1a4a8a");
 
 // Filled rounded box (background + border)
-container.RoundedBox(radius: 8, fillHexColor: "#E3F2FD", borderHexColor: "#1a4a8a");
+container.RoundedBox(radius: 8, fillColor: "#E3F2FD", borderColor: "#1a4a8a");
 
 // Per-edge borders
 container.BorderTop(1.5, "#1a4a8a");
 container.BorderLeft(3, Color.Red.Medium);</code></pre>
+
+    <h3 id="lines">Lines</h3>
+    <pre><code class="language-csharp">container.LineHorizontal(1.5, "#1a4a8a");  // horizontal divider
+container.LineVertical(1);                    // vertical separator (1pt black)</code></pre>
+
+    <h3 id="rounded-boxes">Rounded Boxes</h3>
+    <p>Combine background fill with rounded border in a single decorator. Ideal for callout boxes and highlighted content.</p>
+    
+    <h3 id="aspect-ratio">Aspect Ratio</h3>
+    <p>Constrain child content to maintain width-to-height proportion. Use for images or fixed-ratio containers.</p>
   </div>
 
-  <div class="content-section">
-    <h2>Page Features</h2>
+  <!-- Page Features -->
+  <div class="content-section" id="page-document">
+    <h2>Page & Document</h2>
     
-    <h3>Page Breaks</h3>
-    <p>Force a new page inside a Column:</p>
+    <h3 id="page-config">Page Configuration</h3>
+    <p>Configure page size, margins, background colour, and default text style. All standard ISO page sizes included.</p>
+    <pre><code class="language-csharp">page.Size(PageSize.A4);
+page.Margin(2, Unit.Centimetre);
+page.PageColor(Color.White);
+page.DefaultTextStyle(s => s.FontSize(11));</code></pre>
+
+    <h3 id="headers-footers">Headers & Footers</h3>
+    <p>Define persistent header and footer regions that automatically repeat on every page. Main content flows between them with pagination.</p>
+    <pre><code class="language-csharp">page.Header()
+    .Background("#1a4a8a")
+    .Padding(8)
+    .Text("My Report").Bold().FontColor(Color.White);
+
+page.Footer()
+    .AlignCenter()
+    .Text(t =>
+    {
+        t.Span("Page ");
+        t.CurrentPageNumber();
+        t.Span(" / ");
+        t.TotalPages();
+    });</code></pre>
+
+    <h3 id="page-breaks">Page Breaks</h3>
+    <p>Force a new page at any point inside a Column:</p>
     <pre><code class="language-csharp">container.Column(col =>
 {
     col.Item().Text("Content on page 1");
-    col.PageBreak();
+    col.PageBreak();                // Explicit page break
     col.Item().Text("Content on page 2");
 });</code></pre>
-    
-    <h3>Hyperlinks</h3>
-    <pre><code class="language-csharp">// URI hyperlink
-container.Hyperlink("https://example.com").Text("Click here");
 
-// Hyperlinked image
-container.Hyperlink("https://example.com").Image("logo.png", 120);</code></pre>
-    
-    <h3>Internal Links</h3>
-    <p>Create GoTo links that jump to specific pages:</p>
-    <pre><code class="language-csharp">container.InternalLink(pageNumber: 5, topPosition: 50)
-       .Text("Go to section 5");</code></pre>
-    
-    <h3>Table of Contents</h3>
-    <p>Automatic TOC generation from H1-H6 headings with clickable links and hierarchical numbering.</p>
-    <pre><code class="language-csharp">container.TableOfContents(p =>
-{
-    p.Size(PageSize.A4);
-    p.Margin(2, Unit.Centimetre);
-    p.DefaultTextStyle(s => s.FontSize(11));
-});</code></pre>
-    
-    <h3>Page Numbers</h3>
-    <p>Current page and total page count in footers:</p>
-    <pre><code class="language-csharp">page.Footer().AlignCenter().Text(t =>
-{
-    t.Span("Page ");
-    t.CurrentPageNumber().FontSize(9);
-    t.Span(" / ");
-    t.TotalPages().FontSize(9);
-});</code></pre>
+    <h3 id="page-numbers">Page Numbers</h3>
+    <p>Insert current page number and total page count anywhere in the document. Automatically resolves during the two-pass rendering phase.</p>
+
+    <h3 id="page-orientation">Page Orientation</h3>
+    <p>Switch between portrait and landscape:</p>
+    <pre><code class="language-csharp">page.Size(PageSize.Landscape(PageSize.A4));
+page.Size(PageSize.Portrait(PageSize.Letter));</code></pre>
   </div>
 
-  <div class="content-section">
-    <h2>Images & Media</h2>
-    <p>Embed PNG and JPEG images with automatic aspect ratio preservation.</p>
+  <!-- Navigation & Links -->
+  <div class="content-section" id="navigation">
+    <h2>Navigation & Links</h2>
+    
+    <h3 id="hyperlinks">Hyperlinks</h3>
+    <p>Create clickable links to external URLs or email addresses. Wrap any content element:</p>
+    <pre><code class="language-csharp">// Text hyperlink
+container.Hyperlink("https://example.com").Text("Visit website");
+
+// Image hyperlink
+container.Hyperlink("https://github.com/sahebansari/TerraPDF")
+        .Image("logo.png", 120);</code></pre>
+
+    <h3 id="internal-links">Internal Links</h3>
+    <p>Jump to specific pages within the document using GoTo actions:</p>
+    <pre><code class="language-csharp">container.InternalLink(pageNumber: 5, topPosition: 72)
+       .Text("Go to Chapter 5");</code></pre>
+
+    <h3 id="table-of-contents">Table of Contents</h3>
+    <p>Automatic TOC generation from H1–H6 headings. Generates clickable internal links and hierarchical numbering. Page numbers are accurate through the two-pass rendering system.</p>
+    <pre><code class="language-csharp">container.TableOfContents(toc =>
+{
+    toc.Size(PageSize.A4);
+    toc.Margin(2, Unit.Centimetre);
+    toc.DefaultTextStyle(s => s.FontSize(11));
+});</code></pre>
+
+    <h3 id="bookmarks">PDF Bookmarks</h3>
+    <p>Generate hierarchical PDF bookmarks (outlines) for navigation in PDF readers. Create parent-child relationships and precise page targeting.</p>
+    <pre><code class="language-csharp">c.Bookmark("Chapter 1", 1);
+c.Bookmark("Section 1.1", 1, "Chapter 1");  // child of Chapter 1
+c.Bookmark("Appendix", 5, 144);             // with Y-position</code></pre>
+  </div>
+
+  <!-- Media & Graphics -->
+  <div class="content-section" id="media">
+    <h2>Media & Graphics</h2>
+    
+    <h3 id="images">Images</h3>
+    <p>Embed PNG and JPEG images with automatic aspect ratio preservation and alignment support:</p>
     <pre><code class="language-csharp">// Fill available width, preserve aspect ratio
-container.Image("path/to/image.png");
+container.Image("photo.jpg");
 
 // Fixed width with alignment
 container.AlignCenter().Image("logo.png", 120);</code></pre>
-    
-    <h3>Horizontal & Vertical Lines</h3>
-    <pre><code class="language-csharp">container.LineHorizontal(1.5, "#1a4a8a");
-container.LineVertical(1); // black by default</code></pre>
+
+    <h3 id="dynamic-components">Dynamic Components</h3>
+    <p>Optimize memory for large documents with deferred content generation. Content is generated only when needed during rendering rather than eagerly computed.</p>
+
+    <h3 id="debugging">Debug Visualisation</h3>
+    <p>Debug areas and pointers help diagnose layout issues during development by highlighting element boundaries and providing context in error messages.</p>
   </div>
 
-  <div class="content-section">
-    <h2>Reusable Components</h2>
-    <p>Create custom reusable components by implementing <code>IComponent</code>:</p>
+  <!-- Reusability & Components -->
+  <div class="content-section" id="reusability">
+    <h2>Reusability & Components</h2>
+    
+    <h3 id="icomponent">IComponent — Reusable Content Blocks</h3>
+    <p>Encapsulate reusable UI elements like callouts, address blocks, or cards:</p>
     <pre><code class="language-csharp">public class CalloutBox : IComponent
 {
     private readonly string _text;
@@ -192,15 +411,17 @@ container.LineVertical(1); // black by default</code></pre>
 
     public void Compose(IContainer container) =>
         container
-            .Margin(6).Background(Color.Blue.Lighten4).Padding(10)
+            .Margin(6)
+            .Background(Color.Blue.Lighten4)
+            .Padding(10)
             .Text(_text).Italic();
 }
 
-// Usage
-container.Component(new CalloutBox("Note: this is important."));</code></pre>
-    
-    <h3>Reusable Document Templates</h3>
-    <p>Implement <code>IDocument</code> for reusable document structures:</p>
+// Usage anywhere
+container.Component(new CalloutBox("Important note"));</code></pre>
+
+    <h3 id="idocument">IDocument — Reusable Document Templates</h3>
+    <p>Separate document structure from data. Create templates for invoices, reports, or letters that can be unit tested and reused.</p>
     <pre><code class="language-csharp">public class InvoiceDocument : IDocument
 {
     private readonly InvoiceData _data;
@@ -212,77 +433,191 @@ container.Component(new CalloutBox("Note: this is important."));</code></pre>
         {
             page.Size(PageSize.A4);
             page.Margin(2, Unit.Centimetre);
-            page.Content().Text($"Invoice #{_data.Number}").Bold().FontSize(24);
+            page.Content().Column(col =>
+            {
+                col.Item().Text($"Invoice #{_data.Number}").Bold();
+                col.Item().Text($"Total: {_data.Total:C}");
+            });
         });
     }
 }
 
-// Usage
+// Generate
 Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pre>
+
+    <h3 id="conditional">Conditional Rendering</h3>
+    <p>Show or hide content based on runtime conditions:</p>
+    <pre><code class="language-csharp">container.Column(col =>
+{
+    col.Item().Text("Always shown");
+
+    col.Item().ShowIf(isVip)
+        .Text("VIP exclusive offer");
+
+    col.Item().ShowIf(showDiscount)
+        .Background(Color.Green.Lighten4)
+        .Text("Discount applied!");
+});</code></pre>
   </div>
 
-  <div class="content-section">
-    <h2>Output Formats</h2>
-    <p>Multiple output options for different scenarios:</p>
-    <ul class="feature-list">
-      <li><strong>To file</strong> — <code>.PublishPdf("output.pdf")</code></li>
-      <li><strong>To byte array</strong> — <code>byte[] bytes = .PublishPdf();</code> (for HTTP responses, email attachments)</li>
-      <li><strong>To stream</strong> — <code>.PublishPdf(stream)</code> (any writable stream)</li>
-    </ul>
-  </div>
-
-  <div class="content-section">
-    <h2>Page Sizes & Units</h2>
-    <h3>Built-in Page Sizes</h3>
-    <table class="api-table">
-      <thead>
-        <tr><th>Constant</th><th>Width × Height (pt)</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>PageSize.A0</code></td><td>2383.94 × 3370.39</td></tr>
-        <tr><td><code>PageSize.A1</code></td><td>1683.78 × 2383.94</td></tr>
-        <tr><td><code>PageSize.A2</code></td><td>1190.55 × 1683.78</td></tr>
-        <tr><td><code>PageSize.A3</code></td><td>841.89 × 1190.55</td></tr>
-        <tr><td><code>PageSize.A4</code></td><td>595.28 × 841.89</td></tr>
-        <tr><td><code>PageSize.A5</code></td><td>419.53 × 595.28</td></tr>
-        <tr><td><code>PageSize.Letter</code></td><td>612.00 × 792.00</td></tr>
-        <tr><td><code>PageSize.Legal</code></td><td>612.00 × 1008.00</td></tr>
-        <tr><td><code>PageSize.Tabloid</code></td><td>792.00 × 1224.00</td></tr>
-      </tbody>
-    </table>
+  <!-- Metadata & Properties -->
+  <div class="content-section" id="metadata">
+    <h2>Metadata & Document Properties</h2>
     
-    <h3>Built-in Units</h3>
-    <table class="api-table">
-      <thead>
-        <tr><th>Enum</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>Unit.Point</code></td><td>PDF native unit (1 pt = 1/72 inch) — default</td></tr>
-        <tr><td><code>Unit.Millimetre</code></td><td>1 mm ≈ 2.835 pt</td></tr>
-        <tr><td><code>Unit.Centimetre</code></td><td>1 cm ≈ 28.35 pt</td></tr>
-        <tr><td><code>Unit.Inch</code></td><td>1 in = 72 pt</td></tr>
-      </tbody>
-    </table>
+    <h3 id="document-metadata">Document Metadata</h3>
+    <p>Set standard PDF document properties that appear in viewer dialogs:</p>
+    <pre><code class="language-csharp">Document.Create(c =>
+{
+    c.MetadataTitle("Quarterly Report Q1 2025");
+    c.MetadataAuthor("Acme Finance Division");
+    c.MetadataSubject("Financial Performance Review");
+    c.MetadataKeywords("finance, quarterly, report, 2025");
+    c.MetadataCreator("Acme Reporting Engine v3.2");
+
+    c.Page(p => p.Size(PageSize.A4).Content().Text("..."));
+})
+.PublishPdf("report.pdf");</code></pre>
+
+    <h3 id="content-direction">Content Direction</h3>
+    <p>Full support for right-to-left (RTL) languages. Set direction at page or container level:</p>
+    <pre><code class="language-csharp">page.ContentFromRightToLeft()
+    .Column(col =>
+    {
+        col.Item().Text("مرحبا بالعالم");  // Arabic RTL text
+    });</code></pre>
+
+    <h3 id="headings">Headings H1–H6</h3>
+    <p>Semantic heading elements with sensible defaults. Automatically register with TOC and bookmark systems.</p>
+    <div class="callout callout-info">
+      Default heading sizes: H1 (24pt bold) → H2 (20pt bold) → H3 (16pt bold) → H4 (14pt italic) → H5 (12pt bold) → H6 (11pt regular).
+    </div>
+
+    <h3 id="lists">Lists</h3>
+    <p>Ordered (numbered) and unordered (bulleted) lists with automatic numbering and custom markers.</p>
   </div>
 
-  <div class="content-section">
-    <h2>Built-in Colors</h2>
-    <p>Material Design colour palette with darken/lighten variations:</p>
-    <pre><code class="language-csharp">Color.Red.Darken2    Color.Red.Darken1   Color.Red.Medium   Color.Red.Lighten1 ... 
-Color.Blue.Darken2  Color.Blue.Medium   ...
-Color.Green.Darken2 Color.Green.Medium  ...
-Color.Grey.Darken2  Color.Grey.Medium   Color.Grey.Lighten1 ...
+  <!-- Output & Units -->
+  <div class="content-section" id="output">
+    <h2>Output & Units</h2>
+    <p>Flexible output destinations and intuitive measurement system for seamless integration into any workflow.</p>
+    
+    <h3 id="output-options">Output Options</h3>
+    <p>Generate PDFs in the format that fits your application architecture:</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>To File</h4>
+        <p>Save directly to disk with <code>.PublishPdf("output.pdf")</code>. Ideal for batch jobs, reports, and archiving.</p>
+      </div>
+      <div class="feature-card">
+        <h4>To Byte Array</h4>
+        <p><code>byte[] data = .PublishPdf();</code> — perfect for HTTP responses, email attachments, and in-memory processing.</p>
+      </div>
+      <div class="feature-card">
+        <h4>To Stream</h4>
+        <p><code>.PublishPdf(stream)</code> writes to any writable stream. Seamlessly integrate with ASP.NET Core responses, Azure Blob Storage, S3, or custom streams.</p>
+      </div>
+    </div>
+
+    <h3 id="units" style="margin-top: var(--space-xl);">Length Units</h3>
+    <p>Specify units directly in API calls — TerraPDF handles all conversions automatically. No manual point calculations needed.</p>
+    <div class="table-wrapper">
+      <table class="api-table">
+        <thead>
+          <tr><th>Unit</th><th>Description</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Unit.Point</code></td><td>PDF native unit (1 pt = 1/72 inch) — default</td><td><code>.Margin(72)</code> = 1 inch</td></tr>
+          <tr><td><code>Unit.Millimetre</code></td><td>1 mm ≈ 2.835 points</td><td><code>.Padding(10, Unit.Mm)</code></td></tr>
+          <tr><td><code>Unit.Centimetre</code></td><td>1 cm ≈ 28.35 points</td><td><code>.Margin(2, Unit.Cm)</code></td></tr>
+          <tr><td><code>Unit.Inch</code></td><td>1 inch = 72 points</td><td><code>.Margin(1, Unit.Inch)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="page-sizes" style="margin-top: var(--space-xl);">Built-in Page Sizes</h3>
+    <p>All standard ISO and North American paper sizes included. Landscape and portrait variants available via <code>PageSize.Landscape()</code> and <code>PageSize.Portrait()</code>.</p>
+    <div class="table-wrapper">
+      <table class="api-table">
+        <thead>
+          <tr><th>Constant</th><th>Width × Height (pt)</th><th>Common Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>PageSize.A4</code></td><td>595.28 × 841.89</td><td>Documents, letters (worldwide)</td></tr>
+          <tr><td><code>PageSize.A3</code></td><td>841.89 × 1190.55</td><td>Large reports, posters</td></tr>
+          <tr><td><code>PageSize.Letter</code></td><td>612.00 × 792.00</td><td>Business letters (North America)</td></tr>
+          <tr><td><code>PageSize.Legal</code></td><td>612.00 × 1008.00</td><td>Legal documents</td></tr>
+          <tr><td><code>PageSize.A5</code></td><td>419.53 × 595.28</td><td>Booklets, notebooks</td></tr>
+          <tr><td><code>PageSize.Tabloid</code></td><td>792.00 × 1224.00</td><td>Newspapers, large charts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted" style="font-size: 0.85rem; margin-top: var(--space-sm);">
+      Full ISO A0–A6 series included. All dimensions in PDF points (1/72 inch).
+    </p>
+  </div>
+
+  <!-- Colors -->
+  <div class="content-section" id="colors">
+    <h2>Colors</h2>
+    <p>Material Design colour palette built-in, with darken/lighten variants and direct hex string support.</p>
+    <div id="material-colors">
+      <pre><code class="language-csharp">// Material Design palette
+Color.Red.Darken2    Color.Red.Darken1   Color.Red.Medium   Color.Red.Lighten1 ... Color.Red.Lighten4
+Color.Blue.Darken2   Color.Blue.Medium   Color.Blue.Lighten1 ... Color.Blue.Lighten4
+Color.Green.Darken2  Color.Green.Medium  Color.Green.Lighten1 ... Color.Green.Lighten4
+Color.Grey.Darken2   Color.Grey.Medium   Color.Grey.Lighten1 ... Color.Grey.Lighten4
 Color.Orange.Medium
 Color.Purple.Medium
 
-// Convenience constants
+// Custom hex colors
+container.Background("#1a4a8a");
+container.Border(1, "#2ec27e");
+
+// Constants
 Color.White  // "#FFFFFF"
 Color.Black  // "#000000"</code></pre>
+    </div>
+    <p>All color-accepting methods support both <code>Color</code> constants and hex strings like <code>"#RRGGBB"</code>.</p>
+  </div>
+
+  <!-- Developer Experience -->
+  <div class="content-section" id="developer-experience">
+    <h2>Developer Experience</h2>
+    <p>Built for productivity with a clean, fully managed architecture that integrates seamlessly into any .NET project.</p>
     
-    <p>All colour methods also accept hex strings directly: <code>Background("#1a4a8a")</code></p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>Zero Dependencies</h4>
+        <p>No native binaries, no third-party runtime packages. Just a single NuGet with everything included.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Pure C#</h4>
+        <p>100% managed code that runs anywhere .NET runs — Windows, Linux, macOS, containers, serverless.</p>
+      </div>
+      <div class="feature-card">
+        <h4>MIT Licensed</h4>
+        <p>Free for commercial and personal use. No restrictions, no royalties, no licensing headaches.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Fluent API</h4>
+        <p>Chainable methods that read like natural language. Discoverable IntelliSense with clear method names.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Two-Pass Rendering</h4>
+        <p>Automatic page number resolution for accurate TOC links and cross-references. No manual tracking needed.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Modern .NET</h4>
+        <p>Targets .NET 8 and .NET 9 with latest language features. Future-proof and actively maintained.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info" style="margin-top: var(--space-xl);">
+      <strong>Production ready:</strong> TerraPDF is used in enterprise applications worldwide for invoices, reports, contracts, and document automation.
+    </div>
   </div>
 
   <div class="callout callout-success">
-    <strong>Ready to build?</strong> Check out the <a href="/getting-started/">Getting Started guide</a> or browse the <a href="/docs/">full documentation</a>.
+    <strong>Ready to build?</strong> Start with the <a href="/getting-started/">Getting Started guide</a> or explore the <a href="/docs/">full API documentation</a>.
   </div>
 </div>

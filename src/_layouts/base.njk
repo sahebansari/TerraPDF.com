@@ -30,19 +30,25 @@
   <meta name="twitter:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents.' }}">
   <meta name="twitter:image" content="https://github.com/sahebansari/TerraPDF/raw/master/logo.png">
   
-  <!-- Favicon (SVG data URI) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E">
-  
-   <!-- Stylesheets -->
-   <link rel="stylesheet" href="/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/android-chrome-512x512.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
 
-   <!-- Highlight.js -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+   <!-- Google Fonts - Modern font stack -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-   <!-- Scripts -->
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-   <script src="/js/main.js" defer></script>
+    <script src="/js/main.js" defer></script>
   
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
@@ -79,8 +85,8 @@
   <header class="site-header">
     <nav class="container nav-wrapper" aria-label="Main navigation" role="navigation">
       <a href="/" class="logo">
-        <span class="logo-icon">&#x1F4C4;</span>
-        <span class="logo-text">TerraPDF</span>
+        <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="logo-img">
+        <span class="logo-text"></span>
       </a>
       <ul class="nav-links">
         <li><a href="/" {% if page.url == "/" %}class="active" aria-current="page"{% endif %}>Home</a></li>
@@ -97,14 +103,26 @@
     </nav>
   </header>
 
-  <main id="main-content" role="main">
-    {{ content | safe }}
-  </main>
+    <main id="main-content" role="main">
+      {% if docPage %}
+        <div class="container">
+          <div class="content-section">
+            <a href="/docs/" class="back-to-docs">← All Documentation</a>
+            {{ content | safe }}
+          </div>
+        </div>
+      {% else %}
+        {{ content | safe }}
+      {% endif %}
+    </main>
 
-  <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo">
     <div class="container footer-content">
       <div class="footer-section">
-        <h4>TerraPDF</h4>
+        <div class="footer-logo">
+          <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="footer-logo-img">
+          <h4>TerraPDF</h4>
+        </div>
         <p>A lightweight, zero-dependency, pure C# library for generating professional PDF documents.</p>
       </div>
       <div class="footer-section">
@@ -131,26 +149,50 @@
       </div>
     </div>
      <div class="footer-bottom">
-       <div class="container">
-         <p>&copy; {{ page.date.getFullYear() }} TerraPDF. All rights reserved. | <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow noreferrer">MIT License</a></p>
-       </div>
-     </div>
-  </footer>
-
+        <div class="container">
+          <p>&copy; {{ page.date.getFullYear() }} TerraPDF. All rights reserved. | <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow noreferrer">MIT License</a></p>
+          <p class="footer-signature">With ❤️ designed by <a href="https://www.sahebansari.com" target="_blank" rel="noopener noreferrer">Saheb Ansari</a></p>
+        </div>
+      </div>
+   </footer>
   <script>
-    // Mobile menu toggle with ARIA support
-    document.addEventListener('DOMContentLoaded', function() {
+    (function() {
       const menuToggle = document.querySelector('.mobile-menu-toggle');
       const navLinks = document.querySelector('.nav-links');
-      
-      if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-          menuToggle.setAttribute('aria-expanded', !isExpanded);
-          navLinks.classList.toggle('active');
+      if (!menuToggle || !navLinks) return;
+
+      // Toggle menu on button click
+      menuToggle.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('active');
+      });
+
+      // Close menu when clicking a link
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
         });
-      }
-    });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          navLinks.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.focus();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
