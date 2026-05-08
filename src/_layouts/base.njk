@@ -3,14 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }} | TerraPDF.com</title>
+  
+  <!-- Primary Meta Tags -->
+  <title>{{ title }}</title>
+  <meta name="title" content="{{ title }}">
+  <meta name="description" content="{{ description or 'TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. Fast, free, and easy to use.' }}">
+  <meta name="keywords" content="PDF generation, C# PDF library, .NET PDF, TerraPDF, NuGet, open-source PDF, document generation, free PDF library">
+  <meta name="author" content="Saheb Ansari">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://terrapdf.com{{ page.url }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://terrapdf.com{{ page.url }}">
+  <meta property="og:title" content="{{ title }} | TerraPDF">
+  <meta property="og:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents. Fast, free, and easy to use.' }}">
+  <meta property="og:image" content="https://github.com/sahebansari/TerraPDF/raw/master/logo.png">
+  <meta property="og:site_name" content="TerraPDF">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://terrapdf.com{{ page.url }}">
+  <meta name="twitter:title" content="{{ title }} | TerraPDF">
+  <meta name="twitter:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents.' }}">
+  <meta name="twitter:image" content="https://github.com/sahebansari/TerraPDF/raw/master/logo.png">
+  
+  <!-- Favicon (SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TerraPDF",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, Linux, macOS",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. No native binaries, no third-party library required.",
+    "url": "https://github.com/sahebansari/TerraPDF",
+    "downloadUrl": "https://www.nuget.org/packages/TerraPDF/",
+    "screenshot": "https://github.com/sahebansari/TerraPDF/raw/master/logo.png",
+    "author": {
+      "@type": "Person",
+      "name": "Saheb Ansari"
+    },
+    "softwareVersion": "1.2.2",
+    "programmingLanguage": "C#",
+    "targetPlatform": ".NET 8, .NET 9",
+    "license": "https://github.com/sahebansari/TerraPDF/blob/master/LICENSE"
+  }
+  </script>
 </head>
 <body>
-  {% include "header.njk" %}
-  <main>
+  <header class="site-header">
+    <nav class="container nav-wrapper" aria-label="Main navigation">
+      <a href="/" class="logo">
+        <span class="logo-icon">&#x1F4C4;</span>
+        <span class="logo-text">TerraPDF</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a></li>
+        <li><a href="/features/" {% if page.url == "/features/" %}class="active"{% endif %}>Features</a></li>
+        <li><a href="/getting-started/" {% if page.url == "/getting-started/" %}class="active"{% endif %}>Getting Started</a></li>
+        <li><a href="/docs/" {% if page.url == "/docs/" %}class="active"{% endif %}>Documentation</a></li>
+        <li><a href="/download/" {% if page.url == "/download/" %}class="active"{% endif %}>Download</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener nofollow">GitHub</a>
+        <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener nofollow">NuGet</a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">&#x2630;</button>
+    </nav>
+  </header>
+
+  <main role="main">
     {{ content | safe }}
   </main>
-  {% include "footer.njk" %}
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h4>TerraPDF</h4>
+        <p>A lightweight, zero-dependency, pure C# library for generating professional PDF documents.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/features/">Features</a></li>
+          <li><a href="/getting-started/">Getting Started</a></li>
+          <li><a href="/docs/">Documentation</a></li>
+          <li><a href="https://github.com/sahebansari/TerraPDF" rel="noopener nofollow">GitHub Repository</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://www.nuget.org/packages/TerraPDF/" rel="noopener nofollow">NuGet Package</a></li>
+          <li><a href="https://github.com/sahebansari/TerraPDF/tree/master/docs" rel="noopener nofollow">Full Documentation</a></li>
+          <li><a href="https://github.com/sahebansari/TerraPDF/issues" rel="noopener nofollow">Report an Issue</a></li>
+          <li><a href="https://github.com/sahebansari/TerraPDF/blob/master/CONTRIBUTING.md" rel="noopener nofollow">Contributing</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>License</h4>
+        <p>MIT License &mdash; Free for commercial and personal use.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; {{ page.date.getFullYear() }} TerraPDF. All rights reserved. | <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow">MIT License</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle with ARIA support
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+          navLinks.classList.toggle('active');
+        });
+      }
+    });
+  </script>
 </body>
 </html>

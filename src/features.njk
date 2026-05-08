@@ -1,0 +1,288 @@
+---
+title: TerraPDF Features - PDF Generation Capabilities
+description: "Explore TerraPDF's comprehensive features: text styling, layouts, tables, images, TOC generation, bookmarks, and more. Zero dependencies, pure C#."
+layout: base.njk
+---
+
+<div class="container">
+  <div class="section-header">
+    <h1>TerraPDF Features</h1>
+    <p>A complete PDF generation library with zero dependencies. Everything you need to create professional documents.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Text & Typography</h2>
+    <p>TerraPDF provides rich text styling capabilities with a fluent API that feels natural and expressive.</p>
+    
+    <h3>Text Styling</h3>
+    <ul class="feature-list">
+      <li><strong>Bold</strong> — Make text bold with <code>.Bold()</code></li>
+      <li><strong>Italic</strong> — Italicize with <code>.Italic()</code></li>
+      <li><strong>Strikethrough</strong> — Cross out text with <code>.Strikethrough()</code></li>
+      <li><strong>Underline</strong> — Underline text with <code>.Underline()</code></li>
+      <li><strong>Font Size</strong> — Customize size with <code>.FontSize(16)</code></li>
+      <li><strong>Font Color</strong> — Full Material Design palette plus hex colours</li>
+      <li><strong>Line Height</strong> — Control spacing with <code>.LineHeight(1.5)</code> multiplier</li>
+    </ul>
+    
+    <h3>Multi-Span Text</h3>
+    <p>Mix different styles within the same text block using <code>.Span()</code>:</p>
+    <pre><code class="language-csharp">container.Text(t =>
+{
+    t.Span("Normal  ");
+    t.Span("Bold  ").Bold();
+    t.Span("Italic  ").Italic();
+    t.Span("Struck  ").Strikethrough();
+    t.Span("Coloured  ").FontColor(Color.Red.Medium);
+    t.Span("Large").FontSize(16).FontColor("#1a4a8a");
+});</code></pre>
+    
+    <div class="callout callout-info">
+      Each <code>SpanDescriptor</code> returned by <code>.Span()</code> applies styles only to that specific span, not the whole block.
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>Layout System</h2>
+    <p>Powerful layout containers for organizing content exactly how you want it.</p>
+    
+    <h3>Column Layout</h3>
+    <p>Stacks children vertically with configurable spacing and alignment.</p>
+    <pre><code class="language-csharp">container.Column(col =>
+{
+    col.Spacing(6);
+    col.AlignItemsLeft(); // or Center, Right
+    col.Item().Text("First");
+    col.Item().Text("Second");
+});</code></pre>
+    
+    <h3>Row Layout</h3>
+    <p>Arranges children horizontally with flexible sizing options:</p>
+    <pre><code class="language-csharp">container.Row(row =>
+{
+    row.Spacing(8);
+    row.RelativeItem(2).Text("2x wide");  // proportional
+    row.RelativeItem(1).Text("1x wide");
+    row.AutoItem().Text("Auto width");    // natural content width
+    row.ConstantItem(80).Text("80 pt");   // fixed width
+});</code></pre>
+    
+    <h3>Table Layout</h3>
+    <p>Grid tables with repeating header rows, column definitions, and cell styling.</p>
+    <pre><code class="language-csharp">container.Table(table =>
+{
+    table.ColumnsDefinition(cols =>
+    {
+        cols.RelativeColumn(4);
+        cols.RelativeColumn(1);
+        cols.ConstantColumn(60);
+    });
+
+    table.HeaderRow(row =>
+    {
+        row.Cell().Background("#1a4a8a").Text("Product").Bold();
+        row.Cell().Background("#1a4a8a").Text("Qty").Bold();
+        row.Cell().Background("#1a4a8a").AlignRight().Text("Price").Bold();
+    });
+
+    table.Row(row =>
+    {
+        row.Cell().Text("Widget");
+        row.Cell().Text("5");
+        row.Cell().AlignRight().Text("$99.99");
+    });
+});</code></pre>
+  </div>
+
+  <div class="content-section">
+    <h2>Decorators</h2>
+    <p>Chainable decorators for spacing, backgrounds, borders, and more. They compose from outside in: <strong>Margin → Background → Padding → Content</strong>.</p>
+    
+    <h3>Spacing</h3>
+    <pre><code class="language-csharp">// Padding (inside border/background)
+container.Padding(10);
+container.PaddingTop(4).PaddingBottom(4);
+container.Padding(0.5, Unit.Centimetre);
+
+// Margin (outside border/background)
+container.Margin(10);
+container.MarginVertical(8);
+container.Margin(0.5, Unit.Centimetre);</code></pre>
+    
+    <h3>Background & Borders</h3>
+    <pre><code class="language-csharp">container.Background("#1a4a8a");
+container.Border(1.5, "#1a4a8a");  // width + colour
+
+// Rounded border
+container.RoundedBorder(radius: 8, lineWidth: 1, hexColor: "#1a4a8a");
+
+// Filled rounded box (background + border)
+container.RoundedBox(radius: 8, fillHexColor: "#E3F2FD", borderHexColor: "#1a4a8a");
+
+// Per-edge borders
+container.BorderTop(1.5, "#1a4a8a");
+container.BorderLeft(3, Color.Red.Medium);</code></pre>
+  </div>
+
+  <div class="content-section">
+    <h2>Page Features</h2>
+    
+    <h3>Page Breaks</h3>
+    <p>Force a new page inside a Column:</p>
+    <pre><code class="language-csharp">container.Column(col =>
+{
+    col.Item().Text("Content on page 1");
+    col.PageBreak();
+    col.Item().Text("Content on page 2");
+});</code></pre>
+    
+    <h3>Hyperlinks</h3>
+    <pre><code class="language-csharp">// URI hyperlink
+container.Hyperlink("https://example.com").Text("Click here");
+
+// Hyperlinked image
+container.Hyperlink("https://example.com").Image("logo.png", 120);</code></pre>
+    
+    <h3>Internal Links</h3>
+    <p>Create GoTo links that jump to specific pages:</p>
+    <pre><code class="language-csharp">container.InternalLink(pageNumber: 5, topPosition: 50)
+       .Text("Go to section 5");</code></pre>
+    
+    <h3>Table of Contents</h3>
+    <p>Automatic TOC generation from H1-H6 headings with clickable links and hierarchical numbering.</p>
+    <pre><code class="language-csharp">container.TableOfContents(p =>
+{
+    p.Size(PageSize.A4);
+    p.Margin(2, Unit.Centimetre);
+    p.DefaultTextStyle(s => s.FontSize(11));
+});</code></pre>
+    
+    <h3>Page Numbers</h3>
+    <p>Current page and total page count in footers:</p>
+    <pre><code class="language-csharp">page.Footer().AlignCenter().Text(t =>
+{
+    t.Span("Page ");
+    t.CurrentPageNumber().FontSize(9);
+    t.Span(" / ");
+    t.TotalPages().FontSize(9);
+});</code></pre>
+  </div>
+
+  <div class="content-section">
+    <h2>Images & Media</h2>
+    <p>Embed PNG and JPEG images with automatic aspect ratio preservation.</p>
+    <pre><code class="language-csharp">// Fill available width, preserve aspect ratio
+container.Image("path/to/image.png");
+
+// Fixed width with alignment
+container.AlignCenter().Image("logo.png", 120);</code></pre>
+    
+    <h3>Horizontal & Vertical Lines</h3>
+    <pre><code class="language-csharp">container.LineHorizontal(1.5, "#1a4a8a");
+container.LineVertical(1); // black by default</code></pre>
+  </div>
+
+  <div class="content-section">
+    <h2>Reusable Components</h2>
+    <p>Create custom reusable components by implementing <code>IComponent</code>:</p>
+    <pre><code class="language-csharp">public class CalloutBox : IComponent
+{
+    private readonly string _text;
+    public CalloutBox(string text) => _text = text;
+
+    public void Compose(IContainer container) =>
+        container
+            .Margin(6).Background(Color.Blue.Lighten4).Padding(10)
+            .Text(_text).Italic();
+}
+
+// Usage
+container.Component(new CalloutBox("Note: this is important."));</code></pre>
+    
+    <h3>Reusable Document Templates</h3>
+    <p>Implement <code>IDocument</code> for reusable document structures:</p>
+    <pre><code class="language-csharp">public class InvoiceDocument : IDocument
+{
+    private readonly InvoiceData _data;
+    public InvoiceDocument(InvoiceData data) => _data = data;
+
+    public void Compose(IDocumentContainer container)
+    {
+        container.Page(page =>
+        {
+            page.Size(PageSize.A4);
+            page.Margin(2, Unit.Centimetre);
+            page.Content().Text($"Invoice #{_data.Number}").Bold().FontSize(24);
+        });
+    }
+}
+
+// Usage
+Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pre>
+  </div>
+
+  <div class="content-section">
+    <h2>Output Formats</h2>
+    <p>Multiple output options for different scenarios:</p>
+    <ul class="feature-list">
+      <li><strong>To file</strong> — <code>.PublishPdf("output.pdf")</code></li>
+      <li><strong>To byte array</strong> — <code>byte[] bytes = .PublishPdf();</code> (for HTTP responses, email attachments)</li>
+      <li><strong>To stream</strong> — <code>.PublishPdf(stream)</code> (any writable stream)</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Page Sizes & Units</h2>
+    <h3>Built-in Page Sizes</h3>
+    <table class="api-table">
+      <thead>
+        <tr><th>Constant</th><th>Width × Height (pt)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>PageSize.A0</code></td><td>2383.94 × 3370.39</td></tr>
+        <tr><td><code>PageSize.A1</code></td><td>1683.78 × 2383.94</td></tr>
+        <tr><td><code>PageSize.A2</code></td><td>1190.55 × 1683.78</td></tr>
+        <tr><td><code>PageSize.A3</code></td><td>841.89 × 1190.55</td></tr>
+        <tr><td><code>PageSize.A4</code></td><td>595.28 × 841.89</td></tr>
+        <tr><td><code>PageSize.A5</code></td><td>419.53 × 595.28</td></tr>
+        <tr><td><code>PageSize.Letter</code></td><td>612.00 × 792.00</td></tr>
+        <tr><td><code>PageSize.Legal</code></td><td>612.00 × 1008.00</td></tr>
+        <tr><td><code>PageSize.Tabloid</code></td><td>792.00 × 1224.00</td></tr>
+      </tbody>
+    </table>
+    
+    <h3>Built-in Units</h3>
+    <table class="api-table">
+      <thead>
+        <tr><th>Enum</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Unit.Point</code></td><td>PDF native unit (1 pt = 1/72 inch) — default</td></tr>
+        <tr><td><code>Unit.Millimetre</code></td><td>1 mm ≈ 2.835 pt</td></tr>
+        <tr><td><code>Unit.Centimetre</code></td><td>1 cm ≈ 28.35 pt</td></tr>
+        <tr><td><code>Unit.Inch</code></td><td>1 in = 72 pt</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-section">
+    <h2>Built-in Colors</h2>
+    <p>Material Design colour palette with darken/lighten variations:</p>
+    <pre><code class="language-csharp">Color.Red.Darken2    Color.Red.Darken1   Color.Red.Medium   Color.Red.Lighten1 ... 
+Color.Blue.Darken2  Color.Blue.Medium   ...
+Color.Green.Darken2 Color.Green.Medium  ...
+Color.Grey.Darken2  Color.Grey.Medium   Color.Grey.Lighten1 ...
+Color.Orange.Medium
+Color.Purple.Medium
+
+// Convenience constants
+Color.White  // "#FFFFFF"
+Color.Black  // "#000000"</code></pre>
+    
+    <p>All colour methods also accept hex strings directly: <code>Background("#1a4a8a")</code></p>
+  </div>
+
+  <div class="callout callout-success">
+    <strong>Ready to build?</strong> Check out the <a href="/getting-started/">Getting Started guide</a> or browse the <a href="/docs/">full documentation</a>.
+  </div>
+</div>

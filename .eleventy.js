@@ -4,6 +4,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("favicon.ico");
+  eleventyConfig.addPassthroughCopy({"robots.txt": "robots.txt"});
+  
+  // Treat sitemap.xml as a passthrough from root
+  eleventyConfig.addPassthroughCopy({"sitemap.xml": "sitemap.xml"});
 
   // Markdown shortcode for inline markdown
   let markdownIt = require("markdown-it");

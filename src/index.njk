@@ -1,25 +1,187 @@
 ---
-title: Home
+title: TerraPDF - Free C# PDF Generation Library
+description: TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. Fast, free, MIT licensed. Start generating PDFs in minutes.
 layout: base.njk
 ---
 
 <section class="hero">
-  <h1>TerraPDF.com</h1>
-  <p class="tagline">Your static site is ready with Eleventy</p>
-  <a href="/about/" class="btn">Learn More</a>
+  <div class="container">
+    <h1>TerraPDF</h1>
+    <p class="tagline">
+      A lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. 
+      No native binaries, no third-party packages — just pure C# power.
+    </p>
+    <div class="hero-cta">
+      <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
+      <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge">
+        <img src="https://img.shields.io/nuget/v/TerraPDF.svg" alt="NuGet Version" width="90" height="20" loading="lazy">
+        <span>.NET 8 & 9</span>
+      </div>
+      <div class="badge">
+        <img src="https://img.shields.io/nuget/dt/TerraPDF.svg" alt="NuGet Downloads" width="90" height="20" loading="lazy">
+        <span>MIT License</span>
+      </div>
+      <div class="badge">
+        <img src="https://img.shields.io/github/stars/sahebansari/TerraPDF.svg" alt="GitHub Stars" width="90" height="20" loading="lazy">
+        <span>Zero Dependencies</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="features">
-  <div class="feature">
-    <h2>Fast</h2>
-    <p>Static sites are incredibly fast with no database queries.</p>
+<section class="content-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why TerraPDF?</h2>
+      <p>Professional PDF generation made simple. Designed for developers who value simplicity, performance, and full control.</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Zero Dependencies</h3>
+        <p>Pure C# implementation with no native binaries, no third-party runtime packages, and no licensing restrictions. Just add the NuGet package and you're ready.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Fluent API</h3>
+        <p>Intuitive, composable builder pattern that makes PDF generation feel natural. Chain methods together to create complex layouts with minimal code.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3>Full Layout Control</h3>
+        <p>Columns, rows, tables, margins, padding, borders, backgrounds, and alignment. Everything you need for professional document layouts.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3>Image Support</h3>
+        <p>Embed PNG and JPEG images directly into your PDFs with proper sizing and positioning support.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📑</div>
+        <h3>Automatic TOC</h3>
+        <p>Generate a table of contents automatically from your headings (H1-H6) with clickable internal links and proper page numbering.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Hyperlinks & Bookmarks</h3>
+        <p>Support for URI hyperlinks, internal document links, PDF bookmarks, and hierarchical outline navigation.</p>
+      </div>
+    </div>
   </div>
-  <div class="feature">
-    <h2>Secure</h2>
-    <p>No database means fewer attack vectors and better security.</p>
+</section>
+
+<section class="content-section" style="background: var(--bg-alt); padding: var(--space-2xl); border-radius: 12px;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Quick Start</h2>
+      <p>Generate your first PDF in under a minute with TerraPDF's simple API.</p>
+    </div>
+    
+    <div class="install-box">
+      <code class="command">dotnet add package TerraPDF</code>
+    </div>
+    
+    <p class="text-center mb-lg">Or browse the <a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener">NuGet package page</a> for all versions.</p>
+    
+    <h3>Hello World Example</h3>
+    <pre><code class="language-csharp">using TerraPDF.Core;
+using TerraPDF.Helpers;
+
+Document.Create(container =>
+{
+    container.Page(page =>
+    {
+        page.Size(PageSize.A4);
+        page.Margin(2, Unit.Centimetre);
+        page.PageColor(Color.White);
+        page.DefaultTextStyle(s => s.FontSize(11));
+
+        page.Header()
+            .Text("My Report")
+            .Bold()
+            .FontSize(24)
+            .FontColor(Color.Blue.Darken2);
+
+        page.Content()
+            .Column(col =>
+            {
+                col.Spacing(8);
+                col.Item().Text("Hello, TerraPDF!");
+                col.Item().Text("This paragraph is italic.").Italic();
+                col.Item()
+                   .Margin(6).Background(Color.Grey.Lighten4).Padding(10)
+                   .Text("Indented callout box").Bold();
+            });
+
+        page.Footer()
+            .AlignCenter()
+            .Text(t =>
+            {
+                t.Span("Page ");
+                t.CurrentPageNumber().FontSize(9);
+                t.Span(" / ");
+                t.TotalPages().FontSize(9);
+            });
+    });
+})
+.PublishPdf("output.pdf");</code></pre>
+    
+    <div class="callout callout-info">
+      <strong>Note:</strong> TerraPDF targets <code>.NET 8</code> and <code>.NET 9</code>. 
+      Works with ASP.NET Core, console apps, Windows services, and any .NET application.
+    </div>
   </div>
-  <div class="feature">
-    <h2>Simple</h2>
-    <p>Easy to deploy and maintain with minimal overhead.</p>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Core Features at a Glance</h2>
+      <p>Everything you need to generate professional PDF documents programmatically.</p>
+    </div>
+    
+    <div class="feature-list">
+      <li>Text styling — bold, italic, bold-italic, strikethrough, underline</li>
+      <li>Font size, colour, and line-height control per text block</li>
+      <li>Per-span formatting inside mixed-style text blocks</li>
+      <li>Margin and padding decorators with full unit support (pt, mm, cm, inch)</li>
+      <li>Background fills and borders (full, rounded, per-edge)</li>
+      <li>Rounded-corner borders and filled rounded boxes</li>
+      <li>Per-edge borders (BorderTop, BorderBottom, BorderLeft, BorderRight)</li>
+      <li>Horizontal and vertical alignment</li>
+      <li>Column, Row, and Table layouts</li>
+      <li>PNG and JPEG image embedding</li>
+      <li>Horizontal and vertical rule lines</li>
+      <li>Explicit page breaks via PageBreak()</li>
+      <li>Clickable hyperlink (URI) annotations via Hyperlink()</li>
+      <li>Internal document links (GoTo) via InternalLink()</li>
+      <li>Automatic Table of Contents from H1–H6 headings</li>
+      <li>PDF bookmarks / outlines with hierarchical nesting</li>
+      <li>Document metadata (Title, Author, Subject, Keywords, Creator)</li>
+      <li>Conditional rendering via ShowIf</li>
+      <li>Reusable components via IComponent</li>
+      <li>Headers, footers, and page numbers</li>
+      <li>Fluent, composable API</li>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" style="background: linear-gradient(135deg, #1a5fb4 0%, #0d47a1 100%); color: white; padding: var(--space-2xl); border-radius: 12px;">
+  <div class="container text-center">
+    <h2 style="color: white;">Ready to Get Started?</h2>
+    <p style="font-size: 1.1rem; opacity: 0.9;">Join developers using TerraPDF for fast, reliable PDF generation.</p>
+    <div style="margin-top: var(--space-xl);">
+      <a href="/getting-started/" class="btn btn-large" style="background: white; color: var(--primary); border-color: white;">Read the Guide</a>
+      <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" style="border-color: white; color: white;" target="_blank" rel="noopener">Star on GitHub</a>
+    </div>
   </div>
 </section>
