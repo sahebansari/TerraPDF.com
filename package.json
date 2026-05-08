@@ -1,0 +1,16 @@
+{
+  "name": "terrapdf-com",
+  "version": "1.0.0",
+  "description": "TerraPDF.com static site",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve",
+    "debug": "DEBUG=* npx @11ty/eleventy"
+  },
+  "keywords": ["11ty", "eleventy", "static-site"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
