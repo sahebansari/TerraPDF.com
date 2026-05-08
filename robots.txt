@@ -1,4 +1,21 @@
+# TerraPDF.com robots.txt
+# https://terrapdf.com
+
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://terrapdf.com/sitemap.xml
+
+# Crawl delay for polite crawling (optional)
+Crawl-delay: 10
+
+# Disallow admin and private paths (if any)
+Disallow: /_site/
+Disallow: /_includes/
+Disallow: /_layouts/
+Disallow: /node_modules/
+Disallow: /.github/
+
+# Allow all search engines to index content
+Host: terrapdf.com

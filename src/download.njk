@@ -17,22 +17,24 @@ layout: base.njk
     <div class="install-box">
       <code class="command">dotnet add package TerraPDF</code>
     </div>
-    <p class="text-center"><button class="btn btn-outline btn-small" onclick="navigator.clipboard.writeText('dotnet add package TerraPDF')">Copy Command</button></p>
+    <p class="text-center">
+      <button class="btn btn-outline btn-small copy-btn" data-copy-target=".install-box .command">Copy Command</button>
+    </p>
     
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
-      <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener">View on NuGet.org</a>
-      <a href="https://www.nuget.org/packages/TerraPDF/1.2.2" class="btn btn-outline" target="_blank" rel="noopener">v1.2.2 Download</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on NuGet.org</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/1.2.2" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.2.2 Download</a>
     </div>
     
     <h3 class="mt-xl">Package Information</h3>
     <table class="api-table">
       <tbody>
         <tr><td><strong>Package ID</strong></td><td><code>TerraPDF</code></td></tr>
-        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener">1.2.2</a> (May 4, 2026)</td></tr>
-        <tr><td><strong>Downloads</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener">View on NuGet</a></td></tr>
+        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.2.2</a> (May 4, 2026)</td></tr>
+        <tr><td><strong>Downloads</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">View on NuGet</a></td></tr>
         <tr><td><strong>Target Frameworks</strong></td><td>.NET 8, .NET 9</td></tr>
         <tr><td><strong>Dependencies</strong></td><td>None — zero dependencies</td></tr>
-        <tr><td><strong>License</strong></td><td><a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE">MIT</a></td></tr>
+        <tr><td><strong>License</strong></td><td><a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -43,25 +45,25 @@ layout: base.njk
       <div class="feature-card">
         <h3>GitHub Repository</h3>
         <p>Source code, issues, pull requests, and community discussions.</p>
-        <p><a href="https://github.com/sahebansari/TerraPDF" target="_blank" rel="noopener">github.com/sahebansari/TerraPDF →</a></p>
+        <p><a href="https://github.com/sahebansari/TerraPDF" target="_blank" rel="noopener noreferrer">github.com/sahebansari/TerraPDF →</a></p>
       </div>
       
       <div class="feature-card">
         <h3>Documentation</h3>
         <p>Complete guides, API reference, and examples.</p>
-        <p><a href="https://github.com/sahebansari/TerraPDF/tree/master/docs" target="_blank" rel="noopener">Browse docs →</a></p>
+        <p><a href="https://github.com/sahebansari/TerraPDF/tree/master/docs" target="_blank" rel="noopener noreferrer">Browse docs →</a></p>
       </div>
       
       <div class="feature-card">
         <h3>Releases</h3>
         <p>Download release binaries and check release notes.</p>
-        <p><a href="https://github.com/sahebansari/TerraPDF/releases" target="_blank" rel="noopener">View releases →</a></p>
+        <p><a href="https://github.com/sahebansari/TerraPDF/releases" target="_blank" rel="noopener noreferrer">View releases →</a></p>
       </div>
       
       <div class="feature-card">
         <h3>Report Issues</h3>
         <p>Found a bug? Have a feature request? Let us know.</p>
-        <p><a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener">Open an issue →</a></p>
+        <p><a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">Open an issue →</a></p>
       </div>
     </div>
   </div>
@@ -91,34 +93,34 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
     
-    <h3>v1.2.2 — May 4, 2026</h3>
-    <ul>
-      <li>✓ Table of Contents generation with clickable internal links</li>
-      <li>✓ Internal links (GoTo) with zoom preservation</li>
-      <li>✓ Section headings H1-H6 with default styles</li>
-      <li>✓ Fixed TOC page numbering and heading recorder propagation</li>
-    </ul>
-    
-    <h3>v1.2.1 — May 3, 2025</h3>
-    <ul>
-      <li>✓ Documentation corrections and API updates</li>
-      <li>✓ Fixed color values and added missing shades</li>
-      <li>✓ Improved API method documentation</li>
-    </ul>
-    
-    <h3>v1.2.0 — July 14, 2025</h3>
-    <ul>
-      <li>✓ Underline styling</li>
-      <li>✓ Configurable line-height multiplier</li>
-      <li>✓ Rounded borders and filled rounded boxes</li>
-      <li>✓ Per-edge borders</li>
-      <li>✓ Explicit page breaks</li>
-      <li>✓ Hyperlink URI annotations</li>
-      <li>✓ Fixed per-span style isolation</li>
-    </ul>
-    
-    <p><a href="https://github.com/sahebansari/TerraPDF/blob/master/CHANGELOG.md" target="_blank" rel="noopener">View full changelog →</a></p>
-  </div>
+     <h3>v1.2.2 — May 4, 2026</h3>
+     <ul>
+       <li>✓ Table of Contents generation with clickable internal links</li>
+       <li>✓ Internal links (GoTo) with zoom preservation</li>
+       <li>✓ Section headings H1-H6 with default styles</li>
+       <li>✓ Fixed TOC page numbering and heading recorder propagation</li>
+     </ul>
+     
+     <h3>v1.2.1 — May 3, 2025</h3>
+     <ul>
+       <li>✓ Documentation corrections and API updates</li>
+       <li>✓ Fixed color values and added missing shades</li>
+       <li>✓ Improved API method documentation</li>
+     </ul>
+     
+     <h3>v1.2.0 — July 14, 2025</h3>
+     <ul>
+       <li>✓ Underline styling</li>
+       <li>✓ Configurable line-height multiplier</li>
+       <li>✓ Rounded borders and filled rounded boxes</li>
+       <li>✓ Per-edge borders</li>
+       <li>✓ Explicit page breaks</li>
+       <li>✓ Hyperlink URI annotations</li>
+       <li>✓ Fixed per-span style isolation</li>
+     </ul>
+     
+     <p><a href="https://github.com/sahebansari/TerraPDF/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer">View full changelog →</a></p>
+   </div>
 
   <div class="content-section">
     <h2>📄 License</h2>
@@ -129,7 +131,7 @@ dotnet test</code></pre>
       <li>Private use</li>
       <li>No warranty (as-is)</li>
     </ul>
-    <p><a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener">Read the full license →</a></p>
+    <p><a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">Read the full license →</a></p>
   </div>
 
   <div class="callout callout-success" style="text-align: center;">
@@ -137,7 +139,7 @@ dotnet test</code></pre>
     <p>Add TerraPDF to your project and create amazing PDFs today.</p>
     <div style="margin-top: 1rem;">
       <a href="/getting-started/" class="btn btn-primary btn-large">Read the Guide</a>
-      <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-outline btn-large" target="_blank" rel="noopener">NuGet Package</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">NuGet Package</a>
     </div>
   </div>
 </div>

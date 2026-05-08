@@ -10,22 +10,24 @@ layout: base.njk
     <p>Generate your first PDF in just a few minutes. TerraPDF is designed to be intuitive and easy to use.</p>
   </div>
 
-  <div class="content-section">
-    <h2>Installation</h2>
-    <p>Add TerraPDF to your .NET project via NuGet:</p>
-    
-    <div class="install-box" id="install-command">
-      <code class="command">dotnet add package TerraPDF</code>
-    </div>
-    <p class="text-center"><button class="btn btn-outline btn-small" onclick="navigator.clipboard.writeText('dotnet add package TerraPDF')">Copy Command</button></p>
+   <div class="content-section">
+     <h2>Installation</h2>
+     <p>Add TerraPDF to your .NET project via NuGet:</p>
+     
+     <div class="install-box" id="install-command">
+       <code class="command">dotnet add package TerraPDF</code>
+     </div>
+     <p class="text-center">
+       <button class="btn btn-outline btn-small copy-btn" data-copy-target="#install-command .command">Copy Command</button>
+     </p>
     
     <h3>Package Information</h3>
-    <ul>
-      <li><strong>Package ID:</strong> <code>TerraPDF</code></li>
-      <li><strong>Latest Version:</strong> <a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener">v1.2.2</a></li>
-      <li><strong>Target Frameworks:</strong> .NET 8, .NET 9</li>
-      <li><strong>License:</strong> MIT (free for commercial use)</li>
-    </ul>
+     <ul>
+       <li><strong>Package ID:</strong> <code>TerraPDF</code></li>
+       <li><strong>Latest Version:</strong> <a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">v1.2.2</a></li>
+       <li><strong>Target Frameworks:</strong> .NET 8, .NET 9</li>
+       <li><strong>License:</strong> MIT (free for commercial use)</li>
+     </ul>
   </div>
 
   <div class="content-section">
@@ -170,6 +172,6 @@ composer.PublishPdf(stream);</code></pre>
 
   <div class="text-center mt-xl">
     <a href="/docs/" class="btn btn-primary btn-large">Browse Documentation</a>
-    <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener">View GitHub Repo</a>
+    <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">View GitHub Repo</a>
   </div>
 </div>

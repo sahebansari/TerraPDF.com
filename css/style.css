@@ -756,3 +756,206 @@ pre code {
 .hljs-comment { color: #6a9955; }
 .hljs-function { color: #dcdcaa; }
 .hljs-class { color: #4ec9b0; }
+
+/* ===========================================
+   Skip Link (Accessibility)
+   =========================================== */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 9999;
+  transition: top 0.3s;
+  border-radius: 0 0 6px 0;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* ===========================================
+   Keyboard Navigation Focus
+   =========================================== */
+
+body.keyboard-nav *:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* ===========================================
+   Copy Buttons
+   =========================================== */
+
+pre {
+  position: relative;
+}
+
+.copy-code-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d4d4d4;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-sans);
+}
+
+.copy-code-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.copy-code-btn.copied {
+  background: var(--secondary);
+  color: white;
+  border-color: var(--secondary);
+}
+
+.install-box + .btn-small {
+  margin-top: 0.5rem;
+}
+
+/* ===========================================
+   Scroll to Top Button
+   =========================================== */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ===========================================
+   Error Page (404)
+   =========================================== */
+
+.error-page {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-code {
+  font-size: 10rem;
+  font-weight: 900;
+  color: var(--primary);
+  opacity: 0.15;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.error-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.error-page p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto var(--space-xl);
+  color: var(--text-muted);
+}
+
+.error-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.error-page ul li {
+  margin-bottom: var(--space-sm);
+}
+
+.error-page ul li a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.error-page ul li a:hover {
+  color: var(--primary-dark);
+}
+
+/* ===========================================
+   External Links (optional indicator)
+   =========================================== */
+
+a[target="_blank"]::after {
+  content: " ↗";
+  font-size: 0.85em;
+  opacity: 0.7;
+  vertical-align: super;
+}
+
+/* ===========================================
+   Additional Utilities
+   =========================================== */
+
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+/* Better mobile spacing */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .error-code {
+    font-size: 6rem;
+  }
+
+  .error-page h1 {
+    font-size: 2rem;
+  }
+}

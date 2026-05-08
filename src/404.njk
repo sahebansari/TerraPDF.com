@@ -1,0 +1,43 @@
+---
+title: Page Not Found - TerraPDF
+description: The page you're looking for doesn't exist. Return to TerraPDF's homepage or explore our PDF generation documentation.
+layout: base.njk
+statusCode: 404
+---
+
+<div class="container">
+  <div class="error-page" style="text-align: center; padding: var(--space-3xl) 0;">
+    <div class="error-code" style="font-size: 8rem; font-weight: 800; color: var(--primary); opacity: 0.3; line-height: 1;">
+      404
+    </div>
+
+    <h1 style="font-size: 2.5rem; margin-bottom: var(--space-md);">Page Not Found</h1>
+
+    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto var(--space-xl);">
+      Sorry, the page you're looking for doesn't exist or has been moved.
+      Let's get you back on track.
+    </p>
+
+    <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="btn btn-primary btn-large">Go to Homepage</a>
+      <a href="/getting-started/" class="btn btn-outline btn-large">Getting Started</a>
+      <a href="/docs/" class="btn btn-outline btn-large">Documentation</a>
+    </div>
+
+    <div class="mt-xl" style="max-width: 500px; margin: 0 auto;">
+      <p style="margin-bottom: var(--space-md);">
+        <strong>Looking for something specific?</strong>
+      </p>
+      <ul style="list-style: none; padding: 0; display: inline-flex; flex-direction: column; gap: var(--space-sm); text-align: left;">
+        <li><a href="/features/">→ All Features</a></li>
+        <li><a href="/download/">→ Download & Install</a></li>
+        <li><a href="https://github.com/sahebansari/TerraPDF">→ GitHub Repository</a></li>
+      </ul>
+    </div>
+
+    <div class="mt-xl" style="opacity: 0.6; font-size: 0.9rem;">
+      <p>Error 404 — Page not found</p>
+      <p><a href="/" style="text-decoration: underline;">Return to homepage</a></p>
+    </div>
+  </div>
+</div>
