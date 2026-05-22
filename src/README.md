@@ -16,6 +16,8 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
+> **New in 1.3.0:** AES-128 PDF encryption with user passwords, owner passwords, and fine-grained permission flags.
+
 **TerraPDF** is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. 
 It provides a fluent, composable API that covers the full document-authoring lifecycle — from page layout and 
 rich text to tables, images, hyperlinks, and multi-page pagination — with no native binaries, no third-party 
@@ -43,6 +45,9 @@ runtime packages, and no licensing restrictions.
  - Conditional rendering via `ShowIf`
  - Reusable components via `IComponent`
  - Headers, footers, and page numbers
+ - **AES-128 PDF encryption** via `container.Encrypt()`
+ - **Vector graphics canvas** via `container.Canvas()`
+ - Full **WinAnsiEncoding** character coverage
  - Fluent, composable API
 
 ---
@@ -613,92 +618,5 @@ To report a vulnerability, please follow the responsible-disclosure process desc
 
 MIT — see [LICENSE](/LICENSE) for details.
 
-## About
-
-TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. No native binaries, no third-party library required.
-
-### Topics
-
-[pdf](/topics/pdf "Topic: pdf") [image](/topics/image "Topic: image") [reporting](/topics/reporting "Topic: reporting") [table](/topics/table "Topic: table") [document](/topics/document "Topic: document") [invoice](/topics/invoice "Topic: invoice") [zero-dependency](/topics/zero-dependency "Topic: zero-dependency") [pdf-generation](/topics/pdf-generation "Topic: pdf-generation") [fluent-api](/topics/fluent-api "Topic: fluent-api") [no-dependency](/topics/no-dependency "Topic: no-dependency")
-
-### Resources
-
-[Readme](#readme-ov-file)
-
-### License
-
-[MIT license](#MIT-1-ov-file)
-
-### Contributing
-
-[Contributing](#contributing-ov-file)
-
-### Security policy
-
-[Security policy](#security-ov-file)
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-[Activity](/sahebansari/TerraPDF/activity)
-
-### Stars
-
-[**2** stars](/sahebansari/TerraPDF/stargazers)
-
-### Watchers
-
-[**0** watching](/sahebansari/TerraPDF/watchers)
-
-### Forks
-
-[**0** forks](/sahebansari/TerraPDF/forks)
-
-[Report repository](/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fsahebansari%2FTerraPDF&report=sahebansari+%28user%29)
-
-## [Releases 4](/sahebansari/TerraPDF/releases)
-
-[
-
-v1.2.2 Latest
-
-May 3, 2026
 
 
-
-](/sahebansari/TerraPDF/releases/tag/v1.2.2)
-
-[\+ 3 releases](/sahebansari/TerraPDF/releases)
-
-## [Packages 0](/users/sahebansari/packages?repo_name=TerraPDF)
-
-### Uh oh!
-
-There was an error while loading. Please reload this page.
-
-## [Contributors 1](/sahebansari/TerraPDF/graphs/contributors)
-
--    [![@sahebansari](https://avatars.githubusercontent.com/u/11921343?s=64&v=4)](https://github.com/sahebansari)[**sahebansari** Saheb Ansari](https://github.com/sahebansari)
-
-## Languages
-
--   [C# 100.0%](/sahebansari/TerraPDF/search?l=c%23)
-
-## Footer
-
-[](https://github.com)© 2026 GitHub, Inc.
-
-### Footer navigation
-
--   [Terms](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
--   [Privacy](https://docs.github.com/site-policy/privacy-policies/github-privacy-statement)
--   [Security](https://github.com/security)
--   [Status](https://www.githubstatus.com/)
--   [Community](https://github.community/)
--   [Docs](https://docs.github.com)
--   [Contact](https://support.github.com?tags=dotcom-footer)
--   Manage cookies
--   Do not share my personal information
-
-You can't perform that action at this time.

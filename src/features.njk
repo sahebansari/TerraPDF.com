@@ -82,8 +82,18 @@ layout: base.njk
         <h3 class="category-title">Media & Graphics</h3>
         <ul class="category-features">
           <li><a href="#images">Images</a> — PNG, JPEG with aspect ratio preservation</li>
+          <li><a href="#vector-graphics">Vector graphics</a> — canvas shapes, paths, grids, and charts</li>
           <li><a href="#dynamic-components">Dynamic components</a> — defer content generation</li>
           <li><a href="#debugging">Debug visualisation</a> — debug areas and pointers</li>
+        </ul>
+      </div>
+
+      <!-- Security & Encoding -->
+      <div class="category-group">
+        <h3 class="category-title">Security & Encoding</h3>
+        <ul class="category-features">
+          <li><a href="#encryption">PDF encryption</a> — AES-128, passwords, and permission flags</li>
+          <li><a href="#winansi">WinAnsi text</a> — Windows-1252 and Latin-1 character coverage</li>
         </ul>
       </div>
 
@@ -391,11 +401,72 @@ container.Image("photo.jpg");
 // Fixed width with alignment
 container.AlignCenter().Image("logo.png", 120);</code></pre>
 
+    <h3 id="vector-graphics">Vector Graphics Canvas</h3>
+    <p>Draw vector graphics directly inside any layout container. The canvas fills the available width and uses a top-left coordinate system in PDF points.</p>
+    <pre><code class="language-csharp">container.Canvas(120, c =>
+{
+    c.FillRoundedRect(0, 0, 180, 70, 8, Color.Blue.Lighten4);
+    c.StrokeRoundedRect(0, 0, 180, 70, 8, Color.Blue.Darken2, 1.5);
+    c.Line(0, 90, 260, 90, Color.Grey.Lighten2, 0.5);
+    c.Path(p => p
+        .MoveTo(40, 110)
+        .LineTo(80, 40)
+        .LineTo(120, 110)
+        .Close()
+        .Fill(Color.Orange.Medium));
+});</code></pre>
+    <p>The Canvas API includes lines, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, polygons, and grid helpers for charts and diagrams.</p>
+
     <h3 id="dynamic-components">Dynamic Components</h3>
     <p>Optimize memory for large documents with deferred content generation. Content is generated only when needed during rendering rather than eagerly computed.</p>
 
     <h3 id="debugging">Debug Visualisation</h3>
     <p>Debug areas and pointers help diagnose layout issues during development by highlighting element boundaries and providing context in error messages.</p>
+  </div>
+
+  <!-- Security & Encoding -->
+  <div class="content-section" id="security-encoding">
+    <h2>Security & Encoding</h2>
+
+    <h3 id="encryption">AES-128 PDF Encryption</h3>
+    <p>Protect generated PDFs with the PDF Standard Security Handler using user passwords, owner passwords, and fine-grained permission flags.</p>
+    <pre><code class="language-csharp">Document.Create(container =>
+{
+    container.Encrypt(new EncryptionOptions
+    {
+        UserPassword = "open123",
+        OwnerPassword = "admin456",
+        Permissions = PdfPermissions.Print | PdfPermissions.CopyText
+    });
+
+    container.Page(page =>
+    {
+        page.Size(PageSize.A4);
+        page.Content().Text("This PDF is password-protected.");
+    });
+})
+.PublishPdf("protected.pdf");</code></pre>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>User Password</h4>
+        <p>Require a password before a viewer can open the document.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Owner Password</h4>
+        <p>Grant full access regardless of the restricted user permissions.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Permission Flags</h4>
+        <p>Control printing, copying, editing, annotations, form filling, accessibility extraction, assembly, and low-resolution printing.</p>
+      </div>
+    </div>
+
+    <h3 id="winansi">WinAnsi Character Coverage</h3>
+    <p>TerraPDF maps text through WinAnsiEncoding for built-in Type 1 fonts, covering printable ASCII, Windows-1252 typographic specials, and Latin-1 characters.</p>
+    <pre><code class="language-csharp">container.Text("Français, señor, São Paulo, € 1,299.00");
+container.Text("Pages 42–47 and TerraPDF™");</code></pre>
+    <p>Characters outside WinAnsiEncoding, such as many Latin Extended-A/B glyphs, should be replaced or avoided when using the built-in PDF fonts.</p>
   </div>
 
   <!-- Reusability & Components -->

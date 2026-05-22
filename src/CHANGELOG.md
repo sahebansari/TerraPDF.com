@@ -13,6 +13,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0] - 2026-05-19
+
+### Added
+- **AES-128 PDF Encryption** using the PDF Standard Security Handler.
+- `EncryptionOptions` with `UserPassword`, `OwnerPassword`, and `Permissions`.
+- `PdfPermissions` flags for `Print`, `CopyText`, `ModifyContents`,
+  `ModifyAnnotations`, `FillForms`, `ExtractForAccessibility`,
+  `AssembleDocument`, `PrintLowResolution`, `All`, and `None`.
+- Per-object AES-128 CBC encryption of content streams and image XObjects.
+- Encrypted documents are emitted as PDF 1.6, the minimum version required for AES encryption.
+- Encryption tests covering password combinations, permission flags, multi-page documents, metadata, null guards, and output-size sanity.
+
+### Fixed
+- Encrypted PDFs now write the random `/ID` array to the trailer so viewers can reproduce the file encryption key.
+- Removed invalid `/Filter /Crypt` entries from content streams and JPEG image dictionaries.
+- AES encryption now uses the correct padding behavior for decrypted content.
+- Sample output folders are created automatically before sample PDFs are written.
+- Encryption showcase badges use WinAnsi-safe ASCII symbols.
+
+---
+
+## [1.2.3]
+
+### Added
+- **Vector Graphics / Canvas API** via `container.Canvas(height, draw)`.
+- `VectorCanvas` primitives for lines, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, polygons, and grids.
+- `PathDescriptor` helpers for `MoveTo`, `LineTo`, `CurveTo`, `Close`, `Rect`, `Ellipse`, `Circle`, `Polyline`, `Polygon`, `Fill`, `Stroke`, and even-odd fill.
+- Vector graphics sample demonstrating primitives, custom paths, charts, progress bars, callouts, and icon-grid patterns.
+- Unicode and WinAnsiEncoding showcase sample covering Windows-1252 specials, Latin-1 characters, full byte-to-glyph reference grids, font comparison, and glyph metrics.
+- Documentation guides for vector graphics and Unicode / character encoding.
+
+### Fixed
+- Several language sample sentences now avoid characters outside WinAnsiEncoding so output PDFs do not show replacement `?` glyphs.
+- Win-1252 showcase tables now use proportional column definitions to avoid page overflow.
+
+---
+
 ## [1.2.2] - 2026-05-04
 
 ### Added
@@ -140,7 +177,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflow (GitHub Actions): build, test, coverage.
 - Publish workflow (GitHub Actions): NuGet + symbols on release tag.
 
-[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/sahebansari/TerraPDF/compare/v1.2.3...v1.3.0
+[1.2.3]: https://github.com/sahebansari/TerraPDF/compare/v1.2.2...v1.2.3
+[1.2.2]: https://github.com/sahebansari/TerraPDF/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/sahebansari/TerraPDF/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/sahebansari/TerraPDF/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/sahebansari/TerraPDF/compare/v1.0.0...v1.1.0

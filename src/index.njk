@@ -1,6 +1,6 @@
 ---
 title: TerraPDF - Free C# PDF Generation Library
-description: TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. Fast, free, MIT licensed. Start generating PDFs in minutes.
+description: TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDFs with layout, tables, images, links, bookmarks, vector graphics, WinAnsi text, and AES-128 encryption.
 layout: base.njk
 ---
 
@@ -8,8 +8,8 @@ layout: base.njk
   <div class="container">
     <div><img src="/images/tp-logo.png" alt="TerraPDF Logo" style="width: 200px; height: auto;"></div>
     <p class="tagline">
-      A lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. 
-      No native binaries, no third-party packages — just pure C# power.
+      A lightweight, zero-dependency, pure C# library for generating professional PDFs.
+      Layout, tables, images, links, bookmarks, vector graphics, WinAnsi text, and AES-128 encryption with no native binaries.
     </p>
      <div class="hero-cta">
        <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
@@ -27,6 +27,45 @@ layout: base.njk
       <div class="badge">
         <img src="https://img.shields.io/github/stars/sahebansari/TerraPDF.svg" alt="GitHub Stars" width="90" height="20" loading="lazy">
         <span>Zero Dependencies</span>
+      </div>
+      <div class="badge">
+        <span>v1.3.0</span>
+        <span>AES-128 Encryption</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="section-header">
+      <h2>New in TerraPDF 1.3.0</h2>
+      <p>Password-protect documents, restrict actions with permission flags, and build richer graphics-heavy PDFs.</p>
+    </div>
+
+    <div class="features-grid features-grid--two-col">
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>AES-128 PDF Encryption</h3>
+        <p>Protect documents with user and owner passwords, encrypt content streams and image XObjects, and control print, copy, edit, form, accessibility, and assembly permissions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Vector Graphics Canvas</h3>
+        <p>Draw lines, rectangles, rounded rectangles, circles, ellipses, paths, polygons, grids, charts, and diagrams directly inside TerraPDF layout containers.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">À</div>
+        <h3>WinAnsi Character Coverage</h3>
+        <p>Render Windows-1252 typographic specials and Latin-1 characters with extended AFM width tables for accurate wrapping and measurement.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Encryption Reliability Fixes</h3>
+        <p>Encrypted PDFs now write a stable trailer ID, avoid invalid crypt filters, use correct AES padding, and include broader tests for password and permission combinations.</p>
       </div>
     </div>
   </div>
@@ -74,6 +113,12 @@ layout: base.njk
         <div class="feature-icon">🔗</div>
         <h3>Hyperlinks & Bookmarks</h3>
         <p>Support for URI hyperlinks, internal document links, PDF bookmarks, and hierarchical outline navigation.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Document Security</h3>
+        <p>AES-128 PDF encryption with user passwords, owner passwords, and fine-grained permission flags.</p>
       </div>
     </div>
   </div>
@@ -212,6 +257,21 @@ Document.Create(container =>
             <span class="feature-icon">📄</span>
             <span class="feature-title">Headers & Footers</span>
             <span class="feature-desc">Reusable headers, footers, and page numbers</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔐</span>
+            <span class="feature-title">PDF Encryption</span>
+            <span class="feature-desc">AES-128 protection with passwords and permissions</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📈</span>
+            <span class="feature-title">Vector Canvas</span>
+            <span class="feature-desc">Shapes, paths, grids, charts, and diagrams</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">À</span>
+            <span class="feature-title">WinAnsi Text</span>
+            <span class="feature-desc">Windows-1252 and Latin-1 character coverage</span>
           </div>
         </div>
       </div>

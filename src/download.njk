@@ -23,14 +23,14 @@ layout: base.njk
     
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
       <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on NuGet.org</a>
-      <a href="https://www.nuget.org/packages/TerraPDF/1.2.2" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.2.2 Download</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/1.3.0" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.3.0 Download</a>
     </div>
     
     <h3 class="mt-xl">Package Information</h3>
     <table class="api-table">
       <tbody>
         <tr><td><strong>Package ID</strong></td><td><code>TerraPDF</code></td></tr>
-        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.2.2</a> (May 4, 2026)</td></tr>
+        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.3.0</a> (May 19, 2026)</td></tr>
         <tr><td><strong>Downloads</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">View on NuGet</a></td></tr>
         <tr><td><strong>Target Frameworks</strong></td><td>.NET 8, .NET 9</td></tr>
         <tr><td><strong>Dependencies</strong></td><td>None — zero dependencies</td></tr>
@@ -93,6 +93,21 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
     
+     <h3>v1.3.0 - May 19, 2026</h3>
+     <ul>
+       <li>AES-128 PDF encryption using the PDF Standard Security Handler.</li>
+       <li>User and owner passwords for open access and full-access recovery.</li>
+       <li><code>PdfPermissions</code> flags for print, copy, edit, forms, accessibility, assembly, and low-resolution printing.</li>
+       <li>Encrypted content streams and image XObjects with reliability fixes for trailer IDs, stream filters, and AES padding.</li>
+     </ul>
+
+     <h3>v1.2.3 - Recent graphics and encoding update</h3>
+     <ul>
+       <li>Vector Graphics Canvas API for lines, rectangles, rounded rectangles, circles, ellipses, paths, polygons, grids, and charts.</li>
+       <li>WinAnsiEncoding documentation and showcase sample covering Windows-1252 specials and Latin-1 characters.</li>
+       <li>Improved sample output for vector graphics and Unicode character coverage.</li>
+     </ul>
+
      <h3>v1.2.2 — May 4, 2026</h3>
      <ul>
        <li>✓ Table of Contents generation with clickable internal links</li>
