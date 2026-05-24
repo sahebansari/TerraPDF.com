@@ -1,6 +1,6 @@
 ---
 title: "Changelog"
-description: "Version history and release notes for TerraPDF."
+description: "Version history, release notes, fixes, and feature updates for the TerraPDF C# PDF generation library."
 layout: base.njk
 docPage: true
 permalink: /changelog/

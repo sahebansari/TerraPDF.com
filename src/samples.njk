@@ -1,0 +1,331 @@
+---
+title: TerraPDF Samples - Code Examples
+description: Explore real-world TerraPDF samples demonstrating PDF generation, styling, tables, encryption, and more.
+layout: base.njk
+---
+
+<section class="hero" style="background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%); padding: 4rem 2rem;">
+  <div class="container">
+    <div>
+      <h1 class="hero-title">Code Samples & Examples</h1>
+      <p class="tagline">
+        Real-world examples showing how to build PDFs with TerraPDF. From simple reports to complex documents with tables, encryption, and advanced layouts.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="samples-grid">
+      <!-- Simple Report -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>01. Simple Report</h3>
+          <span class="sample-tag">Beginner</span>
+        </div>
+        <p class="sample-description">
+          Text formatting, bold/italic/strikethrough, justified paragraphs, horizontal rules, tables with alternating rows, and page numbers.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Text Spans</span>
+          <span class="feature-badge">Tables</span>
+          <span class="feature-badge">Page Numbers</span>
+        </div>
+        <a href="/samples/simple-report/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>02. Styled Newsletter</h3>
+          <span class="sample-tag">Intermediate</span>
+        </div>
+        <p class="sample-description">
+          Two-column layouts, colored banners, pull-quote blocks, statistics boxes with borders, and multi-page repeating footers.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Columns & Rows</span>
+          <span class="feature-badge">Styling</span>
+          <span class="feature-badge">Borders</span>
+        </div>
+        <a href="/samples/styled-newsletter/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Invoice -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>03. Invoice</h3>
+          <span class="sample-tag">Intermediate</span>
+        </div>
+        <p class="sample-description">
+          Multi-page document with 30-row line-items table, repeating header on every page, bill-from/to sections, totals block, and payment terms.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Multi-Page</span>
+          <span class="feature-badge">Table Headers</span>
+          <span class="feature-badge">Images</span>
+        </div>
+        <a href="/samples/invoice/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Company Profile -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>04. Company Profile</h3>
+          <span class="sample-tag">Intermediate</span>
+        </div>
+        <p class="sample-description">
+          Full-width header banner images, team tables, key metrics, service cards, and multi-page layouts with footer logos.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Images</span>
+          <span class="feature-badge">Metrics</span>
+          <span class="feature-badge">Layout</span>
+        </div>
+        <a href="/samples/company-profile/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Event Brochure -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>05. Event Brochure</h3>
+          <span class="sample-tag">Intermediate</span>
+        </div>
+        <p class="sample-description">
+          Conference agenda tables, speaker cards in two-column layout, sponsor logos grid, and call-to-action banners.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Agenda</span>
+          <span class="feature-badge">Cards</span>
+          <span class="feature-badge">Sponsors</span>
+        </div>
+        <a href="/samples/event-brochure/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Product Catalogue -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>06. Product Catalogue</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Complex multi-page product grid with images, descriptions, pricing, availability status, and category filtering.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Product Grid</span>
+          <span class="feature-badge">Images</span>
+          <span class="feature-badge">Pricing</span>
+        </div>
+        <a href="/samples/product-catalogue/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Product Catalog Cover -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>07. Product Catalog Cover</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Professional cover page design with featured products, testimonials, and promotional content layout techniques.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Design</span>
+          <span class="feature-badge">Cover Page</span>
+          <span class="feature-badge">Testimonials</span>
+        </div>
+        <a href="/samples/product-catalog-cover/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Report with Bookmarks -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>08. Report with Bookmarks</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Hierarchical bookmark structure with top-level sections, sub-sections, and page-positioned entries for easy PDF navigation.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Bookmarks</span>
+          <span class="feature-badge">Navigation</span>
+          <span class="feature-badge">Hierarchy</span>
+        </div>
+        <a href="/samples/report-with-bookmarks/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Report with TOC -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>09. Report with Table of Contents</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Automatic table of contents generation with heading levels (H1-H6), clickable page numbers, and internal links between sections.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">TOC</span>
+          <span class="feature-badge">Headings</span>
+          <span class="feature-badge">Links</span>
+        </div>
+        <a href="/samples/report-with-toc/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Vector Graphics -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>10. Vector Graphics Showcase</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Demonstrates drawing capabilities including shapes, lines, gradients, and custom vector graphics for data visualization.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Graphics</span>
+          <span class="feature-badge">Shapes</span>
+          <span class="feature-badge">Visualization</span>
+        </div>
+        <a href="/samples/vector-graphics/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Unicode Showcase -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>11. Unicode Showcase</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          Comprehensive Unicode and multi-language support, including RTL text, special characters, and various scripts and encodings.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Unicode</span>
+          <span class="feature-badge">RTL</span>
+          <span class="feature-badge">Encoding</span>
+        </div>
+        <a href="/samples/unicode-showcase/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+
+      <!-- Encryption Showcase -->
+      <div class="sample-card">
+        <div class="sample-header">
+          <h3>12. Encryption & Security</h3>
+          <span class="sample-tag">Advanced</span>
+        </div>
+        <p class="sample-description">
+          AES-128 password protection with four scenarios: open password, owner-only, print-only, and fully restricted documents.
+        </p>
+        <div class="sample-features">
+          <span class="feature-badge">Encryption</span>
+          <span class="feature-badge">Permissions</span>
+          <span class="feature-badge">Security</span>
+        </div>
+        <a href="/samples/encryption-showcase/" class="btn btn-outline btn-sm">View Sample</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="section-header">
+      <h2>Getting the Sample Source Code</h2>
+      <p>All samples are part of the TerraPDF repository and can be run locally.</p>
+    </div>
+
+    <div class="code-block" style="background: #1e1e1e; color: #d4d4d4; padding: 1.5rem; border-radius: 8px; overflow-x: auto;">
+      <pre><code>git clone https://github.com/sahebansari/TerraPDF.git
+cd TerraPDF/samples/TerraPDF.Sample
+dotnet run</code></pre>
+    </div>
+
+    <p style="margin-top: 1.5rem; color: var(--text-muted);">
+      The samples will generate PDF files to your Desktop in a SamplePDF folder. Each sample demonstrates different TerraPDF features and can be modified to suit your needs.
+    </p>
+  </div>
+</section>
+
+<style>
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.sample-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.sample-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+.sample-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.sample-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.sample-tag {
+  background: var(--accent);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sample-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.sample-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.feature-badge {
+  display: inline-block;
+  background: var(--bg-alt);
+  color: var(--primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.code-block {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.code-block code {
+  display: block;
+  white-space: pre;
+}
+</style>

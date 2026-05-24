@@ -1,6 +1,6 @@
 ---
 title: "Security Policy"
-description: "Security policy for TerraPDF library."
+description: "Security policy for TerraPDF, including supported versions, vulnerability reporting, and responsible disclosure guidance."
 layout: base.njk
 docPage: true
 permalink: /security/

@@ -10,51 +10,153 @@
   // Copy Button Functionality
   // ===========================
   function initCopyButtons() {
-    const copyButtons = document.querySelectorAll('.copy-btn, [data-copy]');
+    document.addEventListener('click', async function(e) {
+      const button = e.target.closest('.copy-btn, .copy-code-btn, [data-copy], [data-copy-target]');
+      if (!button) return;
 
-    copyButtons.forEach(button => {
-      button.addEventListener('click', async function(e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        const targetId = this.getAttribute('data-copy') || this.getAttribute('href');
-        let textToCopy = '';
+      const targetId = button.getAttribute('data-copy') || button.getAttribute('href');
+      let textToCopy = '';
 
-        // If data-copy-target is set, copy from that element's text content
-        const targetSelector = this.getAttribute('data-copy-target');
-        if (targetSelector) {
-          const targetEl = document.querySelector(targetSelector);
-          if (targetEl) {
-            textToCopy = targetEl.textContent.trim();
-          }
-        } else if (targetId && targetId.startsWith('#')) {
-          // Copy from element with matching ID
-          const targetEl = document.querySelector(targetId);
-          if (targetEl) {
-            textToCopy = targetEl.textContent.trim();
-          }
-        } else {
-          // Copy button's code instance (inline code block)
-          const codeEl = this.closest('pre')?.querySelector('code') ||
-                        this.closest('.install-box')?.querySelector('code');
-          if (codeEl) {
-            textToCopy = codeEl.textContent.trim();
-          }
+      // If data-copy-target is set, copy from that element's text content
+      const targetSelector = button.getAttribute('data-copy-target');
+      if (targetSelector) {
+        const targetEl = document.querySelector(targetSelector);
+        if (targetEl) {
+          textToCopy = targetEl.textContent.trim();
+        }
+      } else if (targetId && targetId.startsWith('#')) {
+        // Copy from element with matching ID
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          textToCopy = targetEl.textContent.trim();
+        }
+      } else {
+        // Copy button's code instance (inline code block)
+        const codeEl = button.closest('pre')?.querySelector('code') ||
+                      button.closest('.install-box')?.querySelector('code');
+        if (codeEl) {
+          textToCopy = codeEl.textContent.trim();
+        }
+      }
+
+      if (!textToCopy) {
+        console.warn('No content found to copy');
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        showCopyFeedback(button, 'Copied!');
+      } catch (err) {
+        console.error('Copy failed:', err);
+        // Fallback for older browsers
+        fallbackCopy(textToCopy, button);
+      }
+    });
+  }
+
+  // ===========================
+  // Sample Page Modals
+  // ===========================
+  function initSampleModals() {
+    const openButtons = document.querySelectorAll('[data-sample-modal-open]');
+    if (!openButtons.length) return;
+
+    let activeModal = null;
+    let lastFocused = null;
+    const sampleCodeCache = new Map();
+
+    async function loadSampleCode() {
+      const output = document.querySelector('#sample-code-output');
+      if (!output) return;
+
+      const sourceUrl = output.getAttribute('data-sample-code-src');
+      if (!sourceUrl) {
+        setSampleCode(output, '// No sample source file configured for this page.');
+        return;
+      }
+
+      if (sampleCodeCache.has(sourceUrl)) {
+        setSampleCode(output, sampleCodeCache.get(sourceUrl));
+        return;
+      }
+
+      setSampleCode(output, '// Loading sample source code...');
+
+      try {
+        const response = await fetch(sourceUrl, { cache: 'force-cache' });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
         }
 
-        if (!textToCopy) {
-          console.warn('No content found to copy');
-          return;
-        }
+        const source = await response.text();
+        sampleCodeCache.set(sourceUrl, source);
+        setSampleCode(output, source);
+      } catch (err) {
+        console.error('Sample source code load failed:', err);
+        setSampleCode(output, `// Unable to load sample source code from ${sourceUrl}.`);
+      }
+    }
 
-        try {
-          await navigator.clipboard.writeText(textToCopy);
-          showCopyFeedback(this, 'Copied!');
-        } catch (err) {
-          console.error('Copy failed:', err);
-          // Fallback for older browsers
-          fallbackCopy(textToCopy, this);
-        }
+    function setSampleCode(output, source) {
+      output.textContent = source;
+
+      if (typeof hljs !== 'undefined') {
+        delete output.dataset.highlighted;
+        hljs.highlightElement(output);
+      }
+    }
+
+    function openModal(modal) {
+      if (!modal) return;
+
+      if (modal.id === 'sample-code-modal') {
+        loadSampleCode();
+      }
+
+      lastFocused = document.activeElement;
+      activeModal = modal;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sample-modal-open');
+
+      const firstFocusable = modal.querySelector('button, a, iframe, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) {
+        firstFocusable.focus();
+      }
+    }
+
+    function closeModal(modal) {
+      const targetModal = modal || activeModal;
+      if (!targetModal) return;
+
+      targetModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sample-modal-open');
+      activeModal = null;
+
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
+    }
+
+    openButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const modal = document.getElementById(this.getAttribute('data-sample-modal-open'));
+        openModal(modal);
       });
+    });
+
+    document.querySelectorAll('[data-sample-modal-close]').forEach(button => {
+      button.addEventListener('click', function() {
+        closeModal(this.closest('.sample-modal'));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && activeModal) {
+        closeModal(activeModal);
+      }
     });
   }
 
@@ -265,6 +367,7 @@
      initKeyboardNav();
      initScrollToTop();
      initCodeBlocks();
+     initSampleModals();
      initSyntaxHighlighting();
    }
 

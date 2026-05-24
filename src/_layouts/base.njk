@@ -10,17 +10,20 @@
   <meta name="description" content="{{ description or 'TerraPDF is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents. Fast, free, and easy to use.' }}">
   <meta name="keywords" content="PDF generation, C# PDF library, .NET PDF, TerraPDF, NuGet, open-source PDF, document generation, free PDF library">
   <meta name="author" content="Saheb Ansari">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="{{ robots or 'index, follow' }}">
+  <meta name="theme-color" content="#0f172a">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://terrapdf.com{{ page.url }}">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://terrapdf.com{{ page.url }}">
   <meta property="og:title" content="{{ title }} | TerraPDF">
   <meta property="og:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents. Fast, free, and easy to use.' }}">
-  <meta property="og:image" content="https://github.com/sahebansari/TerraPDF/raw/master/logo.png">
+  <meta property="og:image" content="https://terrapdf.com/images/tp-logo.png">
+  <meta property="og:image:alt" content="TerraPDF PDF generation library logo">
   <meta property="og:site_name" content="TerraPDF">
   
   <!-- Twitter -->
@@ -28,7 +31,8 @@
   <meta name="twitter:url" content="https://terrapdf.com{{ page.url }}">
   <meta name="twitter:title" content="{{ title }} | TerraPDF">
   <meta name="twitter:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents.' }}">
-  <meta name="twitter:image" content="https://github.com/sahebansari/TerraPDF/raw/master/logo.png">
+  <meta name="twitter:image" content="https://terrapdf.com/images/tp-logo.png">
+  <meta name="twitter:image:alt" content="TerraPDF logo">
   
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
@@ -74,9 +78,11 @@
       "priceCurrency": "USD"
     },
     "description": "A lightweight, zero-dependency, pure C# library for generating professional PDFs with layout, tables, images, links, bookmarks, vector graphics, WinAnsi text, and AES-128 encryption.",
+    "keywords": "PDF generation, C# PDF library, .NET PDF, TerraPDF, NuGet",
     "url": "https://github.com/sahebansari/TerraPDF",
     "downloadUrl": "https://www.nuget.org/packages/TerraPDF/",
-    "screenshot": "https://github.com/sahebansari/TerraPDF/raw/master/logo.png",
+    "screenshot": "https://terrapdf.com/images/tp-logo.png",
+    "sameAs": ["https://github.com/sahebansari/TerraPDF"],
     "author": {
       "@type": "Person",
       "name": "Saheb Ansari"
@@ -99,11 +105,12 @@
         <span class="logo-text"></span>
       </a>
       <ul class="nav-links">
-        <li><a href="/" {% if page.url == "/" %}class="active" aria-current="page"{% endif %}>Home</a></li>
-        <li><a href="/features/" {% if page.url == "/features/" %}class="active" aria-current="page"{% endif %}>Features</a></li>
-        <li><a href="/getting-started/" {% if page.url == "/getting-started/" %}class="active" aria-current="page"{% endif %}>Getting Started</a></li>
-        <li><a href="/docs/" {% if page.url == "/docs/" %}class="active" aria-current="page"{% endif %}>Documentation</a></li>
-        <li><a href="/download/" {% if page.url == "/download/" %}class="active" aria-current="page"{% endif %}>Download</a></li>
+        <li><a href="/" {% if page.url | isActiveNav("/") %}class="active" aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="/features/" {% if page.url | isActiveNav("/features/") %}class="active" aria-current="page"{% endif %}>Features</a></li>
+        <li><a href="/getting-started/" {% if page.url | isActiveNav("/getting-started/") %}class="active" aria-current="page"{% endif %}>Getting Started</a></li>
+        <li><a href="/docs/" {% if page.url | isActiveNav("/docs/") %}class="active" aria-current="page"{% endif %}>Documentation</a></li>
+        <li><a href="/samples/" {% if page.url | isActiveNav("/samples/") %}class="active" aria-current="page"{% endif %}>Samples</a></li>
+        <li><a href="/download/" {% if page.url | isActiveNav("/download/") %}class="active" aria-current="page"{% endif %}>Download</a></li>
       </ul>
       <div class="nav-cta">
         <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener nofollow noreferrer">GitHub</a>
@@ -117,8 +124,45 @@
       {% if docPage %}
         <div class="container">
           <div class="content-section">
-            <a href="/docs/" class="back-to-docs">← All Documentation</a>
+            <div class="docs-page-actions">
+              <a href="/docs/" class="back-to-docs">← All Documentation</a>
+              {% set docsNav = [
+                {url: '/docs/getting-started/', title: 'Getting Started', next: '/docs/encryption/', nextTitle: 'Encryption & Security'},
+                {url: '/docs/encryption/', title: 'Encryption & Security', prev: '/docs/getting-started/', prevTitle: 'Getting Started', next: '/docs/vector-graphics/', nextTitle: 'Vector Graphics'},
+                {url: '/docs/vector-graphics/', title: 'Vector Graphics', prev: '/docs/encryption/', prevTitle: 'Encryption & Security', next: '/docs/unicode-and-encoding/', nextTitle: 'Unicode & Encoding'},
+                {url: '/docs/unicode-and-encoding/', title: 'Unicode & Encoding', prev: '/docs/vector-graphics/', prevTitle: 'Vector Graphics', next: '/docs/text-and-spans/', nextTitle: 'Text & Spans'},
+                {url: '/docs/text-and-spans/', title: 'Text & Spans', prev: '/docs/unicode-and-encoding/', prevTitle: 'Unicode & Encoding', next: '/docs/layout/', nextTitle: 'Layout'},
+                {url: '/docs/layout/', title: 'Layout', prev: '/docs/text-and-spans/', prevTitle: 'Text & Spans', next: '/docs/decorators/', nextTitle: 'Decorators'},
+                {url: '/docs/decorators/', title: 'Decorators', prev: '/docs/layout/', prevTitle: 'Layout', next: '/docs/images/', nextTitle: 'Images'},
+                {url: '/docs/images/', title: 'Images', prev: '/docs/decorators/', prevTitle: 'Decorators', next: '/docs/table-of-contents/', nextTitle: 'Table of Contents'},
+                {url: '/docs/table-of-contents/', title: 'Table of Contents', prev: '/docs/images/', prevTitle: 'Images', next: '/docs/bookmarks/', nextTitle: 'Bookmarks'},
+                {url: '/docs/bookmarks/', title: 'Bookmarks', prev: '/docs/table-of-contents/', prevTitle: 'Table of Contents', next: '/docs/metadata/', nextTitle: 'Metadata'},
+                {url: '/docs/metadata/', title: 'Metadata', prev: '/docs/bookmarks/', prevTitle: 'Bookmarks', next: '/docs/colors/', nextTitle: 'Colors'},
+                {url: '/docs/colors/', title: 'Colors', prev: '/docs/metadata/', prevTitle: 'Metadata', next: '/docs/page-sizes-and-units/', nextTitle: 'Page Sizes & Units'},
+                {url: '/docs/page-sizes-and-units/', title: 'Page Sizes & Units', prev: '/docs/colors/', prevTitle: 'Colors', next: '/docs/components-and-templates/', nextTitle: 'Components & Templates'},
+                {url: '/docs/components-and-templates/', title: 'Components & Templates', prev: '/docs/page-sizes-and-units/', prevTitle: 'Page Sizes & Units', next: '/docs/row-and-column-layout/', nextTitle: 'Row & Column Layout'},
+                {url: '/docs/row-and-column-layout/', title: 'Row & Column Layout', prev: '/docs/components-and-templates/', prevTitle: 'Components & Templates'}
+              ] %}
+              {% set current = null %}
+              {% for item in docsNav %}
+                {% if item.url == page.url %}
+                  {% set current = item %}
+                {% endif %}
+              {% endfor %}
+            </div>
+
             {{ content | safe }}
+
+            {% if current and (current.prev or current.next) %}
+              <div class="docs-page-nav">
+                {% if current.prev %}
+                  <a href="{{ current.prev }}" class="docs-nav-link docs-nav-prev">← {{ current.prevTitle }}</a>
+                {% endif %}
+                {% if current.next %}
+                  <a href="{{ current.next }}" class="docs-nav-link docs-nav-next">{{ current.nextTitle }} →</a>
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         </div>
       {% else %}
@@ -141,6 +185,7 @@
           <li><a href="/features/">Features</a></li>
           <li><a href="/getting-started/">Getting Started</a></li>
           <li><a href="/docs/">Documentation</a></li>
+          <li><a href="/samples/">Samples</a></li>
           <li><a href="https://github.com/sahebansari/TerraPDF" rel="noopener nofollow noreferrer">GitHub Repository</a></li>
         </ul>
       </div>

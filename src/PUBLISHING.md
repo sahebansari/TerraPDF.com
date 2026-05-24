@@ -1,6 +1,6 @@
 ---
 title: "Publishing TerraPDF"
-description: "Guide to publishing TerraPDF to NuGet.org."
+description: "Step-by-step publishing guide for releasing TerraPDF packages to NuGet.org with versioning and release checks."
 layout: base.njk
 docPage: true
 permalink: /publishing/

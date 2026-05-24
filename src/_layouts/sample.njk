@@ -1,0 +1,100 @@
+---
+layout: base.njk
+---
+
+{% set samplesNav = [
+  {url: '/samples/simple-report/', title: 'Simple Report', pdf: '/samples/01_simple_report.pdf', code: '/sample-codes/01_SimpleReport.cs'},
+  {url: '/samples/styled-newsletter/', title: 'Styled Newsletter', pdf: '/samples/02_newsletter.pdf', code: '/sample-codes/02_StyledNewsletter.cs'},
+  {url: '/samples/invoice/', title: 'Invoice', pdf: '/samples/03_invoice.pdf', code: '/sample-codes/03_Invoice.cs'},
+  {url: '/samples/company-profile/', title: 'Company Profile', pdf: '/samples/04_company_profile.pdf', code: '/sample-codes/04_CompanyProfile.cs'},
+  {url: '/samples/event-brochure/', title: 'Event Brochure', pdf: '/samples/05_event_brochure.pdf', code: '/sample-codes/05_EventBrochure.cs'},
+  {url: '/samples/product-catalogue/', title: 'Product Catalogue', pdf: '/samples/06_product_catalogue.pdf', code: '/sample-codes/06_ProductCatalogue.cs'},
+  {url: '/samples/product-catalog-cover/', title: 'Product Catalog Cover', pdf: '/samples/07_product_catalog_cover.pdf', code: '/sample-codes/07_ProductCatalogCover.cs'},
+  {url: '/samples/report-with-bookmarks/', title: 'Report with Bookmarks', pdf: '/samples/08_report_with_bookmarks.pdf', code: '/sample-codes/08_ReportWithBookmarks.cs'},
+  {url: '/samples/report-with-toc/', title: 'Report with Table of Contents', pdf: '/samples/09_report_with_toc.pdf', code: '/sample-codes/09_ReportWithToc.cs'},
+  {url: '/samples/vector-graphics/', title: 'Vector Graphics Showcase', pdf: '/samples/10_vector_graphics_showcase.pdf', code: '/sample-codes/10_VectorGraphicsShowcase.cs'},
+  {url: '/samples/unicode-showcase/', title: 'Unicode Showcase', pdf: '/samples/11_unicode_showcase.pdf', code: '/sample-codes/11_UnicodeShowcase.cs'},
+  {url: '/samples/encryption-showcase/', title: 'Encryption & Security', pdf: '/samples/12_encryption_showcase.pdf', code: '/sample-codes/12_EncryptionShowcase.cs'}
+] %}
+{% set currentSample = null %}
+{% for sample in samplesNav %}
+  {% if sample.url == page.url %}
+    {% set currentSample = sample %}
+  {% endif %}
+{% endfor %}
+
+<div class="container">
+  <div class="content-section">
+    <div class="docs-page-actions">
+      <a href="/samples/" class="back-to-docs">← All Samples</a>
+    </div>
+
+    {% if currentSample %}
+      <div class="sample-action-bar">
+        <button type="button" class="btn btn-outline sample-action-button" data-sample-modal-open="sample-code-modal">
+          View Sample Code
+        </button>
+        <button type="button" class="btn btn-primary sample-action-button" data-sample-modal-open="sample-pdf-modal">
+          View PDF
+        </button>
+      </div>
+    {% endif %}
+
+    <div class="sample-content" data-sample-title="{% if currentSample %}{{ currentSample.title }}{% else %}{{ title }}{% endif %}">
+      {{ content | safe }}
+    </div>
+
+    {% if currentSample %}
+      <div class="sample-action-bar sample-action-bar-bottom">
+        <button type="button" class="btn btn-outline sample-action-button" data-sample-modal-open="sample-code-modal">
+          View Sample Code
+        </button>
+        <button type="button" class="btn btn-primary sample-action-button" data-sample-modal-open="sample-pdf-modal">
+          View PDF
+        </button>
+      </div>
+    {% endif %}
+
+    <div class="docs-page-nav">
+      {% for sample in samplesNav %}
+        {% if sample.url == page.url %}
+          {% if loop.index > 1 %}
+            {% set prev = samplesNav[loop.index - 2] %}
+            <a href="{{ prev.url }}" class="docs-nav-link docs-nav-prev">← {{ prev.title }}</a>
+          {% endif %}
+          {% if loop.index < samplesNav.length %}
+            {% set next = samplesNav[loop.index] %}
+            <a href="{{ next.url }}" class="docs-nav-link docs-nav-next">{{ next.title }} →</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if currentSample %}
+      <div class="sample-modal" id="sample-code-modal" aria-hidden="true">
+        <div class="sample-modal-backdrop" data-sample-modal-close></div>
+        <div class="sample-modal-dialog sample-code-dialog" role="dialog" aria-modal="true" aria-labelledby="sample-code-modal-title">
+          <div class="sample-modal-header">
+            <h2 id="sample-code-modal-title">{{ currentSample.title }} Code</h2>
+            <button type="button" class="sample-modal-close" aria-label="Close modal" data-sample-modal-close>&times;</button>
+          </div>
+          <div class="sample-modal-toolbar">
+            <button type="button" class="btn btn-outline btn-small" data-copy-target="#sample-code-output">Copy Code</button>
+          </div>
+          <pre class="sample-code-output"><code id="sample-code-output" class="language-csharp" data-sample-code-src="{{ currentSample.code }}"></code></pre>
+        </div>
+      </div>
+
+      <div class="sample-modal" id="sample-pdf-modal" aria-hidden="true">
+        <div class="sample-modal-backdrop" data-sample-modal-close></div>
+        <div class="sample-modal-dialog sample-pdf-dialog" role="dialog" aria-modal="true" aria-labelledby="sample-pdf-modal-title">
+          <div class="sample-modal-header">
+            <h2 id="sample-pdf-modal-title">{{ currentSample.title }} PDF</h2>
+            <button type="button" class="sample-modal-close" aria-label="Close modal" data-sample-modal-close>&times;</button>
+          </div>
+          <iframe class="sample-pdf-frame" src="{{ currentSample.pdf }}" title="{{ currentSample.title }} PDF preview"></iframe>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

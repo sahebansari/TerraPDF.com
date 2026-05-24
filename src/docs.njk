@@ -4,147 +4,64 @@ description: Complete TerraPDF documentation with API reference, guides, and exa
 layout: base.njk
 ---
 
-<div class="container">
+<div class="container docs-home">
   <div class="section-header">
     <h1>TerraPDF Documentation</h1>
-    <p>Master PDF generation with our comprehensive guides and API reference.</p>
+    <p>Browse the documentation like a table of contents — quick links to every guide and resource, with less scrolling and faster discovery.</p>
   </div>
 
-   <div class="content-section">
-     <h2>Getting Started</h2>
-     <p>New to TerraPDF? Start here for installation and your first PDF.</p>
-     
-     <div class="features-vertical">
-       <div class="feature-card">
-         <h3>📚 Full Getting Started Guide</h3>
-         <p>Installation, setup, namespaces, page configuration, and your first "Hello World" PDF. Complete walkthrough with code examples.</p>
-         <p><a href="/docs/getting-started/">Read the Guide →</a></p>
-       </div>
-     </div>
-   </div>
+  <div class="docs-home-grid">
+    <section class="docs-home-card">
+      <h2>Quick Start</h2>
+      <p>Begin with the core setup and your first PDF.</p>
+      <ul class="docs-home-list">
+        <li>
+          <a href="/docs/getting-started/">
+            <span class="docs-home-icon">📚</span>
+            <span>
+              <strong>Getting Started Guide</strong>
+              <span class="docs-home-desc">Installation, setup, namespaces, page configuration, and first PDF examples.</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
 
-   <div class="content-section">
-     <h2>Core Documentation</h2>
-     <p>In-depth guides covering every aspect of TerraPDF:</p>
-     
-     <div class="features-vertical">
-      <div class="feature-card">
-        <h3>🔐 Encryption & Security</h3>
-        <p>AES-128 PDF encryption, user and owner passwords, and permission flags for printing, copying, editing, forms, accessibility, and assembly.</p>
-        <p><a href="/docs/encryption/">Read →</a></p>
-      </div>
+    <section class="docs-home-card">
+      <h2>Core Guides</h2>
+      <p>Jump directly to the feature guide you need.</p>
+      <ul class="docs-home-list">
+        <li><a href="/docs/encryption/"><span class="docs-home-icon">🔐</span><span><strong>Encryption & Security</strong><span class="docs-home-desc">AES-128 encryption, passwords, and permission flags.</span></span></a></li>
+        <li><a href="/docs/vector-graphics/"><span class="docs-home-icon">📈</span><span><strong>Vector Graphics</strong><span class="docs-home-desc">Lines, shapes, paths, charts, and diagrams.</span></span></a></li>
+        <li><a href="/docs/unicode-and-encoding/"><span class="docs-home-icon">À</span><span><strong>Unicode & Encoding</strong><span class="docs-home-desc">WinAnsi and Latin-1 text rendering rules.</span></span></a></li>
+        <li><a href="/docs/text-and-spans/"><span class="docs-home-icon">📝</span><span><strong>Text & Spans</strong><span class="docs-home-desc">Styling, fonts, line spacing, and span composition.</span></span></a></li>
+        <li><a href="/docs/layout/"><span class="docs-home-icon">📐</span><span><strong>Layout</strong><span class="docs-home-desc">Rows, columns, tables, spacing, and alignment.</span></span></a></li>
+        <li><a href="/docs/decorators/"><span class="docs-home-icon">🎨</span><span><strong>Decorators</strong><span class="docs-home-desc">Margins, padding, borders, backgrounds, and page breaks.</span></span></a></li>
+        <li><a href="/docs/images/"><span class="docs-home-icon">🖼️</span><span><strong>Images</strong><span class="docs-home-desc">PNG/JPEG embedding, sizing, and positioning.</span></span></a></li>
+        <li><a href="/docs/table-of-contents/"><span class="docs-home-icon">📑</span><span><strong>Table of Contents</strong><span class="docs-home-desc">Auto-generated TOC with clickable internal links.</span></span></a></li>
+        <li><a href="/docs/bookmarks/"><span class="docs-home-icon">🔗</span><span><strong>Bookmarks</strong><span class="docs-home-desc">PDF outlines and hierarchical navigation.</span></span></a></li>
+        <li><a href="/docs/metadata/"><span class="docs-home-icon">ℹ️</span><span><strong>Metadata</strong><span class="docs-home-desc">Document title, author, subject, keywords, and creator.</span></span></a></li>
+        <li><a href="/docs/colors/"><span class="docs-home-icon">🎨</span><span><strong>Colors</strong><span class="docs-home-desc">Color constants, palettes, and hex support.</span></span></a></li>
+        <li><a href="/docs/page-sizes-and-units/"><span class="docs-home-icon">📏</span><span><strong>Page Sizes & Units</strong><span class="docs-home-desc">Standard page sizes and unit conversions.</span></span></a></li>
+        <li><a href="/docs/components-and-templates/"><span class="docs-home-icon">🧩</span><span><strong>Components & Templates</strong><span class="docs-home-desc">Reusable IComponent and IDocument patterns.</span></span></a></li>
+        <li><a href="/docs/row-and-column-layout/"><span class="docs-home-icon">↔️</span><span><strong>Row & Column Layout</strong><span class="docs-home-desc">Advanced responsive layout patterns.</span></span></a></li>
+      </ul>
+    </section>
 
-      <div class="feature-card">
-        <h3>📈 Vector Graphics</h3>
-        <p>Canvas API for lines, rectangles, rounded rectangles, circles, ellipses, arbitrary paths, polygons, grids, charts, and diagrams.</p>
-        <p><a href="/docs/vector-graphics/">Read →</a></p>
-      </div>
+    <section class="docs-home-card">
+      <h2>Project Resources</h2>
+      <p>Readme, changelog, contribution guide, and security policy.</p>
+      <ul class="docs-home-list">
+        <li><a href="/readme/"><span class="docs-home-icon">📖</span><span><strong>README</strong><span class="docs-home-desc">Project overview, examples, and summary.</span></span></a></li>
+        <li><a href="/changelog/"><span class="docs-home-icon">📋</span><span><strong>Changelog</strong><span class="docs-home-desc">Version history and release notes.</span></span></a></li>
+        <li><a href="/contributing/"><span class="docs-home-icon">🤝</span><span><strong>Contributing</strong><span class="docs-home-desc">Coding standards and PR guidance.</span></span></a></li>
+        <li><a href="/security/"><span class="docs-home-icon">🔐</span><span><strong>Security</strong><span class="docs-home-desc">Responsible disclosure and security policy.</span></span></a></li>
+      </ul>
+    </section>
+  </div>
 
-      <div class="feature-card">
-        <h3>À Unicode & Encoding</h3>
-        <p>WinAnsiEncoding coverage, Windows-1252 specials, Latin-1 characters, safe ranges, and glyph-width behavior.</p>
-        <p><a href="/docs/unicode-and-encoding/">Read →</a></p>
-      </div>
-
-      <div class="feature-card">
-        <h3>📝 Text & Spans</h3>
-        <p>Styling, bold, italic, underline, strikethrough, font size, colors, line height, multi-span text, page numbers.</p>
-        <p><a href="/docs/text-and-spans/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>📐 Layout</h3>
-        <p>Column, Row, and Table layouts, spacing, alignment, and responsive design patterns.</p>
-        <p><a href="/docs/layout/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>🎨 Decorators</h3>
-        <p>Margins, padding, backgrounds, borders, rounded corners, per-edge borders, lines, page breaks.</p>
-        <p><a href="/docs/decorators/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>🖼️ Images</h3>
-        <p>Embed PNG and JPEG images, sizing, alignment, and positioning.</p>
-        <p><a href="/docs/images/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>📑 Table of Contents</h3>
-        <p>Automatic TOC generation from H1-H6, hierarchical numbering, internal links.</p>
-        <p><a href="/docs/table-of-contents/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>🔗 Bookmarks</h3>
-        <p>PDF bookmarks/outlines with hierarchical nesting for document navigation.</p>
-        <p><a href="/docs/bookmarks/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>ℹ️ Metadata</h3>
-        <p>Set document properties: Title, Author, Subject, Keywords, Creator.</p>
-        <p><a href="/docs/metadata/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>🎨 Colors</h3>
-        <p>Material Design palette reference, color constants, hex colour support.</p>
-        <p><a href="/docs/colors/">Read →</a></p>
-      </div>
-       
-      <div class="feature-card">
-        <h3>📏 Page Sizes & Units</h3>
-        <p>All standard page sizes (A0-A6, Letter, Legal, Tabloid) and unit conversions.</p>
-        <p><a href="/docs/page-sizes-and-units/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>🧩 Components & Templates</h3>
-        <p>Create reusable <code>IComponent</code> and <code>IDocument</code> implementations.</p>
-        <p><a href="/docs/components-and-templates/">Read →</a></p>
-      </div>
-      
-      <div class="feature-card">
-        <h3>↔️ Row & Column Layout</h3>
-        <p>Deep dive into Row/Column layouts with diagrams and advanced patterns.</p>
-        <p><a href="/docs/row-and-column-layout/">Read →</a></p>
-      </div>
-    </div>
-   </div>
-
-   <div class="content-section">
-     <h2>Project Resources</h2>
-     <div class="features-vertical">
-        <div class="feature-card">
-          <h3>📖 README</h3>
-          <p>Project overview, quick examples, API summary.</p>
-          <p><a href="/readme/">Read →</a></p>
-        </div>
-        
-        <div class="feature-card">
-          <h3>📋 Changelog</h3>
-          <p>Version history and release notes for all TerraPDF releases.</p>
-          <p><a href="/changelog/">Read →</a></p>
-        </div>
-        
-        <div class="feature-card">
-          <h3>🤝 Contributing</h3>
-          <p>Guidelines for contributing, coding standards, and PR process.</p>
-          <p><a href="/contributing/">Read →</a></p>
-        </div>
-        
-        <div class="feature-card">
-          <h3>🔐 Security</h3>
-          <p>Security policy and responsible disclosure process.</p>
-          <p><a href="/security/">Read →</a></p>
-        </div>
-     </div>
-   </div>
-
-   <div class="callout callout-info">
-     <h4>Can't find what you're looking for?</h4>
-     <p>Check the <a href="/docs/">complete documentation</a> or <a href="https://github.com/sahebansari/TerraPDF/issues">open an issue</a>.</p>
-   </div>
+  <div class="callout callout-info">
+    <h4>Need a quick path?</h4>
+    <p>Jump to the guide you need above, or use the full documentation menu for deeper API reference and examples.</p>
+  </div>
 </div>

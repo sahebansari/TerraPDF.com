@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "TerraPDF.com static site",
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "serve": "npx @11ty/eleventy --serve",
-    "debug": "DEBUG=* npx @11ty/eleventy"
+    "start": "eleventy --serve",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "build": "npm run clean && eleventy",
+    "watch": "eleventy --watch",
+    "debug": "DEBUG=Eleventy* eleventy"
   },
-  "keywords": ["11ty", "eleventy", "static-site"],
-  "author": "",
+ "keywords": [
+    "blog",
+    "eleventy",
+    "fluent2"
+  ],
+  "author": "Saheb Ansari",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^3.1.5"
   }
 }
