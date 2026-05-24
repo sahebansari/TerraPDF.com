@@ -280,7 +280,49 @@ a:hover {
   font-size: 1.35rem;
   color: var(--text-muted);
   max-width: 700px;
-  margin: 0 auto var(--space-xl);
+  margin: 0 auto var(--space-lg);
+}
+
+.header-license-bar {
+  background: #ecfeff;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.22);
+}
+
+.header-license-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: 35px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: var(--text);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.header-license-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.25rem;
+  padding: 0 0.55rem;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+  font-size: 0.50rem;
+  letter-spacing: 0;
+}
+
+.header-license-inner span:not(.header-license-mark) {
+  color: var(--text-muted);
+}
+
+.header-license-inner a {
+  color: var(--primary);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .hero-cta {
@@ -337,6 +379,35 @@ a:hover {
 
 #why-terrapdf .section-header p {
   font-size: 1.15rem;
+}
+
+#why-terrapdf .features-grid--two-col {
+  gap: var(--space-md);
+}
+
+#why-terrapdf .features-grid--two-col .feature-card {
+  padding: var(--space-md);
+  border-radius: 8px;
+}
+
+#why-terrapdf .features-grid--two-col .feature-card::before {
+  height: 3px;
+}
+
+#why-terrapdf .features-grid--two-col .feature-icon {
+  font-size: 1.65rem;
+  margin-bottom: var(--space-xs);
+}
+
+#why-terrapdf .features-grid--two-col .feature-card h3,
+#why-terrapdf .features-grid--two-col .feature-card h4 {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-xs);
+}
+
+#why-terrapdf .features-grid--two-col .feature-card p {
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .section-header p {
@@ -1084,6 +1155,16 @@ p.footer-signature {
 
   .hero .tagline {
     font-size: 1.1rem;
+  }
+
+  .header-license-inner {
+    flex-wrap: wrap;
+    text-align: center;
+    row-gap: var(--space-xs);
+  }
+
+  .header-license-inner a {
+    white-space: nowrap;
   }
 
   .hero-cta {
