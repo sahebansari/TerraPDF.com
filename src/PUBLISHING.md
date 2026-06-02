@@ -4,6 +4,7 @@ description: "Step-by-step publishing guide for releasing TerraPDF packages to N
 layout: base.njk
 docPage: true
 permalink: /publishing/
+robots: noindex, follow
 ---
 # Publishing TerraPDF to NuGet.org
 

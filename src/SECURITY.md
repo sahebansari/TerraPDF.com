@@ -4,6 +4,7 @@ description: "Security policy for TerraPDF, including supported versions, vulner
 layout: base.njk
 docPage: true
 permalink: /security/
+robots: noindex, follow
 ---
 # Security Policy
 

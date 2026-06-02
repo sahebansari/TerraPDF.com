@@ -4,6 +4,7 @@ description: "Installation and quick start guide for TerraPDF. Learn to generate
 layout: base.njk
 docPage: true
 permalink: /docs/getting-started/
+canonicalUrl: https://terrapdf.com/getting-started/
 ---
 # Getting Started with TerraPDF
 

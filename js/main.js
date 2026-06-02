@@ -73,6 +73,13 @@
       if (!output) return;
 
       const sourceUrl = output.getAttribute('data-sample-code-src');
+      const inlineSource = output.textContent.trim();
+
+      if (inlineSource && !inlineSource.startsWith('// Loading') && !inlineSource.startsWith('// Unable')) {
+        sampleCodeCache.set(sourceUrl, inlineSource);
+        return;
+      }
+
       if (!sourceUrl) {
         setSampleCode(output, '// No sample source file configured for this page.');
         return;

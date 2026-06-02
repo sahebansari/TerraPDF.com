@@ -81,7 +81,7 @@ layout: base.njk
           <div class="sample-modal-toolbar">
             <button type="button" class="btn btn-outline btn-small" data-copy-target="#sample-code-output">Copy Code</button>
           </div>
-          <pre class="sample-code-output"><code id="sample-code-output" class="language-csharp" data-sample-code-src="{{ currentSample.code }}"></code></pre>
+          <pre class="sample-code-output"><code id="sample-code-output" class="language-csharp" data-sample-code-src="{{ currentSample.code }}">{{ sampleCode(currentSample.code) | escape }}</code></pre>
         </div>
       </div>
 

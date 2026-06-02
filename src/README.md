@@ -4,6 +4,7 @@ description: "TerraPDF project overview: a lightweight, zero-dependency, pure C#
 layout: base.njk
 docPage: true
 permalink: /readme/
+robots: noindex, follow
 ---
 # TerraPDF 
 

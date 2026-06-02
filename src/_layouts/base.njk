@@ -12,14 +12,15 @@
   <meta name="author" content="Saheb Ansari">
   <meta name="robots" content="{{ robots or 'index, follow' }}">
   <meta name="theme-color" content="#0f172a">
+  {% set resolvedCanonicalUrl = canonicalUrl or 'https://terrapdf.com' + page.url %}
   
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://terrapdf.com{{ page.url }}">
+  <link rel="canonical" href="{{ resolvedCanonicalUrl }}">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
-  <meta property="og:url" content="https://terrapdf.com{{ page.url }}">
+  <meta property="og:url" content="{{ resolvedCanonicalUrl }}">
   <meta property="og:title" content="{{ title }} | TerraPDF">
   <meta property="og:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents. Fast, free, and easy to use.' }}">
   <meta property="og:image" content="https://terrapdf.com/images/tp-logo.png">
@@ -28,7 +29,7 @@
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://terrapdf.com{{ page.url }}">
+  <meta name="twitter:url" content="{{ resolvedCanonicalUrl }}">
   <meta name="twitter:title" content="{{ title }} | TerraPDF">
   <meta name="twitter:description" content="{{ description or 'TerraPDF - A lightweight, zero-dependency, pure C# library for generating professional PDF documents.' }}">
   <meta name="twitter:image" content="https://terrapdf.com/images/tp-logo.png">

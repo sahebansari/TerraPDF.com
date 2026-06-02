@@ -4,6 +4,7 @@ description: "Version history, release notes, fixes, and feature updates for the
 layout: base.njk
 docPage: true
 permalink: /changelog/
+robots: noindex, follow
 ---
 # Changelog
 

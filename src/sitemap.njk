@@ -1,0 +1,19 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all %}
+{%- set pageUrl = item.url %}
+{%- set canonical = item.data.canonicalUrl or 'https://terrapdf.com' + pageUrl %}
+{%- if pageUrl and pageUrl != '/sitemap.xml' and not (item.data.robots and 'noindex' in item.data.robots) and canonical == 'https://terrapdf.com' + pageUrl %}
+  <url>
+    <loc>https://terrapdf.com{{ pageUrl }}</loc>
+    <lastmod>{{ item.date | htmlDateString }}</lastmod>
+    <changefreq>{% if pageUrl == '/' or pageUrl == '/features/' or pageUrl == '/getting-started/' or pageUrl == '/docs/' or pageUrl == '/samples/' or pageUrl == '/download/' %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if pageUrl == '/' %}1.0{% elif pageUrl == '/features/' or pageUrl == '/getting-started/' %}0.9{% elif pageUrl == '/docs/' or pageUrl == '/samples/' or pageUrl == '/download/' %}0.8{% else %}0.7{% endif %}</priority>
+  </url>
+{%- endif %}
+{%- endfor %}
+</urlset>

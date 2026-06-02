@@ -4,6 +4,7 @@ description: "Guidelines for contributing to the TerraPDF project."
 layout: base.njk
 docPage: true
 permalink: /contributing/
+robots: noindex, follow
 ---
 # Contributing to TerraPDF
 
