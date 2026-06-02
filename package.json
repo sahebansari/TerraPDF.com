@@ -10,9 +10,14 @@
     "debug": "DEBUG=Eleventy* eleventy"
   },
  "keywords": [
-    "blog",
-    "eleventy",
-    "fluent2"
+    "csharp-pdf-library",
+    "dotnet-pdf-generator",
+    "pdf-generation",
+    "create-pdf-csharp",
+    "generate-pdf-csharp",
+    "open-source-pdf",
+    "nuget",
+    "terrapdf"
   ],
   "author": "Saheb Ansari",
   "license": "MIT",
