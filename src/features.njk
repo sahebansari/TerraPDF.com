@@ -1,7 +1,7 @@
 ---
 title: TerraPDF Features - C# PDF Library Capabilities
-description: "Explore TerraPDF's C# PDF library features: fluent API, layouts, PDF tables, images, bookmarks, metadata, reports, vector graphics, AES-128 encryption, and zero dependencies."
-keywords: C# PDF library features, .NET PDF library, PDF generation features, fluent PDF API, PDF layout engine, PDF tables C#, PDF images C#, PDF bookmarks, PDF metadata, PDF encryption C#, AES-128 PDF encryption, TerraPDF
+description: "Explore TerraPDF's C# PDF library features: fluent API, layouts, PDF tables, images, bookmarks, metadata, reports, vector graphics, AES-256 encryption, and zero dependencies."
+keywords: C# PDF library features, .NET PDF library, PDF generation features, fluent PDF API, PDF layout engine, PDF tables C#, PDF images C#, PDF bookmarks, PDF metadata, PDF encryption C#, AES-256 PDF encryption, TerraPDF
 layout: base.njk
 ---
 
@@ -82,7 +82,7 @@ layout: base.njk
       <div class="category-group">
         <h3 class="category-title">Media & Graphics</h3>
         <ul class="category-features">
-          <li><a href="#images">Images</a> — PNG, JPEG with aspect ratio preservation</li>
+          <li><a href="#images">Images</a> — PNG, JPEG from files, bytes, or streams, with aspect ratio and transparency</li>
           <li><a href="#vector-graphics">Vector graphics</a> — canvas shapes, paths, grids, and charts</li>
           <li><a href="#dynamic-components">Dynamic components</a> — defer content generation</li>
           <li><a href="#debugging">Debug visualisation</a> — debug areas and pointers</li>
@@ -93,7 +93,7 @@ layout: base.njk
       <div class="category-group">
         <h3 class="category-title">Security & Encoding</h3>
         <ul class="category-features">
-          <li><a href="#encryption">PDF encryption</a> — AES-128, passwords, and permission flags</li>
+          <li><a href="#encryption">PDF encryption</a> — AES-256 by default, passwords, and permission flags</li>
           <li><a href="#winansi">WinAnsi text</a> — Windows-1252 and Latin-1 character coverage</li>
         </ul>
       </div>
@@ -180,20 +180,25 @@ layout: base.njk
     t.Span("Coloured  ").FontColor(Color.Red.Medium);
     t.Span("Large").FontSize(16).FontColor("#1a4a8a");
 });</code></pre>
-    
+
     <div class="callout callout-info">
-      Each <code>SpanDescriptor</code> returned by <code>.Span()</code> applies styles only to that span, allowing fine-grained control.
+      Each <code>SpanDescriptor</code> returned by <code>.Span()</code> applies styles only to that span, allowing fine-grained control. Spans also accept a style callback — <code>t.Span("Bold  ", s =&gt; s.Bold())</code> — handy for building up a style conditionally.
     </div>
 
     <h3 id="font-control">Font Control</h3>
-    <p>Control font properties per text block with chainable methods:</p>
+    <p>Control font properties per text block with chainable methods, including font family selection:</p>
     <pre><code class="language-csharp">container.Text("Sample text")
+    .FontFamily("Times")
     .FontSize(14)
     .FontColor(Color.Grey.Darken2)
     .LineHeight(1.6)
     .AlignJustify();</code></pre>
-    
+
     <div class="features-grid">
+      <div class="feature-card">
+        <h4>Font Family</h4>
+        <p><code>.FontFamily("Helvetica" | "Times" | "Courier")</code> — <code>Bold()</code>/<code>Italic()</code> stay within the selected family</p>
+      </div>
       <div class="feature-card">
         <h4>Horizontal Alignment</h4>
         <p><code>AlignLeft()</code>, <code>AlignCenter()</code>, <code>AlignRight()</code>, <code>AlignJustify()</code></p>
@@ -384,9 +389,12 @@ container.Hyperlink("https://github.com/sahebansari/TerraPDF")
 });</code></pre>
 
     <h3 id="bookmarks">PDF Bookmarks</h3>
-    <p>Generate hierarchical PDF bookmarks (outlines) for navigation in PDF readers. Create parent-child relationships and precise page targeting.</p>
-    <pre><code class="language-csharp">c.Bookmark("Chapter 1", 1);
-c.Bookmark("Section 1.1", 1, "Chapter 1");  // child of Chapter 1
+    <p>Generate hierarchical PDF bookmarks (outlines) for navigation in PDF readers, with zoom-retaining <code>/XYZ</code> destinations. Anchor a bookmark directly to its content, or target a page number manually.</p>
+    <pre><code class="language-csharp">// Anchor-based — page and position resolved automatically
+col.Item().Bookmark("Chapter 1").Text("Chapter 1").Bold();
+col.Item().Bookmark("1.1 Introduction", parentTitle: "Chapter 1").Text(...);
+
+// Page-number-based — for when you already know the target page
 c.Bookmark("Appendix", 5, 144);             // with Y-position</code></pre>
   </div>
 
@@ -395,12 +403,16 @@ c.Bookmark("Appendix", 5, 144);             // with Y-position</code></pre>
     <h2>Media & Graphics</h2>
     
     <h3 id="images">Images</h3>
-    <p>Embed PNG and JPEG images with automatic aspect ratio preservation and alignment support:</p>
+    <p>Embed PNG and JPEG images from a file path, <code>byte[]</code>, or <code>Stream</code>, with automatic aspect ratio preservation, PNG transparency, and deduplication of repeated images:</p>
     <pre><code class="language-csharp">// Fill available width, preserve aspect ratio
 container.Image("photo.jpg");
 
 // Fixed width with alignment
-container.AlignCenter().Image("logo.png", 120);</code></pre>
+container.AlignCenter().Image("logo.png", 120);
+
+// From bytes or a stream — format detected from magic bytes
+byte[] photoBytes = await httpClient.GetByteArrayAsync(photoUrl);
+container.Image(photoBytes, 200);</code></pre>
 
     <h3 id="vector-graphics">Vector Graphics Canvas</h3>
     <p>Draw vector graphics directly inside any layout container. The canvas fills the available width and uses a top-left coordinate system in PDF points.</p>
@@ -429,8 +441,8 @@ container.AlignCenter().Image("logo.png", 120);</code></pre>
   <div class="content-section" id="security-encoding">
     <h2>Security & Encoding</h2>
 
-    <h3 id="encryption">AES-128 PDF Encryption</h3>
-    <p>Protect generated PDFs with the PDF Standard Security Handler using user passwords, owner passwords, and fine-grained permission flags.</p>
+    <h3 id="encryption">AES-256 PDF Encryption</h3>
+    <p>Protect generated PDFs with the PDF Standard Security Handler using user passwords, owner passwords, and fine-grained permission flags. <strong>AES-256</strong> (Revision 6, PDF 2.0) is the default; <strong>AES-128</strong> (Revision 4) remains available as a legacy opt-in for older viewers.</p>
     <pre><code class="language-csharp">Document.Create(container =>
 {
     container.Encrypt(new EncryptionOptions
@@ -438,6 +450,8 @@ container.AlignCenter().Image("logo.png", 120);</code></pre>
         UserPassword = "open123",
         OwnerPassword = "admin456",
         Permissions = PdfPermissions.Print | PdfPermissions.CopyText
+        // Algorithm defaults to EncryptionAlgorithm.Aes256;
+        // set Algorithm = EncryptionAlgorithm.Aes128 for legacy viewers
     });
 
     container.Page(page =>
@@ -449,6 +463,10 @@ container.AlignCenter().Image("logo.png", 120);</code></pre>
 .PublishPdf("protected.pdf");</code></pre>
 
     <div class="features-grid">
+      <div class="feature-card">
+        <h4>AES-256 by Default</h4>
+        <p>Standard Security Handler Revision 6 with SHA-2 key derivation, emitted as PDF 2.0.</p>
+      </div>
       <div class="feature-card">
         <h4>User Password</h4>
         <p>Require a password before a viewer can open the document.</p>

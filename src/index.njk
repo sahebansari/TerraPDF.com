@@ -8,15 +8,21 @@ layout: base.njk
 <section class="hero">
   <div class="container">
     <div><img src="/images/tp-logo.png" alt="TerraPDF Logo" style="width: 200px; height: auto;"></div>
-    <h1 class="hero-title">Pure C# PDF Generation for .NET</h1>
+    <h1 class="hero-title">The Free C# PDF Library for .NET Developers</h1>
     <p class="tagline">
-      A lightweight, zero-dependency C# PDF library and .NET PDF generator for creating professional documents from code.
-      Build reports, invoices, tables, images, links, bookmarks, metadata, vector graphics, WinAnsi text, and AES-128 encrypted PDFs with no native binaries.
+      Generate professional PDFs entirely from C# — invoices, reports, contracts, and certificates — with a fluent,
+      code-first API. Zero dependencies, no native binaries, MIT-licensed, with tables, images, bookmarks, vector
+      graphics, and AES-256 encrypted output built in.
     </p>
-     <div class="hero-cta">
-       <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
-       <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
+     <p class="hero-use-cases">
+      Built for generating <a href="/samples/invoice/">invoices</a>, <a href="/samples/report-with-toc/">reports</a>,
+      <a href="/samples/company-profile/">business documents</a>, and <a href="/samples/">more</a> — straight from
+      your application, with no design tool in the loop.
+    </p>
+    <div class="hero-cta">
+      <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
+      <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+    </div>
     <div class="hero-badges">
       <div class="badge">
         <img src="https://img.shields.io/nuget/v/TerraPDF.svg" alt="NuGet Version" width="90" height="20" loading="lazy">
@@ -31,8 +37,8 @@ layout: base.njk
         <span>Zero Dependencies</span>
       </div>
       <div class="badge">
-        <span>v1.3.0</span>
-        <span>AES-128 Encryption</span>
+        <span>v1.4.0</span>
+        <span>AES-256 Encryption</span>
       </div>
     </div>
   </div>
@@ -41,40 +47,40 @@ layout: base.njk
 <section class="content-section" style="background: var(--bg-alt);">
   <div class="container">
     <div class="section-header">
-      <h2>What's new in TerraPDF v1.3.0</h2>
-      <p>Secure PDFs with AES-128 encryption, fine-grained permissions, and built-in vector graphics support.</p>
+      <h2>What's new in TerraPDF v1.4.0</h2>
+      <p>AES-256 encryption by default, images from bytes and streams, anchor-based bookmarks, and a safer multi-span text API.</p>
     </div>
 
     <div class="feature-chips-grid">
       <div class="feature-chip">
         <div class="feature-icon">🔐</div>
         <div>
-          <h3>AES-128 Encryption</h3>
-          <p>Protect documents with user/owner passwords, encrypt content streams and images, and enforce print, copy, edit, form, accessibility, and assembly rules.</p>
+          <h3>AES-256 Encryption</h3>
+          <p>Encrypted PDFs now default to AES-256 (Revision 6, PDF 2.0), with AES-128 available as a legacy opt-in for older viewers.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">📈</div>
+        <div class="feature-icon">🖼️</div>
         <div>
-          <h3>Vector Graphics Canvas</h3>
-          <p>Create lines, shapes, paths, charts, and diagrams directly inside TerraPDF layouts without external libraries.</p>
+          <h3>Images from Bytes & Streams</h3>
+          <p>Load images from a <code>byte[]</code> or <code>Stream</code> — not just a file path — with automatic format detection, transparency, and deduplication.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">À</div>
+        <div class="feature-icon">🔗</div>
         <div>
-          <h3>WinAnsi Text Support</h3>
-          <p>Render Windows-1252 and Latin-1 characters with accurate widths and wrapping for better typography.</p>
+          <h3>Anchor-Based Bookmarks</h3>
+          <p>Bookmark content directly with <code>container.Bookmark("Title")</code> — page and position are resolved automatically, with corrected zoom-retaining destinations.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">✓</div>
+        <div class="feature-icon">📝</div>
         <div>
-          <h3>Encryption Stability</h3>
-          <p>Fixed trailer IDs, invalid crypt filters, AES padding, and expanded password/permission test coverage for reliable encrypted output.</p>
+          <h3>Multi-Span TextStyle Callback</h3>
+          <p>Style spans with a callback that returns the configured style — plus <code>FontFamily()</code> now actually selects Helvetica, Times, or Courier.</p>
         </div>
       </div>
     </div>
@@ -128,7 +134,7 @@ layout: base.njk
       <div class="feature-card">
         <div class="feature-icon">🔐</div>
         <h3>Document Security</h3>
-        <p>AES-128 PDF encryption with user passwords, owner passwords, and fine-grained permission flags.</p>
+        <p>AES-256 PDF encryption by default with user passwords, owner passwords, and fine-grained permission flags.</p>
       </div>
     </div>
   </div>
@@ -271,7 +277,7 @@ Document.Create(container =>
           <div class="feature-item">
             <span class="feature-icon">🔐</span>
             <span class="feature-title">PDF Encryption</span>
-            <span class="feature-desc">AES-128 protection with passwords and permissions</span>
+            <span class="feature-desc">AES-256 protection by default with passwords and permissions</span>
           </div>
           <div class="feature-item">
             <span class="feature-icon">📈</span>
@@ -335,7 +341,7 @@ Document.Create(container =>
             <td data-label="Best fit">Code-first document generation for .NET apps</td>
             <td data-label="Licensing model">MIT</td>
             <td data-label="Dependency footprint">Pure C#, zero runtime dependencies</td>
-            <td data-label="TerraPDF advantage">Simple fluent API, tables, links, bookmarks, vector graphics, and AES-128 encryption in one package</td>
+            <td data-label="TerraPDF advantage">Simple fluent API, tables, links, bookmarks, vector graphics, and AES-256 encryption in one package</td>
           </tr>
           <tr>
             <td data-label="Library"><a href="https://www.questpdf.com/" target="_blank" rel="noopener noreferrer">QuestPDF</a></td>
@@ -374,18 +380,10 @@ Document.Create(container =>
 <section class="cta-section">
   <div class="container">
     <div class="cta-content">
-      <div class="cta-copy">
-        <span class="cta-kicker">Pure C# PDF generation</span>
-        <h2>Build your next PDF with TerraPDF</h2>
-        <p>Create reports, invoices, tables, images, bookmarks, and encrypted PDF documents in modern .NET apps with a small, MIT-licensed package.</p>
-      </div>
-      <div class="cta-actions">
-        <code class="cta-command">dotnet add package TerraPDF</code>
-        <div class="cta-buttons">
-          <a href="/getting-started/" class="btn btn-primary">Read the Guide</a>
-          <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View on NuGet</a>
-        </div>
-      </div>
+      <h2>Build your next PDF with TerraPDF</h2>
+      <p>Create reports, invoices, tables, images, bookmarks, and encrypted PDF documents in modern .NET apps with a small, MIT-licensed package.</p>
+      <code class="cta-command">dotnet add package TerraPDF</code>
+      <a href="/docs/" class="btn btn-primary">View Documentation</a>
     </div>
   </div>
 </section>

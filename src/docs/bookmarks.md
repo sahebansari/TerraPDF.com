@@ -13,17 +13,59 @@ TerraPDF supports PDF bookmarks (also called outlines) — the hierarchical tree
 
 ## Overview
 
-Bookmarks are defined at the document level via `IDocumentContainer.Bookmark()` methods. Each bookmark entry consists of:
+TerraPDF offers two ways to define a bookmark:
+
+- **Anchor-based** (recommended, added in 1.4.0) — wrap the content you want to bookmark with `container.Bookmark("Title"[, parentTitle])`. The page number and vertical position are resolved automatically at render time, so the bookmark always lands exactly where the content ends up, even after pagination changes.
+- **Page-number-based** (legacy) — call `IDocumentContainer.Bookmark(title, pageNumber[, top][, parentTitle])` at the document level, specifying the target page (and optionally a Y position) yourself.
+
+Each bookmark entry consists of:
 
 - A **title** displayed in the viewer's outline pane
-- A **destination** — the page number (and optional position) the bookmark links to
+- A **destination** — the page and position the bookmark links to
 - Optional **hierarchy** — child bookmarks nested under a parent
 
-When the PDF is saved, TerraPDF generates a complete `/Outlines` dictionary tree referenced from the document catalog.
+When the PDF is saved, TerraPDF generates a complete `/Outlines` dictionary tree referenced from the document catalog. All destinations use zoom-retaining `/XYZ` coordinates, so clicking a bookmark preserves the reader's current zoom level instead of forcing a fit-page/fit-width change.
 
 ---
 
-## Basic Usage
+## Anchor-Based Bookmarks (Recommended)
+
+`container.Bookmark(string title, string? parentTitle = null)` is an `IContainer` extension you chain directly onto the content you want bookmarked. It records the title, optional parent, and the exact page/position that content renders at — no manual page-number bookkeeping required.
+
+```csharp
+Document.Create(c =>
+{
+    c.Page(p =>
+    {
+        p.Size(PageSize.A4);
+        p.Content().Column(col =>
+        {
+            col.Item()
+                .Bookmark("Chapter 1")
+                .Text("Chapter 1").Bold().FontSize(18);
+
+            col.Item()
+                .Bookmark("1.1 Introduction", parentTitle: "Chapter 1")
+                .Text("1.1 Introduction").Bold().FontSize(14);
+
+            col.Item().Text("Section content...");
+        });
+    });
+})
+.PublishPdf("book.pdf");
+```
+
+**Rules:**
+
+- Parent bookmarks must be anchored before any child that references them via `parentTitle`.
+- Parent lookup is by **exact title match** (case-sensitive).
+- Works seamlessly across page breaks and pagination — since position is resolved at render time, you never need to know which physical page the content ends up on.
+
+---
+
+## Page-Number-Based Bookmarks (Legacy)
+
+The original `IDocumentContainer.Bookmark()` overloads remain fully supported for cases where you already know the target page number ahead of time.
 
 ### Simple bookmark
 
@@ -52,7 +94,7 @@ Supply a Y-coordinate (in points from the top of the page) to control where the 
 c.Bookmark("Introduction", 1, 72.0);  // starts 1 inch from page top
 ```
 
-This generates a `/FitH` destination (fit width, top edge at 72.0 points). If the `top` parameter is omitted, a `/Fit` destination is used (entire page fit).
+This generates a zoom-retaining `/XYZ` destination with the view's top edge at 72.0 points from the page top. If the `top` parameter is omitted, the destination targets the top of the page.
 
 ---
 
@@ -143,16 +185,17 @@ Document.Create(c =>
 
 ## Complete API Reference
 
-All bookmark methods are defined on `IDocumentContainer` (the parameter passed to `Document.Create`).
+The anchor-based `Bookmark(string, string?)` is an `IContainer` extension method; the page-number-based overloads below are defined on `IDocumentContainer` (the parameter passed to `Document.Create`).
 
 ### Method Signatures
 
 | Method | Parameters | Description |
 |--------|------------|-------------|
-| `Bookmark(string title, int pageNumber)` | `title`: display text<br>`pageNumber`: 1-based page | Top-level bookmark with `/Fit` destination |
-| `Bookmark(string title, int pageNumber, double top)` | `title`, `pageNumber`, `top`: Y position in points | Top-level bookmark with `/FitH` destination |
-| `Bookmark(string title, int pageNumber, string parentTitle)` | `title`, `pageNumber`, `parentTitle`: existing bookmark title | Child bookmark under `parentTitle` with `/Fit` |
-| `Bookmark(string title, int pageNumber, string parentTitle, double top)` | `title`, `pageNumber`, `parentTitle`, `top` | Child bookmark with `/FitH` destination |
+| `container.Bookmark(string title, string? parentTitle = null)` | `title`: display text<br>`parentTitle`: existing bookmark title, if nested | Anchor-based bookmark on the wrapped content, `/XYZ` destination resolved at render time |
+| `Bookmark(string title, int pageNumber)` | `title`: display text<br>`pageNumber`: 1-based page | Top-level bookmark with `/XYZ` destination at the page top |
+| `Bookmark(string title, int pageNumber, double top)` | `title`, `pageNumber`, `top`: Y position in points | Top-level bookmark with `/XYZ` destination at `top` |
+| `Bookmark(string title, int pageNumber, string parentTitle)` | `title`, `pageNumber`, `parentTitle`: existing bookmark title | Child bookmark under `parentTitle`, `/XYZ` destination at the page top |
+| `Bookmark(string title, int pageNumber, string parentTitle, double top)` | `title`, `pageNumber`, `parentTitle`, `top` | Child bookmark with `/XYZ` destination at `top` |
 
 ### Exceptions
 
@@ -181,8 +224,7 @@ Each **bookmark item** dictionary contains:
 - `/First N 0 R` — first child (if any)
 - `/Last N 0 R` — last child (if any)
 - `/Count N` — number of children (positive; negative would indicate collapsed state, unused)
-- `/Dest [ pageObj N 0 R /Fit ]` — fit-whole-page destination, **or**
-- `/Dest [ pageObj N 0 R /FitH top ]` — fit-width with top edge at `top` coordinate
+- `/Dest [ pageObj N 0 R /XYZ null top null ]` — zoom-retaining destination, with `top` correctly converted to PDF's bottom-origin coordinate space
 
 Page object references are resolved from the 1-based `pageNumber` after all pages are created.
 
@@ -239,7 +281,6 @@ c.Bookmark("Chapter 2", 8, 72.0);
 ## Limitations
 
 - PDF outlines do not support styling (font, colour, icons). Appearance is controlled by the PDF viewer.
-- No support for **named destinations** with zoom levels beyond `/Fit` and `/FitH`. Future versions may add `/XYZ` for custom zoom.
 - No direct API for collapsible initial state — all outline trees open by default in viewers.
 - Bookmarks are document-global; they cannot be scoped to a single `PageDescriptor`.
 
@@ -250,10 +291,10 @@ c.Bookmark("Chapter 2", 8, 72.0);
 A full working example is available in the TerraPDF sample application:
 
 ```
-samples/TerraPDF.Sample/Program.cs → GenerateReportWithBookmarks()
+samples/TerraPDF.Sample/Samples/08_ReportWithBookmarks.cs → ReportWithBookmarks.Generate()
 ```
 
-This generates `08_report_with_bookmarks.pdf` with 5 top-level bookmarks, nested children, and a mix of `/Fit` and `/FitH` destinations across 6 pages.
+This generates `08_report_with_bookmarks.pdf` with 5 top-level bookmarks, nested children, and zoom-retaining `/XYZ` destinations across 6 pages — all anchored directly on their content via `container.Bookmark(...)`.
 
 ---
 

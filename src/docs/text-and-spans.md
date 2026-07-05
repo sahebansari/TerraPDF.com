@@ -41,6 +41,34 @@ container.Text("Section Heading")
 | `.AlignCenter()` | Centre-align |
 | `.AlignRight()` | Right-align |
 | `.Justify()` | Justify all lines except the last |
+| `.FontFamily(string)` | Selects a font family — see [Font Family](#font-family) below |
+
+---
+
+## Font Family
+
+`.FontFamily(string)` selects one of TerraPDF's three built-in standard-14 font
+families: **Helvetica** (default), **Times**, or **Courier**. It's available on
+`TextDescriptor`, `SpanDescriptor`, and `TextStyle`, so it can be set at the
+block, span, or page-default level.
+
+```csharp
+container.Text("Monospaced note").FontFamily("Courier");
+
+container.Text(t =>
+{
+    t.Span("Serif heading ").FontFamily("Times").Bold();
+    t.Span("sans-serif body").FontFamily("Helvetica");
+});
+
+page.DefaultTextStyle(s => s.FontFamily("Times").FontSize(11));
+```
+
+Family name matching checks whether the name starts with `"Times"` or
+`"Courier"` (case-insensitive); anything else — including common aliases like
+`"Arial"` — falls back to **Helvetica**. `Bold()` and `Italic()` stay within
+the resolved family (e.g. `FontFamily("Times").Bold()` renders Times-Bold, not
+Helvetica-Bold).
 
 ---
 
@@ -65,6 +93,26 @@ container.Text(t =>
 > Style methods chained after `.Span()` apply **only to that span**. This is intentional —
 > it prevents accidental formatting of the whole block.
 
+### Styling a span with a callback
+
+`Span(string, Func<TextStyle, TextStyle>?)` is an alternative to chaining —
+useful when you want to build up a style conditionally or reuse a style
+function across spans:
+
+```csharp
+container.Text(t =>
+{
+    t.Span("Normal  ");
+    t.Span("Bold  ", s => s.Bold());
+    t.Span("Large", s => s.FontSize(16).FontColor("#1a4a8a"));
+});
+```
+
+`TextStyle` is immutable — every style method returns a *new* `TextStyle`
+rather than mutating in place — so the callback must **return** the
+configured style. This is why the parameter type is `Func<TextStyle, TextStyle>`
+rather than `Action<TextStyle>`.
+
 ### `SpanDescriptor` methods
 
 | Method | Effect |
@@ -76,6 +124,7 @@ container.Text(t =>
 | `.Underline()` | Underline for this span |
 | `.FontSize(double)` | Font size for this span |
 | `.FontColor(string)` | Text colour for this span |
+| `.FontFamily(string)` | Font family for this span — see [Font Family](#font-family) |
 
 ---
 

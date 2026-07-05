@@ -14,6 +14,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.0] - 2026-07-04
+
+### Added
+- **AES-256 PDF encryption by default** (Standard Security Handler Revision 6, SHA-2 key derivation, PDF 2.0 output). `EncryptionOptions.Algorithm` lets you opt back into AES-128 (`EncryptionAlgorithm.Aes128`) for legacy viewers.
+- **Images from bytes and streams** — `container.Image(byte[])` and `container.Image(Stream)` overloads (with optional width), for images from databases, embedded resources, or generated data. Format is now detected from magic bytes rather than the file extension.
+- **PNG transparency** — RGBA PNGs keep their alpha channel via a `/SMask` soft mask; indexed-transparency (tRNS) PNGs still render opaque.
+- **Image deduplication** — identical image data reused across pages is embedded once and shared document-wide.
+- **Anchor-based bookmarks** — `container.Bookmark("Title"[, parentTitle])` marks its content as an outline destination; the page number and position are resolved automatically at render time. The page-number-based `Bookmark(title, pageNumber)` API remains available.
+- **Paragraphs split across pages** — a text block taller than the remaining page now flows onto the next page instead of overflowing.
+- **`FontFamily(string)`** on `TextDescriptor`, `SpanDescriptor`, and `TextStyle` now actually works — supports Helvetica, Times, and Courier (plus common aliases like "Arial"), with `Bold()`/`Italic()` staying within the selected family.
+
+### Fixed
+- Bookmark destinations now use zoom-retaining `/XYZ` coordinates instead of `/Fit`/`/FitH`, and land at the correct position.
+- Height-constrained images preserve aspect ratio instead of being squashed.
+- Table of Contents heading scan now traverses decorators, hyperlinks, and bookmark anchors.
+- Encrypted documents no longer leak metadata, bookmark titles, or hyperlink URIs in plaintext — everything is encrypted with the owning object's key.
+- Document metadata is now referenced from the PDF trailer, so viewers display it correctly.
+- Pagination now works through all decorators (`Margin`, `RoundedBorder`, `RoundedBox`, per-edge borders).
+- Negative-value validation added to the single-side `Padding*`/`Margin*` overloads.
+
+### Changed
+- **Breaking:** `TextDescriptor.Span(string, Action<TextStyle>)` is now `Span(string, Func<TextStyle, TextStyle>)`. `TextStyle` is immutable, so the callback must return the configured style: `t.Span("hi", s => s.Bold())`.
+- Content streams are now Flate-compressed, and serialization is streamed instead of buffered in memory — smaller files, lower peak memory.
+- Fragment-based layout engine — page counting and rendering now always agree.
+
+---
+
 ## [1.3.0] - 2026-05-19
 
 ### Added
@@ -178,7 +205,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflow (GitHub Actions): build, test, coverage.
 - Publish workflow (GitHub Actions): NuGet + symbols on release tag.
 
-[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/sahebansari/TerraPDF/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/sahebansari/TerraPDF/compare/v1.2.3...v1.3.0
 [1.2.3]: https://github.com/sahebansari/TerraPDF/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/sahebansari/TerraPDF/compare/v1.2.1...v1.2.2

@@ -1,6 +1,6 @@
 ---
 title: Encryption & Security - TerraPDF Sample
-description: Learn how to protect PDFs with AES-128 encryption, passwords, and granular permission controls using TerraPDF.
+description: Learn how to protect PDFs with AES-256 encryption (AES-128 legacy mode included), passwords, and granular permission controls using TerraPDF.
 layout: sample.njk
 permalink: /samples/encryption-showcase/
 ---
@@ -10,11 +10,12 @@ permalink: /samples/encryption-showcase/
 ## Overview
 
 The Encryption & Security sample demonstrates comprehensive PDF password protection:
-- **AES-128 encryption** — industry-standard PDF encryption
+- **AES-256 encryption by default** — Standard Security Handler Revision 6, PDF 2.0 output
+- **AES-128 legacy mode** — opt in via `EncryptionAlgorithm.Aes128` for pre-2008 viewers
 - **User passwords** — required to open the document
 - **Owner passwords** — full access passwords
 - **Permission flags** — granular control over document operations
-- **Four protection scenarios** — open password, owner-only, print-only, fully restricted
+- **Five protection scenarios** — open password, owner-only, print-only, fully restricted, legacy AES-128
 - **Zero dependencies** — uses only `System.Security.Cryptography`
 
 ## Key Features Demonstrated
@@ -69,6 +70,19 @@ doc.Encrypt(new EncryptionOptions
 
 **Use case:** Maximum restriction — view on screen only. No printing, copying, editing, or form filling.
 
+### 5. Scenario E: Legacy AES-128 Compatibility Mode
+```csharp
+doc.Encrypt(new EncryptionOptions
+{
+    UserPassword  = "legacy123",
+    OwnerPassword = "legacyAdmin",
+    Permissions   = PdfPermissions.All,
+    Algorithm     = EncryptionAlgorithm.Aes128,
+});
+```
+
+**Use case:** Scenarios A–D all use the AES-256 default. Set `Algorithm = EncryptionAlgorithm.Aes128` only when a document must open in a viewer released before roughly 2008, predating AES-256 support — this produces PDF 1.6 / Revision 4 output instead of PDF 2.0 / Revision 6.
+
 ## Understanding PdfPermissions Flags
 
 ### Available Permissions
@@ -96,18 +110,25 @@ Permissions = PdfPermissions.Print
 
 ## Security Details
 
-### Encryption Algorithm
+### Encryption Algorithm (default: AES-256)
 
-- **Cipher:** AES-128 CBC (Advanced Encryption Standard, 128-bit)
-- **Key Derivation:** MD5 × 51 rounds (PDF standard Algorithm 2)
+- **Cipher:** AES-256 CBC (Advanced Encryption Standard, 256-bit)
+- **Key Derivation:** SHA-2 based, Algorithm 2.B (ISO 32000-2, Revision 6)
 - **IV:** 16 random bytes per encrypted object
+- **Handler:** PDF Standard Security Handler, Revision 6
+- **PDF Version:** 2.0
+
+### Legacy Mode (`Algorithm = EncryptionAlgorithm.Aes128`)
+
+- **Cipher:** AES-128 CBC
+- **Key Derivation:** MD5 × 51 rounds (PDF standard Algorithm 2)
 - **Handler:** PDF Standard Security Handler, Revision 4
 - **PDF Version:** 1.6 minimum for AES support
 
 ### How It Works
 
-1. **File Encryption Key (FEK)** — Derived from user/owner passwords using MD5-based key derivation
-2. **Per-Object Encryption** — Each PDF object (pages, images, streams) encrypted with unique AES-128 CBC key
+1. **File Encryption Key (FEK)** — Derived from user/owner passwords (SHA-2 based for AES-256, MD5-based for legacy AES-128)
+2. **Per-Object Encryption** — Each PDF object (pages, images, streams, metadata, bookmark titles, hyperlink URIs) encrypted with a unique key derived from the FEK and object identity
 3. **Random IVs** — 16-byte initialization vector prepended to every encrypted payload
 4. **Password Verification** — O entry (owner) and U entry (user) store password verifiers
 
@@ -170,16 +191,17 @@ Perfect for:
 - **Passwords:** Use strong, complex passwords for sensitive documents
 - **Owner Password:** Auto-generated if not specified
 - **User Password:** Can be empty for restricted-access mode
-- **Extraction:** Even with encryption, metadata is visible
-- **Compliance:** Meets PDF 1.6+ security standards
+- **Extraction:** Metadata, bookmark titles, and hyperlink URIs are all encrypted — nothing is left as plaintext in an encrypted document
+- **Compliance:** Meets PDF 2.0 security standards by default; PDF 1.6+ in legacy mode
 
 ## File Outputs
 
 Generates multiple files:
-- `12a_open_password.pdf` — requires password to open
-- `12b_owner_only.pdf` — opens freely, operations restricted
-- `12c_print_only.pdf` — print and view only
-- `12d_fully_restricted.pdf` — view only, no operations
+- `12a_open_password.pdf` — requires password to open (AES-256)
+- `12b_owner_only.pdf` — opens freely, operations restricted (AES-256)
+- `12c_print_only.pdf` — print and view only (AES-256)
+- `12d_fully_restricted.pdf` — view only, no operations (AES-256)
+- `12e_aes128_legacy.pdf` — legacy AES-128 compatibility mode
 - `12_encryption_showcase.pdf` — overview document
 
 All scenarios are demonstrated in a comprehensive guide with tables, scenarios, and code examples.

@@ -129,7 +129,7 @@ composer.PublishPdf(stream);
 - [Layout](/docs/layout/) — Column, Row, Table
 - [Decorators](/docs/decorators/) — Padding, Margin, Background, Border, Rounded Border, Per-Edge Borders, Alignment, Lines, PageBreak, Hyperlink, ShowIf
 - [Images](/docs/images/) — PNG and JPEG embedding
-- [Encryption & Security](/docs/encryption/) - AES-128 encryption, passwords, and permissions
+- [Encryption & Security](/docs/encryption/) - AES-256 encryption (with legacy AES-128 support), passwords, and permissions
 - [Vector Graphics](/docs/vector-graphics/) - Canvas API, shapes, paths, grids, and charts
 - [Unicode & Encoding](/docs/unicode-and-encoding/) - WinAnsiEncoding, Windows-1252 specials, and Latin-1 coverage
 - [Table of Contents](/docs/table-of-contents/) — headings, automatic TOC generation, internal links

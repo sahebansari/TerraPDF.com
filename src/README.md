@@ -17,7 +17,7 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
-> **New in 1.3.0:** AES-128 PDF encryption with user passwords, owner passwords, and fine-grained permission flags.
+> **New in 1.4.0:** AES-256 encryption by default, plus bytes/stream image sources, anchor-based bookmarks, and the immutable `TextStyle` callback for multi-span text.
 
 **TerraPDF** is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. 
 It provides a fluent, composable API that covers the full document-authoring lifecycle — from page layout and 
@@ -35,18 +35,18 @@ runtime packages, and no licensing restrictions.
 - Per-edge borders — `BorderTop`, `BorderBottom`, `BorderLeft`, `BorderRight`
 - Horizontal and vertical alignment
 - Column, Row, and Table layouts
-- PNG and JPEG image embedding
+- PNG and JPEG image embedding — from file paths, `byte[]`, or `Stream`, with transparency and deduplication
 - Horizontal and vertical rule lines
  - Explicit page breaks via `PageBreak()`
  - Clickable hyperlink (URI) annotations via `Hyperlink()`
  - Internal document links (GoTo) via `InternalLink()`
  - Automatic Table of Contents generation from H1–H6 headings
- - PDF bookmarks / outlines with hierarchical nesting
+ - PDF bookmarks / outlines with hierarchical nesting — anchor-based via `container.Bookmark("Title")` or manual page-number targeting
  - Document metadata (Title, Author, Subject, Keywords, Creator)
  - Conditional rendering via `ShowIf`
  - Reusable components via `IComponent`
  - Headers, footers, and page numbers
- - **AES-128 PDF encryption** via `container.Encrypt()`
+ - **AES-256 PDF encryption by default** via `container.Encrypt()` — AES-128 remains available as a legacy opt-in
  - **Vector graphics canvas** via `container.Canvas()`
  - Full **WinAnsiEncoding** character coverage
  - Fluent, composable API
