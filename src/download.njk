@@ -24,14 +24,14 @@ layout: base.njk
     
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
       <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on NuGet.org</a>
-      <a href="https://www.nuget.org/packages/TerraPDF/1.4.0" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.4.0 Download</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/1.5.0" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.5.0 Download</a>
     </div>
     
     <h3 class="mt-xl">Package Information</h3>
     <table class="api-table">
       <tbody>
         <tr><td><strong>Package ID</strong></td><td><code>TerraPDF</code></td></tr>
-        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.4.0</a> (July 4, 2026)</td></tr>
+        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.5.0</a> (July 9, 2026)</td></tr>
         <tr><td><strong>Downloads</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">View on NuGet</a></td></tr>
         <tr><td><strong>Target Frameworks</strong></td><td>.NET 8, .NET 9</td></tr>
         <tr><td><strong>Dependencies</strong></td><td>None — zero dependencies</td></tr>
@@ -93,6 +93,14 @@ dotnet test</code></pre>
   <div class="content-section">
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
+
+     <h3>v1.5.0 - July 9, 2026</h3>
+     <ul>
+       <li>Code128 (Subset B) barcodes via <code>container.Barcode(data, ...)</code>, with optional caption, custom colour, and a configurable quiet zone.</li>
+       <li>ISO/IEC 18004 QR codes via <code>container.QrCode(data, ...)</code> — from-scratch generator with automatic version selection (1-40), all four error correction levels, and Reed-Solomon error correction.</li>
+       <li>Both render as vector-filled rectangles — crisp at any zoom, placeable inside any <code>Column</code>, <code>Row</code>, or <code>Table</code> cell.</li>
+       <li>New <code>PdfPage.AddFilledRects</code> batch primitive for efficient rendering of symbols with thousands of modules.</li>
+     </ul>
 
      <h3>v1.4.0 - July 4, 2026</h3>
      <ul>

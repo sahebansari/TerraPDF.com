@@ -17,7 +17,7 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
-> **New in 1.4.0:** AES-256 encryption by default, plus bytes/stream image sources, anchor-based bookmarks, and the immutable `TextStyle` callback for multi-span text.
+> **New in 1.5.0:** Code128 barcodes and ISO/IEC 18004 QR codes, rendered as vector-filled rectangles that stay crisp at any zoom and compose inside any container.
 
 **TerraPDF** is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. 
 It provides a fluent, composable API that covers the full document-authoring lifecycle — from page layout and 
@@ -48,6 +48,8 @@ runtime packages, and no licensing restrictions.
  - Headers, footers, and page numbers
  - **AES-256 PDF encryption by default** via `container.Encrypt()` — AES-128 remains available as a legacy opt-in
  - **Vector graphics canvas** via `container.Canvas()`
+ - **Barcodes** — Code128 (Subset B) via `container.Barcode()`
+ - **QR codes** — ISO/IEC 18004 via `container.QrCode()`
  - Full **WinAnsiEncoding** character coverage
  - Fluent, composable API
 
@@ -368,6 +370,30 @@ container.Image("path/to/photo.jpg");
 // Fixed width in points, can be positioned with alignment
 container.AlignCenter().Image("logo.png", 120);
 ```
+
+---
+
+## Barcodes & QR Codes
+
+Both render as vector-filled rectangles — no raster image pipeline — so they stay crisp at any zoom and can be placed inside any `Column`, `Row`, or `Table` cell.
+
+```csharp
+// Code128 (Subset B) barcode, auto-fills available width
+container.Barcode("TERRAPDF-2026");
+
+// With explicit size, colour, and a caption below the bars
+container.Barcode("SKU-00042-A", width: 260, height: 50,
+    hexColor: "#1A3C5E", showCaption: true);
+
+// QR code (ISO/IEC 18004), auto-fills available width (capped to a square)
+container.QrCode("https://terrapdf.example/p/SKU-10231");
+
+// With explicit size and error correction level
+container.QrCode("https://terrapdf.example/", size: 90,
+    level: QrErrorCorrectionLevel.Q);
+```
+
+`QrErrorCorrectionLevel` is `L`, `M` (default), `Q`, or `H` — higher levels tolerate more damage/occlusion at the cost of a denser code.
 
 ---
 

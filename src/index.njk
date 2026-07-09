@@ -12,7 +12,7 @@ layout: base.njk
     <p class="tagline">
       Generate professional PDFs entirely from C# — invoices, reports, contracts, and certificates — with a fluent,
       code-first API. Zero dependencies, no native binaries, MIT-licensed, with tables, images, bookmarks, vector
-      graphics, and AES-256 encrypted output built in.
+      graphics, barcodes, QR codes, and AES-256 encrypted output built in.
     </p>
      <p class="hero-use-cases">
       Built for generating <a href="/samples/invoice/">invoices</a>, <a href="/samples/report-with-toc/">reports</a>,
@@ -37,8 +37,8 @@ layout: base.njk
         <span>Zero Dependencies</span>
       </div>
       <div class="badge">
-        <span>v1.4.0</span>
-        <span>AES-256 Encryption</span>
+        <span>v1.5.0</span>
+        <span>Barcodes & QR Codes</span>
       </div>
     </div>
   </div>
@@ -47,40 +47,40 @@ layout: base.njk
 <section class="content-section" style="background: var(--bg-alt);">
   <div class="container">
     <div class="section-header">
-      <h2>What's new in TerraPDF v1.4.0</h2>
-      <p>AES-256 encryption by default, images from bytes and streams, anchor-based bookmarks, and a safer multi-span text API.</p>
+      <h2>What's new in TerraPDF v1.5.0</h2>
+      <p>Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes, built from scratch with no raster image pipeline.</p>
     </div>
 
     <div class="feature-chips-grid">
       <div class="feature-chip">
-        <div class="feature-icon">🔐</div>
+        <div class="feature-icon">▮</div>
         <div>
-          <h3>AES-256 Encryption</h3>
-          <p>Encrypted PDFs now default to AES-256 (Revision 6, PDF 2.0), with AES-128 available as a legacy opt-in for older viewers.</p>
+          <h3>Code128 Barcodes</h3>
+          <p><code>container.Barcode("SKU-00042")</code> renders a Subset B Code128 barcode as vector-filled bars, with optional caption, custom colours, and a configurable quiet zone.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">🖼️</div>
+        <div class="feature-icon">▦</div>
         <div>
-          <h3>Images from Bytes & Streams</h3>
-          <p>Load images from a <code>byte[]</code> or <code>Stream</code> — not just a file path — with automatic format detection, transparency, and deduplication.</p>
+          <h3>QR Codes</h3>
+          <p><code>container.QrCode("https://...")</code> generates a from-scratch ISO/IEC 18004 QR code — versions 1-40, all four error correction levels, with Reed-Solomon error correction.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">🔗</div>
+        <div class="feature-icon">🔎</div>
         <div>
-          <h3>Anchor-Based Bookmarks</h3>
-          <p>Bookmark content directly with <code>container.Bookmark("Title")</code> — page and position are resolved automatically, with corrected zoom-retaining destinations.</p>
+          <h3>Crisp at Any Zoom</h3>
+          <p>Both render as vector-filled rectangles matching the existing Canvas rendering style — no raster images, and placeable inside any <code>Column</code>, <code>Row</code>, or <code>Table</code> cell.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">📝</div>
+        <div class="feature-icon">⚡</div>
         <div>
-          <h3>Multi-Span TextStyle Callback</h3>
-          <p>Style spans with a callback that returns the configured style — plus <code>FontFamily()</code> now actually selects Helvetica, Times, or Courier.</p>
+          <h3>Batch Rect Rendering</h3>
+          <p>New <code>PdfPage.AddFilledRects</code> primitive emits one colour operator and a single trailing fill for symbols with thousands of modules, instead of a colour-set/fill pair per module.</p>
         </div>
       </div>
     </div>
@@ -135,6 +135,12 @@ layout: base.njk
         <div class="feature-icon">🔐</div>
         <h3>Document Security</h3>
         <p>AES-256 PDF encryption by default with user passwords, owner passwords, and fine-grained permission flags.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">▦</div>
+        <h3>Barcodes & QR Codes</h3>
+        <p>Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes, placeable anywhere an <code>IContainer</code> is exposed.</p>
       </div>
     </div>
   </div>
@@ -285,6 +291,11 @@ Document.Create(container =>
             <span class="feature-desc">Shapes, paths, grids, charts, and diagrams</span>
           </div>
           <div class="feature-item">
+            <span class="feature-icon">▦</span>
+            <span class="feature-title">Barcodes & QR Codes</span>
+            <span class="feature-desc">Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes</span>
+          </div>
+          <div class="feature-item">
             <span class="feature-icon">À</span>
             <span class="feature-title">WinAnsi Text</span>
             <span class="feature-desc">Windows-1252 and Latin-1 character coverage</span>
@@ -341,7 +352,7 @@ Document.Create(container =>
             <td data-label="Best fit">Code-first document generation for .NET apps</td>
             <td data-label="Licensing model">MIT</td>
             <td data-label="Dependency footprint">Pure C#, zero runtime dependencies</td>
-            <td data-label="TerraPDF advantage">Simple fluent API, tables, links, bookmarks, vector graphics, and AES-256 encryption in one package</td>
+            <td data-label="TerraPDF advantage">Simple fluent API, tables, links, bookmarks, vector graphics, barcodes/QR codes, and AES-256 encryption in one package</td>
           </tr>
           <tr>
             <td data-label="Library"><a href="https://www.questpdf.com/" target="_blank" rel="noopener noreferrer">QuestPDF</a></td>
