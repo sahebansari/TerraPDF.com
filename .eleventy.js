@@ -5,6 +5,7 @@ module.exports = function(eleventyConfig) {
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
+  eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("samples");
   eleventyConfig.addPassthroughCopy("sample-codes");
@@ -12,9 +13,20 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({"robots.txt": "robots.txt"});
   eleventyConfig.addPassthroughCopy("LICENSE");
 
+  // Markdown tables: emit <th scope="col"> for accessibility (WCAG H63).
+  // markdown-it only produces <th> from the header row, so "col" is always correct.
+  function addThScope(md) {
+    md.renderer.rules.th_open = function(tokens, idx, options, env, self) {
+      tokens[idx].attrSet("scope", "col");
+      return self.renderToken(tokens, idx, options);
+    };
+    return md;
+  }
+  eleventyConfig.amendLibrary("md", addThScope);
+
   // Markdown shortcode for inline markdown
   let markdownIt = require("markdown-it");
-  let md = markdownIt();
+  let md = addThScope(markdownIt());
   eleventyConfig.addShortcode("markdown", function(content) {
     return md.render(content);
   });
@@ -41,6 +53,9 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addShortcode("sampleCode", sampleCode);
   eleventyConfig.addNunjucksGlobal("sampleCode", sampleCode);
+
+  // Build year for the footer copyright (evaluated at build time)
+  eleventyConfig.addNunjucksGlobal("buildYear", new Date().getFullYear());
 
   // Custom filter for startsWith
   eleventyConfig.addNunjucksFilter("startsWith", function(str, prefix) {

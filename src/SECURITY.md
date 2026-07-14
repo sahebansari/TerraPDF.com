@@ -4,7 +4,6 @@ description: "Security policy for TerraPDF, including supported versions, vulner
 layout: base.njk
 docPage: true
 permalink: /security/
-robots: noindex, follow
 ---
 # Security Policy
 
@@ -46,9 +45,14 @@ The following are **out of scope**:
 
 **Please do not file public GitHub Issues for security vulnerabilities.**
 
-Report security issues by emailing:
+Report security issues through either channel:
 
-> **security@terrapdf.example**
+1. **GitHub private vulnerability reporting** (preferred):
+   [Report a vulnerability](https://github.com/sahebansari/TerraPDF/security/advisories/new)
+2. **Email:** [security@terrapdf.com](mailto:security@terrapdf.com)
+
+A machine-readable version of this policy is published at
+[`/.well-known/security.txt`](/.well-known/security.txt).
 
 Include in your report:
 

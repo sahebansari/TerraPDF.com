@@ -19,21 +19,21 @@ layout: base.njk
       <code class="command">dotnet add package TerraPDF</code>
     </div>
     <p class="text-center">
-      <button class="btn btn-outline btn-small copy-btn" data-copy-target=".install-box .command">Copy Command</button>
+      <button type="button" class="btn btn-outline btn-small copy-btn" data-copy-target=".install-box .command">Copy Command</button>
     </p>
     
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
       <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on NuGet.org</a>
-      <a href="https://www.nuget.org/packages/TerraPDF/1.5.0" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v1.5.0 Download</a>
+      <a href="https://www.nuget.org/packages/TerraPDF/{{ site.version }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">v{{ site.version }} Download</a>
     </div>
     
     <h3 class="mt-xl">Package Information</h3>
     <table class="api-table">
       <tbody>
         <tr><td><strong>Package ID</strong></td><td><code>TerraPDF</code></td></tr>
-        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">1.5.0</a> (July 9, 2026)</td></tr>
+        <tr><td><strong>Latest Version</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">{{ site.version }}</a> ({{ site.releaseDate }})</td></tr>
         <tr><td><strong>Downloads</strong></td><td><a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">View on NuGet</a></td></tr>
-        <tr><td><strong>Target Frameworks</strong></td><td>.NET 8, .NET 9</td></tr>
+        <tr><td><strong>Target Frameworks</strong></td><td>.NET 8, .NET 9, .NET 10</td></tr>
         <tr><td><strong>Dependencies</strong></td><td>None — zero dependencies</td></tr>
         <tr><td><strong>License</strong></td><td><a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></td></tr>
       </tbody>
@@ -80,7 +80,7 @@ dotnet test</code></pre>
     
     <h3>Requirements</h3>
     <ul>
-      <li><strong>.NET 8 SDK</strong> or later (includes .NET 9 SDK)</li>
+      <li><strong>.NET 10 SDK</strong> (the repository's <code>global.json</code> requires it for building from source)</li>
       <li>Git for cloning the repository</li>
       <li>No other dependencies — TerraPDF is pure C#</li>
     </ul>
@@ -93,6 +93,12 @@ dotnet test</code></pre>
   <div class="content-section">
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
+
+     <h3>v1.5.1 - July 10, 2026</h3>
+     <ul>
+       <li><strong>.NET 10 target</strong> — the library now multi-targets <code>net8.0</code>, <code>net9.0</code>, and <code>net10.0</code> (the current LTS). No API or behaviour changes; existing .NET 8/9 consumers are unaffected.</li>
+       <li>Test suite now runs once per supported runtime; CI consolidated into a single workflow with the .NET 8/9/10 SDKs.</li>
+     </ul>
 
      <h3>v1.5.0 - July 9, 2026</h3>
      <ul>

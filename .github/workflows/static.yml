@@ -38,6 +38,12 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Validate HTML
+        run: npx html-validate "_site/**/*.html"
+
+      - name: Check internal links
+        run: node scripts/check-internal-links.js
+
       - name: Disable Jekyll for generated site
         shell: bash
         run: touch _site/.nojekyll

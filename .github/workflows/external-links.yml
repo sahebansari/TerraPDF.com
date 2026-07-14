@@ -1,0 +1,44 @@
+# Weekly external link health check.
+# Internal links are checked on every PR and deploy; external URLs are
+# checked here on a schedule because third-party hosts are slow and flaky.
+name: External links
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Check external links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --scheme https --scheme http
+            --exclude-mail
+            --accept 200..204,301,302,403,429
+            --exclude 'img\.shields\.io'
+            --exclude 'googletagmanager\.com'
+            "_site/**/*.html"
+          fail: true

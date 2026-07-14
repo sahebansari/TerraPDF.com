@@ -172,7 +172,7 @@ layout: base.njk
     
     <h3 id="multi-span">Multi-Span Formatting</h3>
     <p>Combine multiple styles within a single text block using <code>.Span()</code> for inline variations:</p>
-    <pre><code class="language-csharp">container.Text(t =>
+    <pre><code class="language-csharp">container.Text(t =&gt;
 {
     t.Span("Normal  ");
     t.Span("Bold  ").Bold();
@@ -218,7 +218,7 @@ layout: base.njk
     
     <h3 id="column-layout">Column Layout</h3>
     <p>Stacks children vertically with configurable spacing and alignment options. Content flows naturally across pages.</p>
-    <pre><code class="language-csharp">container.Column(col =>
+    <pre><code class="language-csharp">container.Column(col =&gt;
 {
     col.Spacing(6);
     col.AlignItemsLeft(); // Left, Center, or Right alignment
@@ -228,7 +228,7 @@ layout: base.njk
     
     <h3 id="row-layout">Row Layout</h3>
     <p>Arranges children horizontally with flexible sizing: proportional, fixed, or auto-width based on content.</p>
-    <pre><code class="language-csharp">container.Row(row =>
+    <pre><code class="language-csharp">container.Row(row =&gt;
 {
     row.Spacing(8);
     row.RelativeItem(2).Text("Takes 2/3 width");  // proportional sizing
@@ -239,23 +239,23 @@ layout: base.njk
     
     <h3 id="table-layout">Table Layout</h3>
     <p>Grid-based tables with column definitions, repeating header rows, cell spanning, and full styling control.</p>
-    <pre><code class="language-csharp">container.Table(table =>
+    <pre><code class="language-csharp">container.Table(table =&gt;
 {
-    table.ColumnsDefinition(cols =>
+    table.ColumnsDefinition(cols =&gt;
     {
         cols.RelativeColumn(4);   // 4 units
         cols.RelativeColumn(1);   // 1 unit
         cols.ConstantColumn(60);  // 60 points fixed
     });
 
-    table.HeaderRow(row =>
+    table.HeaderRow(row =&gt;
     {
         row.Cell().Background("#1a4a8a").Text("Product").Bold();
         row.Cell().Background("#1a4a8a").Text("Qty").Bold();
         row.Cell().Background("#1a4a8a").AlignRight().Text("Price").Bold();
     });
 
-    table.Row(row =>
+    table.Row(row =&gt;
     {
         row.Cell().Text("Widget");
         row.Cell().Text("5");
@@ -325,7 +325,7 @@ container.LineVertical(1);                    // vertical separator (1pt black)<
     <pre><code class="language-csharp">page.Size(PageSize.A4);
 page.Margin(2, Unit.Centimetre);
 page.PageColor(Color.White);
-page.DefaultTextStyle(s => s.FontSize(11));</code></pre>
+page.DefaultTextStyle(s =&gt; s.FontSize(11));</code></pre>
 
     <h3 id="headers-footers">Headers & Footers</h3>
     <p>Define persistent header and footer regions that automatically repeat on every page. Main content flows between them with pagination.</p>
@@ -336,7 +336,7 @@ page.DefaultTextStyle(s => s.FontSize(11));</code></pre>
 
 page.Footer()
     .AlignCenter()
-    .Text(t =>
+    .Text(t =&gt;
     {
         t.Span("Page ");
         t.CurrentPageNumber();
@@ -346,7 +346,7 @@ page.Footer()
 
     <h3 id="page-breaks">Page Breaks</h3>
     <p>Force a new page at any point inside a Column:</p>
-    <pre><code class="language-csharp">container.Column(col =>
+    <pre><code class="language-csharp">container.Column(col =&gt;
 {
     col.Item().Text("Content on page 1");
     col.PageBreak();                // Explicit page break
@@ -382,11 +382,11 @@ container.Hyperlink("https://github.com/sahebansari/TerraPDF")
 
     <h3 id="table-of-contents">Table of Contents</h3>
     <p>Automatic TOC generation from H1–H6 headings. Generates clickable internal links and hierarchical numbering. Page numbers are accurate through the two-pass rendering system.</p>
-    <pre><code class="language-csharp">container.TableOfContents(toc =>
+    <pre><code class="language-csharp">container.TableOfContents(toc =&gt;
 {
     toc.Size(PageSize.A4);
     toc.Margin(2, Unit.Centimetre);
-    toc.DefaultTextStyle(s => s.FontSize(11));
+    toc.DefaultTextStyle(s =&gt; s.FontSize(11));
 });</code></pre>
 
     <h3 id="bookmarks">PDF Bookmarks</h3>
@@ -417,12 +417,12 @@ container.Image(photoBytes, 200);</code></pre>
 
     <h3 id="vector-graphics">Vector Graphics Canvas</h3>
     <p>Draw vector graphics directly inside any layout container. The canvas fills the available width and uses a top-left coordinate system in PDF points.</p>
-    <pre><code class="language-csharp">container.Canvas(120, c =>
+    <pre><code class="language-csharp">container.Canvas(120, c =&gt;
 {
     c.FillRoundedRect(0, 0, 180, 70, 8, Color.Blue.Lighten4);
     c.StrokeRoundedRect(0, 0, 180, 70, 8, Color.Blue.Darken2, 1.5);
     c.Line(0, 90, 260, 90, Color.Grey.Lighten2, 0.5);
-    c.Path(p => p
+    c.Path(p =&gt; p
         .MoveTo(40, 110)
         .LineTo(80, 40)
         .LineTo(120, 110)
@@ -483,7 +483,7 @@ container.QrCode("https://terrapdf.example/", size: 90,
 
     <h3 id="encryption">AES-256 PDF Encryption</h3>
     <p>Protect generated PDFs with the PDF Standard Security Handler using user passwords, owner passwords, and fine-grained permission flags. <strong>AES-256</strong> (Revision 6, PDF 2.0) is the default; <strong>AES-128</strong> (Revision 4) remains available as a legacy opt-in for older viewers.</p>
-    <pre><code class="language-csharp">Document.Create(container =>
+    <pre><code class="language-csharp">Document.Create(container =&gt;
 {
     container.Encrypt(new EncryptionOptions
     {
@@ -494,7 +494,7 @@ container.QrCode("https://terrapdf.example/", size: 90,
         // set Algorithm = EncryptionAlgorithm.Aes128 for legacy viewers
     });
 
-    container.Page(page =>
+    container.Page(page =&gt;
     {
         page.Size(PageSize.A4);
         page.Content().Text("This PDF is password-protected.");
@@ -537,9 +537,9 @@ container.Text("Pages 42–47 and TerraPDF™");</code></pre>
     <pre><code class="language-csharp">public class CalloutBox : IComponent
 {
     private readonly string _text;
-    public CalloutBox(string text) => _text = text;
+    public CalloutBox(string text) =&gt; _text = text;
 
-    public void Compose(IContainer container) =>
+    public void Compose(IContainer container) =&gt;
         container
             .Margin(6)
             .Background(Color.Blue.Lighten4)
@@ -555,15 +555,15 @@ container.Component(new CalloutBox("Important note"));</code></pre>
     <pre><code class="language-csharp">public class InvoiceDocument : IDocument
 {
     private readonly InvoiceData _data;
-    public InvoiceDocument(InvoiceData data) => _data = data;
+    public InvoiceDocument(InvoiceData data) =&gt; _data = data;
 
     public void Compose(IDocumentContainer container)
     {
-        container.Page(page =>
+        container.Page(page =&gt;
         {
             page.Size(PageSize.A4);
             page.Margin(2, Unit.Centimetre);
-            page.Content().Column(col =>
+            page.Content().Column(col =&gt;
             {
                 col.Item().Text($"Invoice #{_data.Number}").Bold();
                 col.Item().Text($"Total: {_data.Total:C}");
@@ -577,7 +577,7 @@ Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pr
 
     <h3 id="conditional">Conditional Rendering</h3>
     <p>Show or hide content based on runtime conditions:</p>
-    <pre><code class="language-csharp">container.Column(col =>
+    <pre><code class="language-csharp">container.Column(col =&gt;
 {
     col.Item().Text("Always shown");
 
@@ -596,7 +596,7 @@ Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pr
     
     <h3 id="document-metadata">Document Metadata</h3>
     <p>Set standard PDF document properties that appear in viewer dialogs:</p>
-    <pre><code class="language-csharp">Document.Create(c =>
+    <pre><code class="language-csharp">Document.Create(c =&gt;
 {
     c.MetadataTitle("Quarterly Report Q1 2025");
     c.MetadataAuthor("Acme Finance Division");
@@ -604,14 +604,14 @@ Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pr
     c.MetadataKeywords("finance, quarterly, report, 2025");
     c.MetadataCreator("Acme Reporting Engine v3.2");
 
-    c.Page(p => p.Size(PageSize.A4).Content().Text("..."));
+    c.Page(p =&gt; p.Size(PageSize.A4).Content().Text("..."));
 })
 .PublishPdf("report.pdf");</code></pre>
 
     <h3 id="content-direction">Content Direction</h3>
     <p>Full support for right-to-left (RTL) languages. Set direction at page or container level:</p>
     <pre><code class="language-csharp">page.ContentFromRightToLeft()
-    .Column(col =>
+    .Column(col =&gt;
     {
         col.Item().Text("مرحبا بالعالم");  // Arabic RTL text
     });</code></pre>
@@ -653,7 +653,7 @@ Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pr
     <div class="table-wrapper">
       <table class="api-table">
         <thead>
-          <tr><th>Unit</th><th>Description</th><th>Example</th></tr>
+          <tr><th scope="col">Unit</th><th scope="col">Description</th><th scope="col">Example</th></tr>
         </thead>
         <tbody>
           <tr><td><code>Unit.Point</code></td><td>PDF native unit (1 pt = 1/72 inch) — default</td><td><code>.Margin(72)</code> = 1 inch</td></tr>
@@ -669,7 +669,7 @@ Document.Create(new InvoiceDocument(data)).PublishPdf("invoice.pdf");</code></pr
     <div class="table-wrapper">
       <table class="api-table">
         <thead>
-          <tr><th>Constant</th><th>Width × Height (pt)</th><th>Common Use</th></tr>
+          <tr><th scope="col">Constant</th><th scope="col">Width × Height (pt)</th><th scope="col">Common Use</th></tr>
         </thead>
         <tbody>
           <tr><td><code>PageSize.A4</code></td><td>595.28 × 841.89</td><td>Documents, letters (worldwide)</td></tr>
@@ -738,7 +738,7 @@ Color.Black  // "#000000"</code></pre>
       </div>
       <div class="feature-card">
         <h4>Modern .NET</h4>
-        <p>Targets .NET 8 and .NET 9 with latest language features. Future-proof and actively maintained.</p>
+        <p>Targets .NET 8, .NET 9, and .NET 10 with latest language features. Future-proof and actively maintained.</p>
       </div>
     </div>
 

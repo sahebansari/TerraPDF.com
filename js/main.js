@@ -369,7 +369,7 @@
   // ===========================
    function init() {
      initCopyButtons();
-     // initMobileMenu(); // Disabled: using inline script instead
+     initMobileMenu();
      initSmoothScroll();
      initKeyboardNav();
      initScrollToTop();

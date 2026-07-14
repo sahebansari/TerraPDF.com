@@ -25,7 +25,7 @@ rich text to tables, images, hyperlinks, and multi-page pagination — with no n
 runtime packages, and no licensing restrictions.
 
 - No native dependencies, no third-party packages
-- Targets **.NET 8** and **.NET 9**
+- Targets **.NET 8**, **.NET 9**, and **.NET 10**
 - Text styling — bold, italic, bold-italic, strikethrough, underline, font size, colour
 - Configurable line-height multiplier per text block
 - Per-span formatting inside mixed-style text blocks

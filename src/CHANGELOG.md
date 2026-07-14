@@ -4,13 +4,29 @@ description: "Version history, release notes, fixes, and feature updates for the
 layout: base.njk
 docPage: true
 permalink: /changelog/
-robots: noindex, follow
 ---
 # Changelog
 
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [1.5.1] - 2026-07-10
+
+### Added
+- **.NET 10 target** — the library now multi-targets `net8.0`, `net9.0` and
+  `net10.0` (the current LTS). No API or behaviour changes; existing .NET 8/9
+  consumers are unaffected.
+
+### Changed
+- Test suite now runs once per supported runtime (`net8.0`, `net9.0`,
+  `net10.0`); the sample app moved to `net10.0`.
+- CI workflows install the .NET 8/9/10 SDKs; `global.json` now requires the
+  .NET 10 SDK (with `rollForward: latestMajor`).
+- Consolidated the two overlapping CI workflows into a single `ci.yml`.
+- Migrated the solution to the XML-based `.slnx` format (`TerraPDF.slnx`).
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Generate PDF in C# - TerraPDF Install & Quick Start
-description: Learn how to install TerraPDF from NuGet and generate a PDF in C# with a simple fluent API. A quick start guide for .NET 8 and .NET 9 developers.
-keywords: generate PDF in C#, create PDF in C#, install C# PDF library, NuGet PDF package, .NET PDF generator, TerraPDF quick start, fluent PDF API, .NET 8 PDF, .NET 9 PDF
+description: Learn how to install TerraPDF from NuGet and generate a PDF in C# with a simple fluent API. A quick start guide for .NET 8, 9, and 10 developers.
+keywords: generate PDF in C#, create PDF in C#, install C# PDF library, NuGet PDF package, .NET PDF generator, TerraPDF quick start, fluent PDF API, .NET 8 PDF, .NET 9 PDF, .NET 10 PDF
 layout: base.njk
 ---
 
@@ -19,14 +19,14 @@ layout: base.njk
        <code class="command">dotnet add package TerraPDF</code>
      </div>
      <p class="text-center">
-       <button class="btn btn-outline btn-small copy-btn" data-copy-target="#install-command .command">Copy Command</button>
+       <button type="button" class="btn btn-outline btn-small copy-btn" data-copy-target="#install-command .command">Copy Command</button>
      </p>
     
     <h3>Package Information</h3>
      <ul>
        <li><strong>Package ID:</strong> <code>TerraPDF</code></li>
        <li><strong>Latest Version:</strong> <a href="https://www.nuget.org/packages/TerraPDF/" target="_blank" rel="noopener noreferrer">v1.5.0</a></li>
-       <li><strong>Target Frameworks:</strong> .NET 8, .NET 9</li>
+       <li><strong>Target Frameworks:</strong> .NET 8, .NET 9, .NET 10</li>
        <li><strong>License:</strong> MIT (free for commercial use)</li>
      </ul>
   </div>
@@ -45,28 +45,28 @@ using TerraPDF.Helpers;  // Color, PageSize, Unit, TextStyle</code></pre>
     <pre><code class="language-csharp">using TerraPDF.Core;
 using TerraPDF.Helpers;
 
-Document.Create(container =>
+Document.Create(container =&gt;
 {
-    container.Page(page =>
+    container.Page(page =&gt;
     {
         page.Size(PageSize.A4);
         page.Margin(2, Unit.Centimetre);
         page.PageColor(Color.White);
-        page.DefaultTextStyle(s => s.FontSize(11));
+        page.DefaultTextStyle(s =&gt; s.FontSize(11));
 
         page.Header()
             .Text("My First PDF")
             .Bold()
             .FontSize(20);
 
-        page.Content().Column(col =>
+        page.Content().Column(col =&gt;
         {
             col.Spacing(8);
             col.Item().Text("Hello, TerraPDF!");
             col.Item().Text("A second paragraph.").Italic();
         });
 
-        page.Footer().AlignCenter().Text(t =>
+        page.Footer().AlignCenter().Text(t =&gt;
         {
             t.Span("Page ");
             t.CurrentPageNumber();
@@ -91,18 +91,18 @@ Document.Create(container =>
     <p>TerraPDF offers two ways to create documents:</p>
     
     <h3>Inline Callback (Quick & Simple)</h3>
-    <pre><code class="language-csharp">Document.Create(container => { /* build your PDF */ })
+    <pre><code class="language-csharp">Document.Create(container =&gt; { /* build your PDF */ })
        .PublishPdf("report.pdf");</code></pre>
     
     <h3>Reusable Document Class (DRY, reusable templates)</h3>
     <pre><code class="language-csharp">public class InvoiceDocument : IDocument
 {
     private readonly InvoiceData _data;
-    public InvoiceDocument(InvoiceData data) => _data = data;
+    public InvoiceDocument(InvoiceData data) =&gt; _data = data;
 
     public void Compose(IDocumentContainer container)
     {
-        container.Page(page =>
+        container.Page(page =&gt;
         {
             page.Size(PageSize.A4);
             page.Margin(2, Unit.Centimetre);
@@ -120,7 +120,7 @@ Document.Create(new InvoiceDocument(data))
     <h2>Page Configuration</h2>
     <p>Every page is configured through <code>PageDescriptor</code>:</p>
     
-    <pre><code class="language-csharp">container.Page(page =>
+    <pre><code class="language-csharp">container.Page(page =&gt;
 {
     // Size
     page.Size(PageSize.A4);                              // standard size
@@ -135,7 +135,7 @@ Document.Create(new InvoiceDocument(data))
 
     // Appearance
     page.PageColor(Color.White);
-    page.DefaultTextStyle(s => s.FontSize(11).FontColor(Color.Grey.Darken2));
+    page.DefaultTextStyle(s =&gt; s.FontSize(11).FontColor(Color.Grey.Darken2));
 
     // Layout slots
     page.Header();   // IContainer - drawn above content on every page

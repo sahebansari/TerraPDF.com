@@ -1,0 +1,10 @@
+{
+  "version": "1.5.1",
+  "releaseDate": "July 10, 2026",
+  "releaseHighlight": ".NET 10 Support",
+  "url": "https://terrapdf.com",
+  "github": "https://github.com/sahebansari/TerraPDF",
+  "nuget": "https://www.nuget.org/packages/TerraPDF/",
+  "contactEmail": "hello@terrapdf.com",
+  "securityEmail": "security@terrapdf.com"
+}

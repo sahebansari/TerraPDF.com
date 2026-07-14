@@ -28,7 +28,7 @@ npm ci
 ### Development Server
 
 ```bash
-npm run serve
+npm start
 ```
 
 This starts a local development server at `http://localhost:8080` with live reload.

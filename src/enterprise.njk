@@ -1,0 +1,149 @@
+---
+title: TerraPDF for Enterprise - Trust, Support & Compliance
+description: "Everything an enterprise evaluation needs: MIT licensing with no audit risk, zero-dependency supply chain, deterministic builds with Source Link, AES-256 security posture, support lifecycle, and honest current limitations."
+keywords: enterprise PDF library .NET, C# PDF library license compliance, PDF library supply chain security, MIT PDF library commercial use, .NET PDF library support policy, TerraPDF enterprise
+layout: base.njk
+permalink: /enterprise/
+---
+
+<div class="container">
+  <div class="section-header">
+    <h1>TerraPDF for Enterprise</h1>
+    <p>The answers your architecture review, security team, and procurement process will ask for — licensing, supply chain, security posture, support lifecycle, and what TerraPDF deliberately does not do yet.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Licensing &amp; procurement</h2>
+    <p>
+      TerraPDF is licensed under the <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+      (SPDX identifier: <code>MIT</code>) — one of the two licenses on virtually every corporate
+      open-source allowlist. There is nothing to procure:
+    </p>
+    <ul class="feature-list">
+      <li>Free for commercial use at any scale — no per-developer, per-server, per-document, or SaaS-deployment fees</li>
+      <li>No license keys, activation, or telemetry — the package makes no network calls</li>
+      <li>No dual licensing, no "community vs. commercial" tiers, no license audit exposure</li>
+      <li>Redistribution and modification permitted, including in closed-source products</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Supply chain &amp; provenance</h2>
+    <table class="api-table">
+      <tbody>
+        <tr>
+          <td><strong>Runtime dependencies</strong></td>
+          <td>None. Pure C# — no transitive packages, no native binaries. Your dependency-scanning surface for TerraPDF is exactly one package.</td>
+        </tr>
+        <tr>
+          <td><strong>Source availability</strong></td>
+          <td>Full source on <a href="https://github.com/sahebansari/TerraPDF" target="_blank" rel="noopener noreferrer">GitHub</a>; you can audit, fork, or build from source (<code>dotnet build</code>, no special toolchain).</td>
+        </tr>
+        <tr>
+          <td><strong>Reproducible builds</strong></td>
+          <td>Releases are built with <code>&lt;Deterministic&gt;</code> and <code>&lt;ContinuousIntegrationBuild&gt;</code> enabled, producing reproducible, byte-identical assemblies.</td>
+        </tr>
+        <tr>
+          <td><strong>Debuggability</strong></td>
+          <td>Every release ships a <code>.snupkg</code> symbol package with Source Link, so you can step directly into TerraPDF source from your debugger.</td>
+        </tr>
+        <tr>
+          <td><strong>Release process</strong></td>
+          <td>Packages are built and pushed to NuGet.org by GitHub Actions on release tags — not from a developer machine. See the <a href="/publishing/">publishing process</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-section">
+    <h2>Security posture</h2>
+    <ul class="check-list">
+      <li><strong>No custom cryptography.</strong> AES-256 / AES-128 encryption and SHA-2 key derivation use .NET's <code>System.Security.Cryptography</code>, which delegates to the platform's crypto libraries — TerraPDF inherits your environment's .NET and OS FIPS configuration rather than shipping its own primitives.</li>
+      <li><strong>AES-256 by default</strong> (PDF 2.0, Standard Security Handler Revision 6) since v1.4.0, with user/owner passwords and granular permission flags. <a href="/docs/encryption/">Encryption docs →</a></li>
+      <li><strong>Coordinated disclosure.</strong> A published <a href="/security/">security policy</a> with response-time targets, <a href="https://github.com/sahebansari/TerraPDF/security/advisories/new" target="_blank" rel="noopener noreferrer">GitHub private vulnerability reporting</a>, and a machine-readable <a href="/.well-known/security.txt">security.txt</a>.</li>
+      <li><strong>No data leaves your process.</strong> PDF generation is a fully in-memory, offline operation — no telemetry, no external services, safe for air-gapped environments.</li>
+    </ul>
+
+    <h3>Vulnerability response targets</h3>
+    <table class="api-table">
+      <thead>
+        <tr><th scope="col">Stage</th><th scope="col">Target time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Acknowledgement</td><td>≤ 2 business days</td></tr>
+        <tr><td>Initial assessment</td><td>≤ 5 business days</td></tr>
+        <tr><td>Fix and patched release (critical / high)</td><td>≤ 30 days</td></tr>
+        <tr><td>Public disclosure</td><td>Coordinated with reporter after the fix ships</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-section">
+    <h2>Versioning &amp; support lifecycle</h2>
+    <ul class="check-list">
+      <li>Releases follow <a href="https://semver.org/spec/v2.0.0.html" target="_blank" rel="noopener noreferrer">Semantic Versioning</a>; breaking changes are called out explicitly in the <a href="/changelog/">changelog</a> (Keep a Changelog format)</li>
+      <li>The latest 1.x release line receives fixes and security patches; older major versions are not supported</li>
+      <li>Planned work is tracked publicly on <a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> and <a href="https://github.com/sahebansari/TerraPDF/milestones" target="_blank" rel="noopener noreferrer">milestones</a></li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Deployment &amp; compatibility</h2>
+    <ul class="check-list">
+      <li><strong>Targets .NET 8, .NET 9, and .NET 10</strong> — runs anywhere they do: Windows, Linux, macOS, Docker/Kubernetes containers, Azure App Service &amp; Functions, AWS Lambda</li>
+      <li><strong>No native binaries</strong> means no platform-specific deployment steps, no <code>libgdiplus</code>-style Linux surprises, and identical behavior across operating systems</li>
+      <li><strong>Concurrency guidance:</strong> generation is a self-contained in-memory operation. Treat each document build as single-threaded — create one document per request or thread (the natural pattern in ASP.NET Core), and generate as many documents in parallel as you like</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Current limitations — the honest list</h2>
+    <p>TerraPDF is focused on <em>generating</em> new documents with a code-first API. If your requirements include the following today, TerraPDF is not yet the right fit, and we would rather you know now:</p>
+    <table class="api-table">
+      <thead>
+        <tr><th scope="col">Capability</th><th scope="col">Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PDF/A (archival) and PDF/UA (accessibility) conformance</td>
+          <td>Not currently supported</td>
+        </tr>
+        <tr>
+          <td>Custom TrueType/OpenType font embedding</td>
+          <td>Not yet — built-in standard fonts (Helvetica, Times, Courier) with <a href="/docs/unicode-and-encoding/">WinAnsi character coverage</a></td>
+        </tr>
+        <tr>
+          <td>Full Unicode text (CJK, Cyrillic, Arabic, …) in page content</td>
+          <td>Not yet — follows from the built-in-font limitation above; metadata and bookmarks do support UTF-16</td>
+        </tr>
+        <tr>
+          <td>Editing, merging, or splitting existing PDFs</td>
+          <td>Out of scope — TerraPDF generates new documents only</td>
+        </tr>
+        <tr>
+          <td>Digital signatures (PAdES)</td>
+          <td>Not currently supported</td>
+        </tr>
+        <tr>
+          <td>Interactive forms (AcroForms) creation</td>
+          <td>Not currently supported</td>
+        </tr>
+        <tr>
+          <td>HTML-to-PDF conversion</td>
+          <td>Out of scope — TerraPDF is code-first by design</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Feature requests are prioritized in the open on <a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">GitHub</a> — if one of these blocks your adoption, say so there or <a href="/contact/">contact us</a>.</p>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-content">
+      <h2>Evaluating TerraPDF for your organization?</h2>
+      <p>We're happy to answer architecture, security, or licensing questions directly.</p>
+      <code class="cta-command">dotnet add package TerraPDF</code>
+      <a href="/contact/" class="btn btn-primary">Contact Us</a>
+      <a href="/faq/" class="btn btn-outline">Read the FAQ</a>
+    </div>
+  </div>
+</div>

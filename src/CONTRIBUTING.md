@@ -40,7 +40,7 @@ discrimination in any form.
 ### Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download) or later (the library
-  targets both .NET 8 and .NET 9)
+  targets .NET 8, .NET 9, and .NET 10)
 - Git
 
 ### Clone and Build

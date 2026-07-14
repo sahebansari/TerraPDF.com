@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Security: GitHub Pages cannot send HTTP headers, so CSP ships as a meta tag.
+       'unsafe-inline' is needed for style only (inline style attributes); all scripts are external. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.shields.io https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   {% set defaultKeywords = 'C# PDF library, .NET PDF library, .NET PDF generator, PDF generation in C#, create PDF in C#, generate PDF C#, PDF document generation, open source PDF library, free C# PDF library, NuGet PDF package, fluent PDF API, code-first PDF generation, PDF layout engine, PDF reports, invoice PDF generation, PDF tables, PDF images, PDF bookmarks, PDF metadata, PDF encryption, AES-256 PDF, pure C# PDF, zero dependency PDF library, ASP.NET Core PDF generation, TerraPDF' %}
   
   <!-- Primary Meta Tags -->
@@ -44,27 +48,22 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/android-chrome-512x512.png">
     <link rel="manifest" href="/images/favicon/site.webmanifest">
 
-   <!-- Google Fonts - Modern font stack -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+   <!-- Fonts: self-hosted Inter & JetBrains Mono (variable, latin + latin-ext) -->
+   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="/css/vendor/github.min.css">
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Scripts: all external and deferred (CSP allows no inline scripts) -->
+    <script src="/js/vendor/highlight.min.js" defer></script>
     <script src="/js/main.js" defer></script>
 
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) — cookieless: Consent Mode defaults (set in analytics.js)
+     deny all storage, so no analytics or advertising cookies are ever set. See /privacy/. -->
+<script src="/js/analytics.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZQ8PWHNLP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-RZQ8PWHNLP');
-</script>
   
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
@@ -89,18 +88,16 @@
       "@type": "Person",
       "name": "Saheb Ansari"
     },
-    "softwareVersion": "1.5.0",
+    "softwareVersion": "{{ site.version }}",
     "programmingLanguage": "C#",
-    "targetPlatform": ".NET 8, .NET 9",
+    "targetPlatform": ".NET 8, .NET 9, .NET 10",
     "license": "https://github.com/sahebansari/TerraPDF/blob/master/LICENSE"
   }
   </script>
 </head>
 <body>
-  <!-- Skip link for keyboard navigation -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
   <header class="site-header">
-    <div class="header-license-bar" aria-label="TerraPDF licensing">
+    <div class="header-license-bar">
       <div class="container header-license-inner">
         <span class="header-license-mark">MIT</span>
         <strong>Free for personal and commercial use.</strong>
@@ -108,7 +105,7 @@
         <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener nofollow noreferrer">License</a>
       </div>
     </div>
-    <nav class="container nav-wrapper" aria-label="Main navigation" role="navigation">
+    <nav class="container nav-wrapper" aria-label="Main navigation">
       <a href="/" class="logo">
         <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="logo-img">
         <span class="logo-text"></span>
@@ -119,17 +116,18 @@
         <li><a href="/getting-started/" {% if page.url | isActiveNav("/getting-started/") %}class="active" aria-current="page"{% endif %}>Getting Started</a></li>
         <li><a href="/docs/" {% if page.url | isActiveNav("/docs/") %}class="active" aria-current="page"{% endif %}>Documentation</a></li>
         <li><a href="/samples/" {% if page.url | isActiveNav("/samples/") %}class="active" aria-current="page"{% endif %}>Samples</a></li>
+        <li><a href="/enterprise/" {% if page.url | isActiveNav("/enterprise/") %}class="active" aria-current="page"{% endif %}>Enterprise</a></li>
         <li><a href="/download/" {% if page.url | isActiveNav("/download/") %}class="active" aria-current="page"{% endif %}>Download</a></li>
       </ul>
       <div class="nav-cta">
         <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener nofollow noreferrer">GitHub</a>
         <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener nofollow noreferrer">NuGet</a>
       </div>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">&#x2630;</button>
+      <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">&#x2630;</button>
     </nav>    
   </header>
 
-    <main id="main-content" role="main">
+    <main id="main-content">
       {% if docPage %}
         <div class="container">
           <div class="content-section">
@@ -180,7 +178,7 @@
       {% endif %}
     </main>
 
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer">
     <div class="container footer-content">
       <div class="footer-section">
         <div class="footer-logo">
@@ -196,6 +194,8 @@
           <li><a href="/getting-started/">Getting Started</a></li>
           <li><a href="/docs/">Documentation</a></li>
           <li><a href="/samples/">Samples</a></li>
+          <li><a href="/enterprise/">Enterprise</a></li>
+          <li><a href="/faq/">FAQ</a></li>
           <li><a href="https://github.com/sahebansari/TerraPDF" rel="noopener nofollow noreferrer">GitHub Repository</a></li>
         </ul>
       </div>
@@ -206,58 +206,26 @@
           <li><a href="https://github.com/sahebansari/TerraPDF/tree/master/docs" rel="noopener nofollow noreferrer">Full Documentation</a></li>
           <li><a href="https://github.com/sahebansari/TerraPDF/issues" rel="noopener nofollow noreferrer">Report an Issue</a></li>
           <li><a href="https://github.com/sahebansari/TerraPDF/blob/master/CONTRIBUTING.md" rel="noopener nofollow noreferrer">Contributing</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+          <li><a href="/security/">Security Policy</a></li>
         </ul>
       </div>
       <div class="footer-section">
-        <h4>License</h4>
+        <h4>License &amp; Legal</h4>
         <p>MIT License &mdash; Free for commercial and personal use.</p>
+        <ul>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/legal/">Legal</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
       </div>
     </div>
      <div class="footer-bottom">
         <div class="container">
-          <p>&copy; {{ page.date.getFullYear() }} TerraPDF. All rights reserved. | <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow noreferrer">MIT License</a></p>
+          <p>&copy; {{ buildYear }} TerraPDF. Released under the <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow noreferrer">MIT License</a>.</p>
           <p class="footer-signature">Designed with ❤️ by <a href="https://www.sahebansari.com" target="_blank" rel="noopener noreferrer">Saheb Ansari</a></p>
         </div>
       </div>
    </footer>
-  <script>
-    (function() {
-      const menuToggle = document.querySelector('.mobile-menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
-      if (!menuToggle || !navLinks) return;
-
-      // Toggle menu on button click
-      menuToggle.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        navLinks.classList.toggle('active');
-      });
-
-      // Close menu when clicking a link
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-          navLinks.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Close menu on Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          menuToggle.focus();
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

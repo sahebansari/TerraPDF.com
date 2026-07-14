@@ -1,0 +1,130 @@
+---
+title: TerraPDF FAQ - Licensing, Compatibility & Capabilities
+description: "Frequently asked questions about TerraPDF: commercial use under MIT, telemetry, .NET and platform support, FIPS and thread safety, PDF/A status, custom fonts, and how it compares to other C# PDF libraries."
+keywords: TerraPDF FAQ, C# PDF library free commercial use, PDF library thread safe, PDF library FIPS, PDF/A C#, C# PDF library comparison, TerraPDF questions
+layout: base.njk
+permalink: /faq/
+---
+
+<div class="container">
+  <div class="section-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>Quick answers to the questions developers and evaluators ask most. For a deeper enterprise-evaluation view, see <a href="/enterprise/">TerraPDF for Enterprise</a>.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Licensing &amp; cost</h2>
+
+    <h3>Is TerraPDF really free for commercial use?</h3>
+    <p>Yes. TerraPDF is MIT-licensed with no dual licensing, no community/commercial tiers, and no fees of any kind — per developer, per server, per document, or for SaaS deployment. You can use, modify, and redistribute it in closed-source commercial products.</p>
+
+    <h3>Does TerraPDF collect telemetry or make network calls?</h3>
+    <p>No. The library performs no network I/O of any kind — no telemetry, no license checks, no font or asset downloads. PDF generation is a fully in-memory operation, which also makes TerraPDF safe for air-gapped environments.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Compatibility &amp; deployment</h2>
+
+    <h3>Which .NET versions and platforms are supported?</h3>
+    <p>TerraPDF targets .NET 8, .NET 9, and .NET 10 and runs anywhere they do: Windows, Linux, and macOS, including Docker/Kubernetes containers, Azure App Service and Functions, and AWS Lambda. Because it is pure C# with no native binaries, behavior is identical across platforms and there are no platform-specific deployment steps.</p>
+
+    <h3>Is TerraPDF thread-safe? Can I generate PDFs concurrently?</h3>
+    <p>Generate as many documents in parallel as you like — the pattern is one document per thread or request, which is what ASP.NET Core gives you naturally. Treat each individual document build as single-threaded rather than sharing one document builder across threads.</p>
+
+    <h3>Is the encryption FIPS-compliant?</h3>
+    <p>TerraPDF implements no cryptographic primitives of its own. AES-256/AES-128 and SHA-2 operations use .NET's <code>System.Security.Cryptography</code>, which delegates to the underlying platform crypto libraries — so TerraPDF inherits whatever FIPS configuration your OS and .NET runtime enforce.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Capabilities &amp; limits</h2>
+
+    <h3>Can TerraPDF read, edit, merge, or split existing PDFs?</h3>
+    <p>No — TerraPDF generates new documents only. If you need to manipulate existing PDFs, pair it with a library built for that (for example, PDFsharp). See <a href="/#why-terrapdf">how TerraPDF compares</a>.</p>
+
+    <h3>Does TerraPDF support PDF/A or PDF/UA (accessibility)?</h3>
+    <p>Not currently. Generated documents are standard PDF 1.7 (or PDF 2.0 when AES-256 encryption is enabled) without archival or tagged-accessibility conformance. If PDF/A is a blocker for you, please say so on <a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">GitHub issues</a> — demand drives prioritization.</p>
+
+    <h3>Can I embed custom fonts or render CJK, Cyrillic, or Arabic text?</h3>
+    <p>Not yet. TerraPDF currently uses the built-in standard fonts (Helvetica, Times, Courier) with <a href="/docs/unicode-and-encoding/">WinAnsi character coverage</a> — printable ASCII, Windows-1252 typographic characters, and Latin-1 accented characters. Document metadata and bookmark titles do support full Unicode via UTF-16.</p>
+
+    <h3>Can TerraPDF convert HTML to PDF?</h3>
+    <p>No, and that's by design. TerraPDF is a code-first layout engine: you describe documents with a fluent C# API instead of maintaining HTML templates and a browser-based renderer. If HTML conversion is your requirement, a wkhtmltopdf- or Chromium-based tool is a better fit.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Project &amp; support</h2>
+
+    <h3>How is TerraPDF versioned and supported?</h3>
+    <p>Releases follow Semantic Versioning, with all changes documented in the <a href="/changelog/">changelog</a>. The latest 1.x release receives fixes and security patches. Bugs and feature requests are tracked publicly on <a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+
+    <h3>How do I report a security vulnerability?</h3>
+    <p>Please don't file a public issue. Use <a href="https://github.com/sahebansari/TerraPDF/security/advisories/new" target="_blank" rel="noopener noreferrer">GitHub private vulnerability reporting</a> or email <a href="mailto:{{ site.securityEmail }}">{{ site.securityEmail }}</a>. Response-time targets are published in the <a href="/security/">security policy</a>.</p>
+
+    <h3>How does TerraPDF compare to QuestPDF, iText, or PDFsharp?</h3>
+    <p>Short version: TerraPDF is the lightweight, MIT-licensed, zero-dependency option for code-first document <em>generation</em>. QuestPDF offers richer rendering with commercial tiers and native assets; iText is a commercial-grade toolkit for enterprise PDF workflows under AGPL/commercial licensing; PDFsharp is lower-level drawing and manipulation. The <a href="/#why-terrapdf">homepage comparison table</a> has the full breakdown.</p>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is TerraPDF really free for commercial use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. TerraPDF is MIT-licensed with no dual licensing, no tiers, and no fees per developer, server, document, or SaaS deployment. You can use, modify, and redistribute it in closed-source commercial products." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does TerraPDF collect telemetry or make network calls?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The library performs no network I/O — no telemetry, no license checks, no downloads. PDF generation is fully in-memory, making TerraPDF safe for air-gapped environments." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which .NET versions and platforms are supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "TerraPDF targets .NET 8, .NET 9, and .NET 10 and runs on Windows, Linux, and macOS, including containers and serverless platforms. It is pure C# with no native binaries, so behavior is identical across platforms." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is TerraPDF thread-safe?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Generate as many documents in parallel as you like, using one document per thread or request. Treat each individual document build as single-threaded rather than sharing a document builder across threads." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the encryption FIPS-compliant?",
+      "acceptedAnswer": { "@type": "Answer", "text": "TerraPDF implements no cryptographic primitives of its own. AES and SHA-2 operations use .NET's System.Security.Cryptography, which delegates to platform crypto libraries, so TerraPDF inherits the FIPS configuration of your OS and runtime." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can TerraPDF read, edit, merge, or split existing PDFs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No — TerraPDF generates new documents only. For manipulating existing PDFs, pair it with a library built for that purpose, such as PDFsharp." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does TerraPDF support PDF/A or PDF/UA?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not currently. Output is standard PDF 1.7, or PDF 2.0 when AES-256 encryption is enabled, without archival or tagged-accessibility conformance." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I embed custom fonts or render CJK, Cyrillic, or Arabic text?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not yet. TerraPDF uses the built-in standard fonts (Helvetica, Times, Courier) with WinAnsi coverage: printable ASCII, Windows-1252 typographic characters, and Latin-1 accented characters. Metadata and bookmarks support full Unicode via UTF-16." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can TerraPDF convert HTML to PDF?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No, by design. TerraPDF is a code-first layout engine using a fluent C# API. For HTML conversion, a wkhtmltopdf- or Chromium-based tool is a better fit." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is TerraPDF versioned and supported?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Releases follow Semantic Versioning with a public changelog. The latest 1.x release receives fixes and security patches, and work is tracked publicly on GitHub issues." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I report a security vulnerability?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use GitHub private vulnerability reporting or email security@terrapdf.com rather than filing a public issue. Response-time targets are published in the security policy at terrapdf.com/security." }
+    }
+  ]
+}
+</script>

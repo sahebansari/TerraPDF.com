@@ -1,0 +1,48 @@
+---
+title: Contact - TerraPDF
+description: How to reach the TerraPDF team for questions, bug reports, feature requests, security reports, and commercial inquiries.
+layout: base.njk
+permalink: /contact/
+---
+
+<div class="container">
+  <div class="section-header">
+    <h1>Contact</h1>
+    <p>Questions, bug reports, security issues, or business inquiries — here's where each one goes.</p>
+  </div>
+
+  <div class="content-section">
+    <div class="features-grid features-grid--two-col">
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>General &amp; Business Inquiries</h3>
+        <p>Questions about using TerraPDF, adoption in your organization, or anything else.</p>
+        <p><a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a></p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🐛</div>
+        <h3>Bug Reports &amp; Feature Requests</h3>
+        <p>Found a bug or want a feature? File it on GitHub so it's tracked publicly.</p>
+        <p><a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">Open a GitHub issue →</a></p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Security Reports</h3>
+        <p>Please do not file public issues for vulnerabilities. Use private reporting instead.</p>
+        <p>
+          <a href="https://github.com/sahebansari/TerraPDF/security/advisories/new" target="_blank" rel="noopener noreferrer">Private vulnerability report →</a><br>
+          <a href="mailto:{{ site.securityEmail }}">{{ site.securityEmail }}</a> · <a href="/security/">Security policy</a>
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Contributing</h3>
+        <p>Pull requests are welcome. Read the contribution guidelines before you start.</p>
+        <p><a href="/contributing/">Contributing guide →</a></p>
+      </div>
+    </div>
+  </div>
+</div>
