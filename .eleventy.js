@@ -54,6 +54,42 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode("sampleCode", sampleCode);
   eleventyConfig.addNunjucksGlobal("sampleCode", sampleCode);
 
+  // Wrap every <pre><code> block in the same editor-window chrome as the
+  // homepage showcase panel (titlebar with dots + language label).
+  // Skipped: the showcase panel itself (has its own titlebar) and the
+  // sample-code modal (its <pre> is sized by the dialog's flex layout).
+  const codeWindowLabels = {
+    csharp: "C#", cs: "C#", bash: "Terminal", sh: "Terminal", shell: "Terminal",
+    console: "Terminal", powershell: "PowerShell", ps1: "PowerShell",
+    xml: "XML", html: "HTML", css: "CSS", js: "JavaScript", javascript: "JavaScript",
+    json: "JSON", yaml: "YAML", yml: "YAML", text: "Code", plaintext: "Code"
+  };
+
+  eleventyConfig.addTransform("codeWindows", function (content) {
+    if (!this.page.outputPath || !this.page.outputPath.endsWith(".html")) {
+      return content;
+    }
+
+    return content.replace(/<pre\b([^>]*)>[\s\S]*?<\/pre>/g, function (block, preAttrs) {
+      if (/showcase-pre|sample-code-output/.test(preAttrs)) {
+        return block;
+      }
+
+      const langMatch = block.match(/<code[^>]*\blanguage-([\w#+-]+)/);
+      const lang = langMatch ? langMatch[1].toLowerCase() : null;
+      const label = (lang && codeWindowLabels[lang]) ||
+        (lang ? lang.charAt(0).toUpperCase() + lang.slice(1) : "Code");
+
+      return '<div class="code-window">'
+        + '<div class="code-titlebar">'
+        + '<span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>'
+        + '<span class="code-titlebar-label">' + label + '</span>'
+        + '</div>'
+        + block
+        + '</div>';
+    });
+  });
+
   // Build year for the footer copyright (evaluated at build time)
   eleventyConfig.addNunjucksGlobal("buildYear", new Date().getFullYear());
 

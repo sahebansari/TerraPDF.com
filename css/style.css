@@ -776,6 +776,27 @@ pre code.hljs {
   padding: 0;
 }
 
+/* Editor-window chrome around code blocks — same look as the homepage
+   showcase panel. Added at build time around every <pre><code> block. */
+.code-window {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--code-bg);
+  box-shadow: var(--shadow-xs);
+  margin: var(--space-lg) 0;
+}
+
+.code-window pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.code-titlebar-label {
+  font-weight: 600;
+}
+
 /* ===========================================
    Content Sections
    =========================================== */
@@ -1872,10 +1893,11 @@ a[target="_blank"]::after {
   margin: 0;
 }
 
-/* Compact homepage feature matrix */
+/* Compact homepage feature matrix: one full-width row per category,
+   feature items flowing horizontally and wrapping as needed */
 .features-showcase {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-xl);
   margin-top: var(--space-xl);
 }
@@ -1885,8 +1907,8 @@ a[target="_blank"]::after {
 }
 
 .feature-category .features-grid {
-  grid-template-columns: 1fr;
-  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0 var(--space-xl);
 }
 
 .feature-category .category-label {
@@ -1930,15 +1952,8 @@ a[target="_blank"]::after {
   line-height: 1.4;
 }
 
-@media (max-width: 1000px) {
-  .features-showcase {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 640px) {
   .features-showcase {
-    grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
 }
@@ -2231,6 +2246,11 @@ a[target="_blank"]::after {
 .showcase-panel {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  /* Tall enough to show the full output screenshot; the code pane scrolls.
+     minmax(0, 1fr) keeps the row at panel height instead of growing to the
+     code's full content height. */
+  height: 560px;
+  grid-template-rows: minmax(0, 1fr);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2279,6 +2299,8 @@ a[target="_blank"]::after {
 
 .showcase-pre {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -2297,14 +2319,26 @@ a[target="_blank"]::after {
   padding: 40px 28px;
 }
 
-/* Miniature A4 page rendered in pure HTML/CSS */
+/* Miniature A4 page: real render of the PDF in front, blank sheet behind */
 .page-mock-stack {
   position: relative;
 }
 
+.page-shot {
+  display: block;
+  width: 320px;
+  max-width: 100%;
+  height: auto;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 14px 38px rgba(10, 20, 30, 0.25);
+  position: relative;
+  z-index: 1;
+}
+
 .page-mock {
-  width: 262px;
-  aspect-ratio: 210 / 297;
+  width: 320px;
+  aspect-ratio: 148 / 210;
   background: #ffffff;
   color: #26313c;
   border-radius: 4px;
@@ -2326,102 +2360,15 @@ a[target="_blank"]::after {
   transform: rotate(2.5deg);
 }
 
-.pm-invoice-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.pm-brand {
-  font-weight: 700;
-  font-size: 10px;
-  color: var(--primary);
-}
-
-.pm-invoice-title {
-  font-weight: 800;
-  font-size: 16px;
-  letter-spacing: 0.04em;
-  color: var(--primary);
-}
-
-.pm-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-size: 7.5px;
-  color: #55636f;
-  margin: 2px 0 8px;
-}
-
-.pm-due {
-  color: #b91c1c;
-  font-weight: 600;
-}
-
-.pm-rule {
-  height: 2px;
-  background: var(--primary);
-  margin-bottom: 10px;
-}
-
-.pm-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 7.5px;
-  margin-bottom: 10px;
-}
-
-.pm-table th {
-  text-align: left;
-  background: #eef1f6;
-  color: #26313c;
-  padding: 3px 5px;
-  border: 1px solid #cfd6dc;
-  font-weight: 700;
-}
-
-.pm-table td {
-  padding: 3px 5px;
-  border: 1px solid #dde3e8;
-}
-
-.pm-totals {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  font-size: 8px;
-  color: #3c4a58;
-}
-
-.pm-totals strong {
-  display: inline-block;
-  min-width: 46px;
-  text-align: right;
-}
-
-.pm-totals .pm-grand {
-  font-size: 9px;
-  font-weight: 800;
-  color: var(--primary);
-  border-top: 1px solid #cfd6dc;
-  padding-top: 3px;
-  margin-top: 2px;
-}
-
-.pm-footer {
-  margin-top: auto;
-  padding-top: 6px;
-  border-top: 1px solid #cfd6dc;
-  text-align: center;
-  color: #5f6c79;
-  font-size: 7.5px;
-}
-
 @media (max-width: 960px) {
   .showcase-panel {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    height: auto;
+  }
+
+  .showcase-pre {
+    max-height: 420px;
   }
 
   .showcase-output {
