@@ -1976,11 +1976,37 @@ a[target="_blank"]::after {
 
 .cta-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  max-width: 640px;
+  gap: var(--space-2xl);
+  max-width: 880px;
   margin: 0 auto;
+  text-align: left;
+}
+
+/* Big logo on a white tile so the navy wordmark reads on the dark panel */
+.cta-logo-panel {
+  flex-shrink: 0;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px 30px;
+  box-shadow: 0 14px 38px rgba(3, 10, 24, 0.45);
+}
+
+.cta-logo {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.cta-text .cta-command {
+  text-align: left;
 }
 
 .cta-content h2 {
@@ -2041,6 +2067,25 @@ a[target="_blank"]::after {
   padding: 0.7rem 1.5rem;
   font-size: 0.95rem;
   margin-top: var(--space-xs);
+}
+
+@media (max-width: 760px) {
+  .cta-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-text {
+    align-items: center;
+  }
+
+  .cta-logo {
+    width: 150px;
+  }
+
+  .cta-logo-panel {
+    padding: 20px 22px;
+  }
 }
 
 @media (max-width: 520px) {
