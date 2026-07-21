@@ -39,8 +39,9 @@ discrimination in any form.
 
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download) or later (the library
-  targets .NET 8, .NET 9, and .NET 10)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download) (the repository's
+  `global.json` pins to it, with `rollForward: latestMajor`; the library
+  itself targets .NET 8, .NET 9, and .NET 10 at runtime)
 - Git
 
 ### Clone and Build
@@ -174,33 +175,13 @@ label `enhancement`. Describe the use-case, not just the solution.
 
 ## Release Process
 
+Release steps, API key management, and NuGet troubleshooting are maintained
+in one place to avoid drift — see [Publishing TerraPDF](/publishing/) for the
+full, current process. The short version, for context:
+
 1. Bump `<Version>` in `src/TerraPDF/TerraPDF.csproj`.
 2. Update `CHANGELOG.md` — move items from `[Unreleased]` to a new versioned section.
-3. Commit and push to `main`.
-4. Wait for CI to go green (build-and-test + pack dry-run must pass)
-5. Create a GitHub Release with a tag matching the version (e.g. `v1.3.0`).
-   - The `publish.yml` workflow automatically packs and pushes the `.nupkg`
-   and `.snupkg` (symbols) to nuget.org.
-6. Verify on nuget.org.
-
----
-
-## Renewing the API Key
-
-nuget.org API keys expire. Before expiry:
-
-1. Sign in to nuget.org → **API Keys** → **Edit** → **Regenerate**.
-2. Copy the new key.
-3. Update the `NUGET_API_KEY` GitHub secret (Settings → Secrets → Actions).
-
----
-
-## Troubleshooting
-
-| Symptom | Fix |
-|---------|-----|
-| Workflow fails: "tag does not match csproj version" | Ensure the GitHub Release tag (e.g. `v1.3.0`) matches `<Version>1.3.0</Version>` in the csproj exactly. |
-| `403 Forbidden` from nuget.org | API key expired or has insufficient scope. Regenerate and update the secret. |
-| Package visible but README is blank on nuget.org | Verify `README.md` is included via `<PackageReadmeFile>README.md</PackageReadmeFile>` and the `<None Include=... Pack="true">` item. |
-| Source Link warning locally | Expected when building outside a git repo. The warning disappears on GitHub Actions where `fetch-depth: 0` is used. |
-| Old `.nupkg` in `artifacts/` | The folder is gitignored. Delete it with `Remove-Item artifacts/ -Recurse` before a fresh pack. |
+3. Commit and push to `main`, then wait for CI to go green.
+4. Create a GitHub Release with a tag matching the version (e.g. `v1.3.0`); the
+   `publish.yml` workflow packs and pushes the `.nupkg`/`.snupkg` to nuget.org automatically.
+5. Verify on nuget.org.

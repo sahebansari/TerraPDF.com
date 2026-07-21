@@ -242,6 +242,47 @@
   }
 
   // ===========================
+  // Documentation Sidebar Toggle (mobile)
+  // ===========================
+  function initDocsSidebar() {
+    const sidebarToggle = document.querySelector('.docs-sidebar-toggle');
+    const sidebar = document.querySelector('.docs-sidebar');
+
+    if (!sidebarToggle || !sidebar) return;
+
+    sidebarToggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+      sidebar.classList.toggle('active');
+    });
+
+    // Close sidebar when a link is chosen (mobile UX)
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!sidebarToggle.contains(e.target) && !sidebar.contains(e.target)) {
+        sidebar.classList.remove('active');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close sidebar on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+        sidebarToggle.focus();
+      }
+    });
+  }
+
+  // ===========================
   // Smooth Scrolling
   // ===========================
   function initSmoothScroll() {
@@ -370,6 +411,7 @@
    function init() {
      initCopyButtons();
      initMobileMenu();
+     initDocsSidebar();
      initSmoothScroll();
      initKeyboardNav();
      initScrollToTop();

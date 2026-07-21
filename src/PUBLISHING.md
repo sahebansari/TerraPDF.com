@@ -128,6 +128,8 @@ dotnet nuget remove source local-terra
 | `lib/net8.0/TerraPDF.xml` | IntelliSense XML doc comments |
 | `lib/net9.0/TerraPDF.dll` | Library assembly for .NET 9 |
 | `lib/net9.0/TerraPDF.xml` | IntelliSense XML doc comments |
+| `lib/net10.0/TerraPDF.dll` | Library assembly for .NET 10 |
+| `lib/net10.0/TerraPDF.xml` | IntelliSense XML doc comments |
 
 The `.snupkg` symbol package contains PDBs with Source Link data pointing to
 the exact commit on GitHub, enabling debugger step-in for consumers.

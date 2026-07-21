@@ -129,45 +129,46 @@
 
     <main id="main-content">
       {% if docPage %}
-        <div class="container">
-          <div class="content-section">
-            <div class="docs-page-actions">
-              <a href="/docs/" class="back-to-docs">← All Documentation</a>
-              {% set docsNav = [
-                {url: '/docs/getting-started/', title: 'Getting Started', next: '/docs/encryption/', nextTitle: 'Encryption & Security'},
-                {url: '/docs/encryption/', title: 'Encryption & Security', prev: '/docs/getting-started/', prevTitle: 'Getting Started', next: '/docs/vector-graphics/', nextTitle: 'Vector Graphics'},
-                {url: '/docs/vector-graphics/', title: 'Vector Graphics', prev: '/docs/encryption/', prevTitle: 'Encryption & Security', next: '/docs/barcodes-and-qr-codes/', nextTitle: 'Barcodes & QR Codes'},
-                {url: '/docs/barcodes-and-qr-codes/', title: 'Barcodes & QR Codes', prev: '/docs/vector-graphics/', prevTitle: 'Vector Graphics', next: '/docs/unicode-and-encoding/', nextTitle: 'Unicode & Encoding'},
-                {url: '/docs/unicode-and-encoding/', title: 'Unicode & Encoding', prev: '/docs/barcodes-and-qr-codes/', prevTitle: 'Barcodes & QR Codes', next: '/docs/text-and-spans/', nextTitle: 'Text & Spans'},
-                {url: '/docs/text-and-spans/', title: 'Text & Spans', prev: '/docs/unicode-and-encoding/', prevTitle: 'Unicode & Encoding', next: '/docs/layout/', nextTitle: 'Layout'},
-                {url: '/docs/layout/', title: 'Layout', prev: '/docs/text-and-spans/', prevTitle: 'Text & Spans', next: '/docs/decorators/', nextTitle: 'Decorators'},
-                {url: '/docs/decorators/', title: 'Decorators', prev: '/docs/layout/', prevTitle: 'Layout', next: '/docs/images/', nextTitle: 'Images'},
-                {url: '/docs/images/', title: 'Images', prev: '/docs/decorators/', prevTitle: 'Decorators', next: '/docs/table-of-contents/', nextTitle: 'Table of Contents'},
-                {url: '/docs/table-of-contents/', title: 'Table of Contents', prev: '/docs/images/', prevTitle: 'Images', next: '/docs/bookmarks/', nextTitle: 'Bookmarks'},
-                {url: '/docs/bookmarks/', title: 'Bookmarks', prev: '/docs/table-of-contents/', prevTitle: 'Table of Contents', next: '/docs/metadata/', nextTitle: 'Metadata'},
-                {url: '/docs/metadata/', title: 'Metadata', prev: '/docs/bookmarks/', prevTitle: 'Bookmarks', next: '/docs/colors/', nextTitle: 'Colors'},
-                {url: '/docs/colors/', title: 'Colors', prev: '/docs/metadata/', prevTitle: 'Metadata', next: '/docs/page-sizes-and-units/', nextTitle: 'Page Sizes & Units'},
-                {url: '/docs/page-sizes-and-units/', title: 'Page Sizes & Units', prev: '/docs/colors/', prevTitle: 'Colors', next: '/docs/components-and-templates/', nextTitle: 'Components & Templates'},
-                {url: '/docs/components-and-templates/', title: 'Components & Templates', prev: '/docs/page-sizes-and-units/', prevTitle: 'Page Sizes & Units', next: '/docs/row-and-column-layout/', nextTitle: 'Row & Column Layout'},
-                {url: '/docs/row-and-column-layout/', title: 'Row & Column Layout', prev: '/docs/components-and-templates/', prevTitle: 'Components & Templates'}
-              ] %}
-              {% set current = null %}
-              {% for item in docsNav %}
-                {% if item.url == page.url %}
-                  {% set current = item %}
-                {% endif %}
-              {% endfor %}
-            </div>
+        {% set current = null %}
+        {% for item in docsNavFlat %}
+          {% if item.url == page.url %}
+            {% set current = item %}
+          {% endif %}
+        {% endfor %}
 
+        <div class="container docs-layout">
+          <button type="button" class="docs-sidebar-toggle" aria-expanded="false" aria-controls="docs-sidebar">
+            <span aria-hidden="true">☰</span> Browse Documentation
+          </button>
+
+          <nav class="docs-sidebar" id="docs-sidebar" aria-label="Documentation navigation">
+            <a href="/docs/" class="docs-sidebar-home {% if page.url == '/docs/' %}active{% endif %}">📚 Documentation Home</a>
+            {% for group in docsNav %}
+              <div class="docs-sidebar-group">
+                <p class="docs-sidebar-group-title">{{ group.group }}</p>
+                <ul class="docs-sidebar-list">
+                  {% for item in group.items %}
+                    <li>
+                      <a href="{{ item.url }}" class="docs-sidebar-link{% if item.url == page.url %} active{% endif %}"{% if item.url == page.url %} aria-current="page"{% endif %}>
+                        <span class="docs-sidebar-icon" aria-hidden="true">{{ item.icon }}</span>{{ item.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endfor %}
+          </nav>
+
+          <div class="docs-main content-section">
             {{ content | safe }}
 
             {% if current and (current.prev or current.next) %}
               <div class="docs-page-nav">
                 {% if current.prev %}
-                  <a href="{{ current.prev }}" class="docs-nav-link docs-nav-prev">← {{ current.prevTitle }}</a>
+                  <a href="{{ current.prev.url }}" class="docs-nav-link docs-nav-prev">← {{ current.prev.title }}</a>
                 {% endif %}
                 {% if current.next %}
-                  <a href="{{ current.next }}" class="docs-nav-link docs-nav-next">{{ current.nextTitle }} →</a>
+                  <a href="{{ current.next.url }}" class="docs-nav-link docs-nav-next">{{ current.next.title }} →</a>
                 {% endif %}
               </div>
             {% endif %}
@@ -223,7 +224,7 @@
      <div class="footer-bottom">
         <div class="container">
           <p>&copy; {{ buildYear }} TerraPDF. Released under the <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" rel="noopener nofollow noreferrer">MIT License</a>.</p>
-          <p class="footer-signature">Designed with ❤️ by <a href="https://www.sahebansari.com" target="_blank" rel="noopener noreferrer">Saheb Ansari</a></p>
+          <p class="footer-signature">Designed with ❤️ by <a href="https://sahebansari.com" target="_blank" rel="noopener noreferrer">Saheb Ansari</a></p>
         </div>
       </div>
    </footer>

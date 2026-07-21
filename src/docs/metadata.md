@@ -234,6 +234,6 @@ Look for `Metadata` in the code or add the calls to any sample to produce a PDF 
 
 ## Related
 
-- [Getting Started](/docs/getting-started/) — basic document structure
+- [Getting Started](/docs/) — basic document structure
 - [Bookmarks](/docs/bookmarks/) — hierarchical outline entries for navigation
 - [Page Sizes & Units](/docs/page-sizes-and-units/) — page configuration

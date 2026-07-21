@@ -300,6 +300,6 @@ This generates `08_report_with_bookmarks.pdf` with 5 top-level bookmarks, nested
 
 ## Related
 
-- [Getting Started](/docs/getting-started/) — basic document structure
+- [Getting Started](/docs/) — basic document structure
 - [Page Sizes & Units](/docs/page-sizes-and-units/) — setting page dimensions
 - [Layout](/docs/layout/) — Column, Row, Table for structuring content

@@ -5,6 +5,6 @@
   "url": "https://terrapdf.com",
   "github": "https://github.com/sahebansari/TerraPDF",
   "nuget": "https://www.nuget.org/packages/TerraPDF/",
-  "contactEmail": "hello@terrapdf.com",
+  "discussions": "https://github.com/sahebansari/TerraPDF/discussions",
   "securityEmail": "security@terrapdf.com"
 }

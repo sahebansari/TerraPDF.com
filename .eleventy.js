@@ -22,11 +22,56 @@ module.exports = function(eleventyConfig) {
     };
     return md;
   }
-  eleventyConfig.amendLibrary("md", addThScope);
+
+  // Markdown headings: assign a GitHub-style slug id to every heading, so
+  // in-page anchors (TOCs, "see X below" cross-references) have something
+  // to point at. markdown-it doesn't do this itself.
+  function addHeadingIds(md) {
+    const seenByTokens = new WeakMap();
+
+    function slugify(text) {
+      return String(text)
+        .toLowerCase()
+        .replace(/`/g, "")
+        .replace(/[^\w\s-]/g, "")
+        .trim()
+        .replace(/[\s_]+/g, "-")
+        .replace(/-+/g, "-");
+    }
+
+    md.renderer.rules.heading_open = function(tokens, idx, options, env, self) {
+      const inlineToken = tokens[idx + 1];
+      const text = inlineToken && inlineToken.type === "inline" ? inlineToken.content : "";
+      let slug = slugify(text) || "section";
+      // IDs must begin with a letter (headings like "[1.5.1] - 2026-07-10"
+      // or "1. Create an account" would otherwise slugify to a leading digit).
+      if (!/^[a-z]/.test(slug)) {
+        slug = "section-" + slug;
+      }
+
+      let seen = seenByTokens.get(tokens);
+      if (!seen) {
+        seen = new Map();
+        seenByTokens.set(tokens, seen);
+      }
+      const count = seen.get(slug) || 0;
+      seen.set(slug, count + 1);
+      if (count > 0) slug = `${slug}-${count + 1}`;
+
+      tokens[idx].attrSet("id", slug);
+      return self.renderToken(tokens, idx, options);
+    };
+    return md;
+  }
+
+  function configureMarkdown(md) {
+    return addHeadingIds(addThScope(md));
+  }
+  eleventyConfig.amendLibrary("md", configureMarkdown);
 
   // Markdown shortcode for inline markdown
   let markdownIt = require("markdown-it");
-  let md = addThScope(markdownIt());
+  let md = configureMarkdown(markdownIt());
   eleventyConfig.addShortcode("markdown", function(content) {
     return md.render(content);
   });

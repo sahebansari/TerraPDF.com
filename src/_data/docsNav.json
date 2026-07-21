@@ -1,0 +1,31 @@
+[
+  {
+    "group": "Core Guides",
+    "items": [
+      { "url": "/docs/encryption/", "title": "Encryption & Security", "icon": "🔐", "desc": "AES-256 encryption by default, passwords, and permission flags." },
+      { "url": "/docs/vector-graphics/", "title": "Vector Graphics", "icon": "📈", "desc": "Lines, shapes, paths, charts, and diagrams." },
+      { "url": "/docs/barcodes-and-qr-codes/", "title": "Barcodes & QR Codes", "icon": "▦", "desc": "Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes." },
+      { "url": "/docs/unicode-and-encoding/", "title": "Unicode & Encoding", "icon": "À", "desc": "WinAnsi and Latin-1 text rendering rules." },
+      { "url": "/docs/text-and-spans/", "title": "Text & Spans", "icon": "📝", "desc": "Styling, fonts, line spacing, and span composition." },
+      { "url": "/docs/layout/", "title": "Layout", "icon": "📐", "desc": "Rows, columns, tables, spacing, and alignment." },
+      { "url": "/docs/decorators/", "title": "Decorators", "icon": "🎨", "desc": "Margins, padding, borders, backgrounds, and page breaks." },
+      { "url": "/docs/images/", "title": "Images", "icon": "🖼️", "desc": "PNG/JPEG embedding from files, bytes, or streams." },
+      { "url": "/docs/table-of-contents/", "title": "Table of Contents", "icon": "📑", "desc": "Auto-generated TOC with clickable internal links." },
+      { "url": "/docs/bookmarks/", "title": "Bookmarks", "icon": "🔗", "desc": "PDF outlines and hierarchical navigation." },
+      { "url": "/docs/metadata/", "title": "Metadata", "icon": "ℹ️", "desc": "Document title, author, subject, keywords, and creator." },
+      { "url": "/docs/colors/", "title": "Colors", "icon": "🎨", "desc": "Color constants, palettes, and hex support." },
+      { "url": "/docs/page-sizes-and-units/", "title": "Page Sizes & Units", "icon": "📏", "desc": "Standard page sizes and unit conversions." },
+      { "url": "/docs/components-and-templates/", "title": "Components & Templates", "icon": "🧩", "desc": "Reusable IComponent and IDocument patterns." },
+      { "url": "/docs/row-and-column-layout/", "title": "Row & Column Layout", "icon": "↔️", "desc": "Advanced responsive layout patterns." }
+    ]
+  },
+  {
+    "group": "Project Resources",
+    "items": [
+      { "url": "/readme/", "title": "README", "icon": "📖", "desc": "Project overview, examples, and summary." },
+      { "url": "/changelog/", "title": "Changelog", "icon": "📋", "desc": "Version history and release notes." },
+      { "url": "/contributing/", "title": "Contributing", "icon": "🤝", "desc": "Coding standards and PR guidance." },
+      { "url": "/security/", "title": "Security", "icon": "🔐", "desc": "Responsible disclosure and security policy." }
+    ]
+  }
+]
