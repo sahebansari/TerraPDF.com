@@ -70,6 +70,13 @@ Family name matching checks whether the name starts with `"Times"` or
 the resolved family (e.g. `FontFamily("Times").Bold()` renders Times-Bold, not
 Helvetica-Bold).
 
+Need a font outside these three — a brand typeface, or a script beyond
+WinAnsiEncoding's Windows-1252 range (Cyrillic, Greek, Devanagari, and
+beyond)? `FontFamily.Register("Name", "path/to/font.ttf")` embeds a TrueType
+font once under a name of your choosing, and `.FontFamily("Name")` then works
+exactly like the built-in names above. See
+[Custom Fonts & Full Unicode](/docs/custom-fonts/).
+
 ---
 
 ## Multi-Span Text

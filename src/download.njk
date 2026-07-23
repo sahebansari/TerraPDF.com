@@ -92,6 +92,14 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
 
+     <h3>v2.0.0 - July 23, 2026</h3>
+     <ul>
+       <li><strong>Custom font embedding</strong> — <code>FontFamily.Register(...)</code> embeds a TrueType font (regular/bold/italic/bold-italic) as a <code>Type0</code>/<code>CIDFontType2</code> composite font with <code>Identity-H</code> encoding, unlocking full Unicode text beyond the standard fonts' WinAnsiEncoding range — brand typefaces, Cyrillic, Greek, and more.</li>
+       <li><strong>Devanagari-aware rendering</strong> (pure C#, no native dependency) — automatic matra reordering, conjunct ligatures (स्व, क्ष, ज्ञ), reph (धर्म, वर्तमान), and below/post-base 'ra' forms (क्र, त्र, प्र, ष्ट्र) whenever text is drawn through a registered font.</li>
+       <li>Word-wrap fix — a single word/token wider than the line now breaks at character boundaries instead of overflowing.</li>
+       <li>New <a href="https://github.com/sahebansari/TerraPDF/blob/master/docs/custom-fonts.md" target="_blank" rel="noopener noreferrer"><code>docs/custom-fonts.md</code></a> guide and a new Hindi-language report sample.</li>
+     </ul>
+
      <h3>v1.5.1 - July 10, 2026</h3>
      <ul>
        <li><strong>.NET 10 target</strong> — the library now multi-targets <code>net8.0</code>, <code>net9.0</code>, and <code>net10.0</code> (the current LTS). No API or behaviour changes; existing .NET 8/9 consumers are unaffected.</li>

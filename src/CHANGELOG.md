@@ -13,6 +13,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0] - 2026-07-23
+
+### Added
+- **Custom font embedding** — `FontFamily.Register(...)` embeds a TrueType font (regular,
+  bold, italic, bold-italic) as a `Type0`/`CIDFontType2` composite font with `Identity-H`
+  encoding, giving full Unicode text support beyond the standard-14 fonts'
+  `WinAnsiEncoding` range (brand typefaces, Cyrillic, Greek, and beyond). Fonts are
+  embedded once per document regardless of how many times they're used, and requesting
+  an unregistered style falls back to the closest registered variant instead of throwing.
+- **Devanagari-aware rendering** (pure C#, no native dependency, none planned):
+  - Matra reordering — the vowel sign ि (`U+093F`) is moved to its correct pre-consonant
+    visual position.
+  - Conjunct ligatures — the font's own `half`/`akhn`/`cjct` GSUB features are substituted
+    so स्व, स्थ, क्ष, ज्ञ etc. render as proper joined forms.
+  - Reph — cluster-initial र् (धर्म, वर्तमान, दुर्बलता) is reordered and substituted via
+    the font's `rphf` feature.
+  - Below-base/post-base 'ra' — क्र, त्र, प्र, ष्ट्र substituted via the font's `rkrf`
+    feature.
+- New `docs/custom-fonts.md` guide.
+- New sample: `15_child_nutrition_india_report.pdf` — a full multi-page Hindi-language
+  report exercising the new Devanagari shaping corrections.
+
+### Fixed
+- Word-wrap: a single word/token wider than the line now breaks at character boundaries
+  instead of overflowing the container.
+
+### Changed
+- **Breaking (none):** version bumped `1.5.1` → `2.0.0` to reflect the scope of the new
+  font subsystem, not a breaking API change.
+- CI (`ci.yml`): added a nuget.org connectivity canary as the last step of every run.
+- Publish workflow (`publish.yml`): added pre-publish connectivity and `NUGET_API_KEY`
+  authentication checks, so a dead network path or a stale key is caught before
+  `Pack`/`Push` — previously such a failure could only be recovered by bumping the
+  version, since nuget.org rejects re-pushing the same version.
+
+---
+
 ## [1.5.1] - 2026-07-10
 
 ### Added
@@ -231,7 +268,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflow (GitHub Actions): build, test, coverage.
 - Publish workflow (GitHub Actions): NuGet + symbols on release tag.
 
-[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v1.5.1...HEAD
+[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/sahebansari/TerraPDF/compare/v1.5.1...v2.0.0
 [1.5.1]: https://github.com/sahebansari/TerraPDF/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/sahebansari/TerraPDF/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/sahebansari/TerraPDF/compare/v1.3.0...v1.4.0

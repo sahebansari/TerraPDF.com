@@ -6,6 +6,7 @@
       { "url": "/docs/vector-graphics/", "title": "Vector Graphics", "icon": "📈", "desc": "Lines, shapes, paths, charts, and diagrams." },
       { "url": "/docs/barcodes-and-qr-codes/", "title": "Barcodes & QR Codes", "icon": "▦", "desc": "Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes." },
       { "url": "/docs/unicode-and-encoding/", "title": "Unicode & Encoding", "icon": "À", "desc": "WinAnsi and Latin-1 text rendering rules." },
+      { "url": "/docs/custom-fonts/", "title": "Custom Fonts & Full Unicode", "icon": "🔤", "desc": "Embed TrueType fonts with FontFamily.Register and pure-C# Devanagari-aware shaping." },
       { "url": "/docs/text-and-spans/", "title": "Text & Spans", "icon": "📝", "desc": "Styling, fonts, line spacing, and span composition." },
       { "url": "/docs/layout/", "title": "Layout", "icon": "📐", "desc": "Rows, columns, tables, spacing, and alignment." },
       { "url": "/docs/decorators/", "title": "Decorators", "icon": "🎨", "desc": "Margins, padding, borders, backgrounds, and page breaks." },

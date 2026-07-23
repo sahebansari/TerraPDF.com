@@ -11,7 +11,7 @@ layout: base.njk
     <p class="tagline">
       Generate professional PDFs entirely from C# — invoices, reports, contracts, and certificates — with a fluent,
       code-first API. Zero dependencies, no native binaries, MIT-licensed, with tables, images, bookmarks, vector
-      graphics, barcodes, QR codes, and AES-256 encrypted output built in.
+      graphics, barcodes, QR codes, custom embedded fonts, and AES-256 encrypted output built in.
     </p>
      <p class="hero-use-cases">
       Built for generating <a href="/samples/invoice/">invoices</a>, <a href="/samples/report-with-toc/">reports</a>,
@@ -140,39 +140,39 @@ Document.Create(doc =&gt;
   <div class="container">
     <div class="section-header">
       <h2>What's new in TerraPDF v{{ site.version }}</h2>
-      <p>Now targeting .NET 8, 9, and 10 (LTS) — alongside the v1.5 line's vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes, built from scratch with no raster image pipeline.</p>
+      <p>Custom font embedding with full Unicode support, including automatic, pure-C# Devanagari-aware shaping — no native dependency, none planned.</p>
     </div>
 
     <div class="feature-chips-grid">
       <div class="feature-chip">
-        <div class="feature-icon">▮</div>
+        <div class="feature-icon">🔤</div>
         <div>
-          <h3>Code128 Barcodes</h3>
-          <p><code>container.Barcode("SKU-00042")</code> renders a Subset B Code128 barcode as vector-filled bars, with optional caption, custom colours, and a configurable quiet zone.</p>
+          <h3>Custom Font Embedding</h3>
+          <p><code>FontFamily.Register("Brand", "Brand-Regular.ttf")</code> embeds any TrueType font as a <code>Type0</code>/<code>CIDFontType2</code> composite font — brand typefaces, Cyrillic, Greek, and beyond WinAnsiEncoding.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">▦</div>
+        <div class="feature-icon">अ</div>
         <div>
-          <h3>QR Codes</h3>
-          <p><code>container.QrCode("https://...")</code> generates a from-scratch ISO/IEC 18004 QR code — versions 1-40, all four error correction levels, with Reed-Solomon error correction.</p>
+          <h3>Devanagari-Aware Rendering</h3>
+          <p>Automatic matra reordering, conjunct ligatures (स्व, क्ष, ज्ञ), reph (धर्म, वर्तमान), and below/post-base 'ra' forms (क्र, त्र, प्र) — read straight from the font's own GSUB table.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">🔎</div>
+        <div class="feature-icon">📦</div>
         <div>
-          <h3>Crisp at Any Zoom</h3>
-          <p>Both render as vector-filled rectangles matching the existing Canvas rendering style — no raster images, and placeable inside any <code>Column</code>, <code>Row</code>, or <code>Table</code> cell.</p>
+          <h3>Embedded Once</h3>
+          <p>Each registered font variant is embedded once per document, no matter how many pages or how many times it's used — with graceful fallback to the closest registered style.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon">✂️</div>
         <div>
-          <h3>Batch Rect Rendering</h3>
-          <p>New <code>PdfPage.AddFilledRects</code> primitive emits one colour operator and a single trailing fill for symbols with thousands of modules, instead of a colour-set/fill pair per module.</p>
+          <h3>Character-Boundary Wrap</h3>
+          <p>A single word or token wider than the line now breaks at character boundaries instead of overflowing the container — plus Code128/QR codes and .NET 8/9/10 support from the v1.5 line.</p>
         </div>
       </div>
     </div>
@@ -264,6 +264,11 @@ Document.Create(doc =&gt;
             <span class="feature-icon">🎨</span>
             <span class="feature-title">Color & Formatting</span>
             <span class="feature-desc">Per-span formatting with custom colors and styles</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔤</span>
+            <span class="feature-title">Custom Fonts</span>
+            <span class="feature-desc">Embed TrueType fonts for full Unicode, with Devanagari-aware shaping</span>
           </div>
         </div>
       </div>

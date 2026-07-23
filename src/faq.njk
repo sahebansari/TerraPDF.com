@@ -58,7 +58,7 @@ permalink: /faq/
     <p>Releases follow Semantic Versioning, with all changes documented in the <a href="/changelog/">changelog</a>. The latest 1.x release receives fixes and security patches. Bugs and feature requests are tracked publicly on <a href="https://github.com/sahebansari/TerraPDF/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
 
     <h3>How do I report a security vulnerability?</h3>
-    <p>Please don't file a public issue. Use <a href="https://github.com/sahebansari/TerraPDF/security/advisories/new" target="_blank" rel="noopener noreferrer">GitHub private vulnerability reporting</a> or email <a href="mailto:{{ site.securityEmail }}">{{ site.securityEmail }}</a>. Response-time targets are published in the <a href="/security/">security policy</a>.</p>
+    <p>Please don't file a public issue. Use <a href="{{ site.securityAdvisoryUrl }}" target="_blank" rel="noopener noreferrer">GitHub private vulnerability reporting</a>. Response-time targets are published in the <a href="/security/">security policy</a>.</p>
 
     <h3>How does TerraPDF compare to QuestPDF, iText, or PDFsharp?</h3>
     <p>Short version: TerraPDF is the lightweight, MIT-licensed, zero-dependency option for code-first document <em>generation</em>. QuestPDF offers richer rendering with commercial tiers and native assets; iText is a commercial-grade toolkit for enterprise PDF workflows under AGPL/commercial licensing; PDFsharp is lower-level drawing and manipulation. The <a href="/#why-terrapdf">homepage comparison table</a> has the full breakdown.</p>
@@ -123,7 +123,7 @@ permalink: /faq/
     {
       "@type": "Question",
       "name": "How do I report a security vulnerability?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Use GitHub private vulnerability reporting or email security@terrapdf.com rather than filing a public issue. Response-time targets are published in the security policy at terrapdf.com/security." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Use GitHub private vulnerability reporting rather than filing a public issue. Response-time targets are published in the security policy at terrapdf.com/security." }
     }
   ]
 }

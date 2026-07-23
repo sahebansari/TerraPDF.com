@@ -45,11 +45,11 @@ The following are **out of scope**:
 
 **Please do not file public GitHub Issues for security vulnerabilities.**
 
-Report security issues through either channel:
+Report security issues through GitHub's private vulnerability reporting:
+[Report a vulnerability](https://github.com/sahebansari/TerraPDF/security/advisories/new)
 
-1. **GitHub private vulnerability reporting** (preferred):
-   [Report a vulnerability](https://github.com/sahebansari/TerraPDF/security/advisories/new)
-2. **Email:** [security@terrapdf.com](mailto:security@terrapdf.com)
+This opens a private advisory visible only to you and the maintainers, so no
+report leaks details before a fix ships.
 
 A machine-readable version of this policy is published at
 [`/.well-known/security.txt`](/.well-known/security.txt).

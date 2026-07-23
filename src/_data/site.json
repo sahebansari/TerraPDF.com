@@ -1,10 +1,10 @@
 {
-  "version": "1.5.1",
-  "releaseDate": "July 10, 2026",
-  "releaseHighlight": ".NET 10 Support",
+  "version": "2.0.0",
+  "releaseDate": "July 23, 2026",
+  "releaseHighlight": "Custom Fonts & Devanagari",
   "url": "https://terrapdf.com",
   "github": "https://github.com/sahebansari/TerraPDF",
   "nuget": "https://www.nuget.org/packages/TerraPDF/",
   "discussions": "https://github.com/sahebansari/TerraPDF/discussions",
-  "securityEmail": "security@terrapdf.com"
+  "securityAdvisoryUrl": "https://github.com/sahebansari/TerraPDF/security/advisories/new"
 }

@@ -17,7 +17,13 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
-> **New in 1.5.0:** Code128 barcodes and ISO/IEC 18004 QR codes, rendered as vector-filled rectangles that stay crisp at any zoom and compose inside any container.
+> **New in 2.0.0:** Custom font embedding — `FontFamily.Register(...)` loads a TrueType font
+(brand typefaces, or scripts beyond WinAnsiEncoding like Cyrillic and Greek) and uses it via the
+same `TextStyle.FontFamily(...)` API as the built-in families — including automatic, pure-C#
+Devanagari-aware rendering (conjunct ligatures, reph, and below-base 'ra' forms, no native
+shaping engine). See [Custom Fonts](/docs/custom-fonts/).
+>
+> Also: Code128 barcodes and QR codes (ISO/IEC 18004, versions 1-40, all four error correction levels) via `container.Barcode(...)` and `container.QrCode(...)` — rendered as vector-filled rectangles, no raster image pipeline, placeable anywhere a `Column`, `Row`, or `Table` cell can go. TerraPDF also multi-targets **.NET 10 (LTS)** alongside .NET 8 and 9.
 
 **TerraPDF** is a lightweight, zero-dependency, pure C# library for generating professional PDF 1.7 documents programmatically. 
 It provides a fluent, composable API that covers the full document-authoring lifecycle — from page layout and 
@@ -50,6 +56,7 @@ runtime packages, and no licensing restrictions.
  - **Vector graphics canvas** via `container.Canvas()`
  - **Barcodes** — Code128 (Subset B) via `container.Barcode()`
  - **QR codes** — ISO/IEC 18004 via `container.QrCode()`
+ - **Custom font embedding** — `FontFamily.Register(...)` embeds a TrueType font (brand typefaces, Cyrillic, Greek, and beyond WinAnsiEncoding) used via the same `FontFamily()` API as the built-in families, with automatic Devanagari-aware shaping
  - Full **WinAnsiEncoding** character coverage
  - Fluent, composable API
 

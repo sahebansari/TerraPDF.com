@@ -1,7 +1,7 @@
 ---
 title: TerraPDF Features - C# PDF Library Capabilities
-description: "Explore TerraPDF's C# PDF library features: fluent API, layouts, PDF tables, images, bookmarks, metadata, reports, vector graphics, barcodes, QR codes, AES-256 encryption, and zero dependencies."
-keywords: C# PDF library features, .NET PDF library, PDF generation features, fluent PDF API, PDF layout engine, PDF tables C#, PDF images C#, PDF bookmarks, PDF metadata, PDF encryption C#, AES-256 PDF encryption, PDF barcode C#, PDF QR code C#, Code128 barcode, TerraPDF
+description: "Explore TerraPDF's C# PDF library features: fluent API, layouts, PDF tables, images, custom fonts, bookmarks, metadata, reports, vector graphics, barcodes, QR codes, AES-256 encryption, and zero dependencies."
+keywords: C# PDF library features, .NET PDF library, PDF generation features, fluent PDF API, PDF layout engine, PDF tables C#, PDF images C#, PDF bookmarks, PDF metadata, PDF encryption C#, AES-256 PDF encryption, PDF barcode C#, PDF QR code C#, Code128 barcode, custom fonts PDF C#, Devanagari PDF, TerraPDF
 layout: base.njk
 ---
 
@@ -24,6 +24,7 @@ layout: base.njk
           <li><a href="#text-typography">Text styling</a> — bold, italic, underline, strikethrough</li>
           <li><a href="#multi-span">Multi-span text</a> — inline formatting within text blocks</li>
           <li><a href="#font-control">Font control</a> — size, color, line height</li>
+          <li><a href="#custom-fonts">Custom fonts</a> — embed TrueType fonts for full Unicode, with Devanagari-aware shaping</li>
           <li><a href="#material-colors">Material Design colors</a> — built-in palette with darken/lighten</li>
           <li><a href="#headings">Semantic headings</a> — H1–H6 with auto TOC integration</li>
         </ul>
@@ -198,7 +199,7 @@ layout: base.njk
     <div class="features-grid">
       <div class="feature-card">
         <h4>Font Family</h4>
-        <p><code>.FontFamily("Helvetica" | "Times" | "Courier")</code> — <code>Bold()</code>/<code>Italic()</code> stay within the selected family</p>
+        <p><code>.FontFamily("Helvetica" | "Times" | "Courier")</code>, or any name registered via <code>FontFamily.Register(...)</code> — <code>Bold()</code>/<code>Italic()</code> stay within the selected family</p>
       </div>
       <div class="feature-card">
         <h4>Horizontal Alignment</h4>
@@ -208,6 +209,40 @@ layout: base.njk
         <h4>Vertical Alignment</h4>
         <p><code>AlignMiddle()</code>, <code>AlignBottom()</code></p>
       </div>
+    </div>
+
+    <h3 id="custom-fonts">Custom Fonts &amp; Full Unicode</h3>
+    <p><code>FontFamily.Register(...)</code> embeds a real TrueType font, so you're not limited to the built-in Helvetica/Times/Courier families or WinAnsiEncoding's Windows-1252 coverage — brand typefaces, Cyrillic, Greek, Devanagari, and any other script the font supports.</p>
+    <pre><code class="language-csharp">using TerraPDF.Helpers;
+
+// Register once (e.g. at startup) — cached, safe to reuse across documents
+FontFamily.Register("Brand", "fonts/Brand-Regular.ttf");
+FontFamily.Register("Brand", "fonts/Brand-Bold.ttf", bold: true);
+
+page.DefaultTextStyle(s =&gt; s.FontFamily("Brand"));
+page.Content().Text("Héllo, Привет, Γειά σου, धर्म").FontSize(18);</code></pre>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4>Full Unicode</h4>
+        <p>Embedded as a <code>Type0</code>/<code>CIDFontType2</code> composite font with <code>Identity-H</code> encoding — any glyph the font contains can be shown, addressed by glyph ID rather than a fixed 256-slot table.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Devanagari-Aware Shaping</h4>
+        <p>Automatic, pure-C# matra reordering, conjunct ligatures (स्व, क्ष, ज्ञ), reph (धर्म, वर्तमान), and below/post-base 'ra' forms (क्र, त्र, प्र, ष्ट्र) — no native dependency.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Embedded Once</h4>
+        <p>A registered font is embedded once per document regardless of how many times it's used — a 200-page report using one font still costs one embedded copy.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Graceful Fallback</h4>
+        <p>Register up to four variants (regular/bold/italic/bold-italic) per family. Requesting an unregistered style falls back to the closest variant instead of throwing.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      TrueType outlines only (<code>.ttf</code>, or <code>.otf</code> with a <code>glyf</code>/<code>loca</code> table) — no subsetting yet, so file size scales with the embedded font. See the <a href="/docs/custom-fonts/">Custom Fonts guide</a> for the full API and shaping details.
     </div>
   </div>
 
