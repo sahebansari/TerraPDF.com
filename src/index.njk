@@ -24,16 +24,13 @@ layout: base.njk
     </div>
     <div class="hero-badges">
       <div class="badge">
-        <img src="https://img.shields.io/nuget/v/TerraPDF.svg" alt="Latest NuGet version" width="90" height="20" loading="lazy">
-        <span>Latest on NuGet</span>
+        <span>⚖️ MIT Licensed</span>
       </div>
       <div class="badge">
-        <img src="https://img.shields.io/nuget/dt/TerraPDF.svg" alt="NuGet download count" width="90" height="20" loading="lazy">
-        <span>NuGet Downloads</span>
+        <span>⚡ Zero Dependencies</span>
       </div>
       <div class="badge">
-        <img src="https://img.shields.io/github/stars/sahebansari/TerraPDF.svg" alt="GitHub star count" width="90" height="20" loading="lazy">
-        <span>GitHub Stars</span>
+        <span>.NET 8 / 9 / 10</span>
       </div>
       <div class="badge">
         <span>v{{ site.version }}</span>
@@ -136,7 +133,7 @@ Document.Create(doc =&gt;
   </div>
 </section>
 
-<section class="content-section" style="background: var(--bg-alt);">
+<section class="content-section content-section--spotlight">
   <div class="container">
     <div class="section-header">
       <h2>What's new in TerraPDF v{{ site.version }}</h2>
@@ -173,189 +170,6 @@ Document.Create(doc =&gt;
         <div>
           <h3>Character-Boundary Wrap</h3>
           <p>A single word or token wider than the line now breaks at character boundaries instead of overflowing the container — plus Code128/QR codes and .NET 8/9/10 support from the v1.5 line.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="content-section" id="why-terrapdf">
-  <div class="container">
-    <div class="section-header">
-      <h2>Why TerraPDF?</h2>
-      <p>Professional PDF generation in C# made simple. Designed for .NET developers who need code-first document creation, predictable layout, and full control.</p>
-    </div>
-    
-     <div class="features-grid features-grid--two-col">
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Zero Dependencies</h3>
-        <p>Pure C# implementation with no native binaries, no third-party runtime packages, and no licensing restrictions. Just add the NuGet package and you're ready.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3>Fluent API</h3>
-        <p>Intuitive, composable builder pattern that makes PDF generation feel natural. Chain methods together to create complex layouts with minimal code.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">📐</div>
-        <h3>Full Layout Control</h3>
-        <p>Columns, rows, tables, margins, padding, borders, backgrounds, and alignment. Everything you need for professional document layouts.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3>Image Support</h3>
-        <p>Embed PNG and JPEG images directly into your PDFs with proper sizing and positioning support.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">📑</div>
-        <h3>Automatic TOC</h3>
-        <p>Generate a table of contents automatically from your headings (H1-H6) with clickable internal links and proper page numbering.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3>Hyperlinks & Bookmarks</h3>
-        <p>Support for URI hyperlinks, internal document links, PDF bookmarks, and hierarchical outline navigation.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🔐</div>
-        <h3>Document Security</h3>
-        <p>AES-256 PDF encryption by default with user passwords, owner passwords, and fine-grained permission flags.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">▦</div>
-        <h3>Barcodes & QR Codes</h3>
-        <p>Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes, placeable anywhere an <code>IContainer</code> is exposed.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="content-section">
-  <div class="container">
-    <div class="section-header">
-      <h2>Everything You Need to Build Amazing PDFs</h2>
-      <p>A focused PDF toolkit for C# apps: layout, styling, navigation, media, graphics, and security without a heavy runtime footprint.</p>
-    </div>
-    
-    <div class="features-showcase">
-      <!-- Text & Typography -->
-      <div class="feature-category">
-        <h3 class="category-label">Typography</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">🔤</span>
-            <span class="feature-title">Rich Text Styling</span>
-            <span class="feature-desc">Bold, italic, underline, strikethrough with full font control</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📏</span>
-            <span class="feature-title">Size & Scale</span>
-            <span class="feature-desc">Precise font sizing and line-height control</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🎨</span>
-            <span class="feature-title">Color & Formatting</span>
-            <span class="feature-desc">Per-span formatting with custom colors and styles</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔤</span>
-            <span class="feature-title">Custom Fonts</span>
-            <span class="feature-desc">Embed TrueType fonts for full Unicode, with Devanagari-aware shaping</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Layout & Structure -->
-      <div class="feature-category">
-        <h3 class="category-label">Layout</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Columns & Tables</span>
-            <span class="feature-desc">Flexible column, row, and table layouts</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Margins & Padding</span>
-            <span class="feature-desc">Full unit support: pt, mm, cm, inch</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🖼️</span>
-            <span class="feature-title">Images</span>
-            <span class="feature-desc">PNG and JPEG embedding with positioning</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Advanced Features -->
-      <div class="feature-category">
-        <h3 class="category-label">Advanced</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">📑</span>
-            <span class="feature-title">Auto Table of Contents</span>
-            <span class="feature-desc">TOC generated from H1–H6 with clickable links</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔗</span>
-            <span class="feature-title">Links & Bookmarks</span>
-            <span class="feature-desc">URI hyperlinks, internal links, and bookmarks</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📄</span>
-            <span class="feature-title">Headers & Footers</span>
-            <span class="feature-desc">Reusable headers, footers, and page numbers</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔐</span>
-            <span class="feature-title">PDF Encryption</span>
-            <span class="feature-desc">AES-256 protection by default with passwords and permissions</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📈</span>
-            <span class="feature-title">Vector Canvas</span>
-            <span class="feature-desc">Shapes, paths, grids, charts, and diagrams</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">▦</span>
-            <span class="feature-title">Barcodes & QR Codes</span>
-            <span class="feature-desc">Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">À</span>
-            <span class="feature-title">WinAnsi Text</span>
-            <span class="feature-desc">Windows-1252 and Latin-1 character coverage</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Styling & Decorators -->
-      <div class="feature-category">
-        <h3 class="category-label">Styling</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">🟢</span>
-            <span class="feature-title">Backgrounds & Borders</span>
-            <span class="feature-desc">Full, rounded, per-edge borders with fills</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Alignment</span>
-            <span class="feature-desc">Horizontal and vertical alignment controls</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🏗️</span>
-            <span class="feature-title">Components</span>
-            <span class="feature-desc">Reusable components and conditional rendering</span>
-          </div>
         </div>
       </div>
     </div>
@@ -422,6 +236,156 @@ Document.Create(doc =&gt;
   </div>
 </section>
 
+<section class="content-section" id="why-terrapdf">
+  <div class="container">
+    <div class="section-header">
+      <h2>Everything You Need to Build Amazing PDFs</h2>
+      <p>A focused PDF toolkit for C# apps: layout, styling, navigation, media, graphics, and security without a heavy runtime footprint.</p>
+    </div>
+
+    <div class="differentiator-strip">
+      <div class="differentiator">
+        <span class="differentiator-icon" aria-hidden="true">⚡</span>
+        <div>
+          <h3>Zero Dependencies</h3>
+          <p>Pure C# implementation with no native binaries, no third-party runtime packages, and no licensing restrictions. Just add the NuGet package and you're ready.</p>
+        </div>
+      </div>
+      <div class="differentiator">
+        <span class="differentiator-icon" aria-hidden="true">🎨</span>
+        <div>
+          <h3>Fluent API</h3>
+          <p>Intuitive, composable builder pattern that makes PDF generation feel natural. Chain methods together to create complex layouts with minimal code.</p>
+        </div>
+      </div>
+      <div class="differentiator">
+        <span class="differentiator-icon" aria-hidden="true">📐</span>
+        <div>
+          <h3>Full Layout Control</h3>
+          <p>Columns, rows, tables, margins, padding, borders, backgrounds, and alignment. Everything you need for professional document layouts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-showcase">
+      <!-- Text & Typography -->
+      <div class="feature-category">
+        <h3 class="category-label">Typography</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">✍️</span>
+            <span class="feature-title">Rich Text Styling</span>
+            <span class="feature-desc">Bold, italic, underline, strikethrough with full font control</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📏</span>
+            <span class="feature-title">Size & Scale</span>
+            <span class="feature-desc">Precise font sizing and line-height control</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎨</span>
+            <span class="feature-title">Color & Formatting</span>
+            <span class="feature-desc">Per-span formatting with custom colors and styles</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔤</span>
+            <span class="feature-title">Custom Fonts</span>
+            <span class="feature-desc">Embed TrueType fonts for full Unicode, with Devanagari-aware shaping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout & Structure -->
+      <div class="feature-category">
+        <h3 class="category-label">Layout</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Columns & Tables</span>
+            <span class="feature-desc">Flexible column, row, and table layouts</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Margins & Padding</span>
+            <span class="feature-desc">Full unit support: pt, mm, cm, inch</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🖼️</span>
+            <span class="feature-title">Images</span>
+            <span class="feature-desc">Embed PNG and JPEG images directly into your PDFs with proper sizing and positioning support</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Features -->
+      <div class="feature-category">
+        <h3 class="category-label">Advanced</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">📑</span>
+            <span class="feature-title">Auto Table of Contents</span>
+            <span class="feature-desc">Generate a table of contents automatically from your headings (H1-H6) with clickable internal links and proper page numbering</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔗</span>
+            <span class="feature-title">Links & Bookmarks</span>
+            <span class="feature-desc">URI hyperlinks, internal document links, PDF bookmarks, and hierarchical outline navigation</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📄</span>
+            <span class="feature-title">Headers & Footers</span>
+            <span class="feature-desc">Reusable headers, footers, and page numbers</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔐</span>
+            <span class="feature-title">PDF Encryption</span>
+            <span class="feature-desc">AES-256 PDF encryption by default with user passwords, owner passwords, and fine-grained permission flags</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📈</span>
+            <span class="feature-title">Vector Canvas</span>
+            <span class="feature-desc">Shapes, paths, grids, charts, and diagrams</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">▦</span>
+            <span class="feature-title">Barcodes & QR Codes</span>
+            <span class="feature-desc">Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">À</span>
+            <span class="feature-title">WinAnsi Text</span>
+            <span class="feature-desc">Windows-1252 and Latin-1 character coverage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Styling & Decorators -->
+      <div class="feature-category">
+        <h3 class="category-label">Styling</h3>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">🟢</span>
+            <span class="feature-title">Backgrounds & Borders</span>
+            <span class="feature-desc">Full, rounded, per-edge borders with fills</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <span class="feature-title">Alignment</span>
+            <span class="feature-desc">Horizontal and vertical alignment controls</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏗️</span>
+            <span class="feature-title">Components</span>
+            <span class="feature-desc">Reusable components and conditional rendering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="features-more-link"><a href="/features/">See the full feature list &rarr;</a></p>
+  </div>
+</section>
+
 <section class="cta-section">
   <div class="container">
     <div class="cta-content">
@@ -431,7 +395,10 @@ Document.Create(doc =&gt;
       <div class="cta-text">
         <h2>Build your next PDF with TerraPDF</h2>
         <p>Create reports, invoices, tables, images, bookmarks, and encrypted PDF documents in modern .NET apps with a small, MIT-licensed package.</p>
-        <a href="/docs/" class="btn btn-primary">View Documentation</a>
+        <div class="cta-buttons">
+          <a href="/docs/" class="btn btn-primary">View Documentation</a>
+          <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
       </div>
     </div>
   </div>

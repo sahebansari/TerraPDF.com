@@ -200,6 +200,38 @@
   }
 
   // ===========================
+  // Theme Toggle
+  // ===========================
+  function initThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    const icon = toggle?.querySelector('.theme-toggle-icon');
+    if (!toggle || !icon) return;
+
+    function applyState(theme) {
+      icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    }
+
+    // theme.js already set data-theme on <html> before this script ran
+    applyState(document.documentElement.getAttribute('data-theme'));
+
+    toggle.addEventListener('click', function () {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('terrapdf-theme', next);
+      applyState(next);
+    });
+
+    // Keep an unmodified toggle in sync with OS-level theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (localStorage.getItem('terrapdf-theme')) return;
+      const theme = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      applyState(theme);
+    });
+  }
+
+  // ===========================
   // Mobile Menu Toggle
   // ===========================
   function initMobileMenu() {
@@ -386,6 +418,11 @@
   function initCodeBlocks() {
     // Add copy button to each code block if not present
     document.querySelectorAll('pre code').forEach(codeBlock => {
+      // The sample-code modal already has its own "Copy Code" button in its
+      // toolbar (a sibling of <pre>, so the .copy-code-btn check below can't
+      // see it) — skip it to avoid a redundant button floating over the code.
+      if (codeBlock.id === 'sample-code-output') return;
+
       const pre = codeBlock.parentElement;
       if (!pre.querySelector('.copy-code-btn')) {
         const copyBtn = document.createElement('button');
@@ -409,6 +446,7 @@
   // Initialize Everything
   // ===========================
    function init() {
+     initThemeToggle();
      initCopyButtons();
      initMobileMenu();
      initDocsSidebar();

@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Security: GitHub Pages cannot send HTTP headers, so CSP ships as a meta tag.
        'unsafe-inline' is needed for style only (inline style attributes); all scripts are external. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.shields.io https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Applies the saved/OS-preferred theme before first paint, so there's no
+       flash of the wrong theme. Must run synchronously (no defer/async) and
+       stay an external file — the CSP above allows no inline scripts. -->
+  <script src="/js/theme.js"></script>
   {% set defaultKeywords = 'C# PDF library, .NET PDF library, .NET PDF generator, PDF generation in C#, create PDF in C#, generate PDF C#, PDF document generation, open source PDF library, free C# PDF library, NuGet PDF package, fluent PDF API, code-first PDF generation, PDF layout engine, PDF reports, invoice PDF generation, PDF tables, PDF images, PDF bookmarks, PDF metadata, PDF encryption, AES-256 PDF, pure C# PDF, zero dependency PDF library, ASP.NET Core PDF generation, TerraPDF' %}
   
   <!-- Primary Meta Tags -->
@@ -54,7 +58,14 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- Both syntax-highlight themes load unconditionally and are self-scoped
+         via [data-theme="light"/"dark"] selectors, matching the manual toggle
+         (js/theme.js sets that attribute) rather than the OS-level
+         prefers-color-scheme — a media-query-gated link here would apply the
+         wrong theme's code colors whenever the manual toggle disagrees with
+         the OS setting. -->
     <link rel="stylesheet" href="/css/vendor/atom-one-light.min.css">
+    <link rel="stylesheet" href="/css/vendor/atom-one-dark.min.css">
 
     <!-- Scripts: all external and deferred (CSP allows no inline scripts) -->
     <script src="/js/vendor/highlight.min.js" defer></script>
@@ -96,15 +107,15 @@
   </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-license-bar">
-      <div class="container header-license-inner">
-        <span class="header-license-mark">MIT</span>
-        <strong>Free for personal and commercial use.</strong>
-        <span>No licensing fees for private or commercial .NET apps.</span>
-        <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener nofollow noreferrer">License</a>
-      </div>
+  <div class="header-license-bar">
+    <div class="container header-license-inner">
+      <span class="header-license-mark">MIT</span>
+      <strong>Free for personal and commercial use.</strong>
+      <span>No licensing fees for private or commercial .NET apps.</span>
+      <a href="https://github.com/sahebansari/TerraPDF/blob/master/LICENSE" target="_blank" rel="noopener nofollow noreferrer">License</a>
     </div>
+  </div>
+  <header class="site-nav-sticky">
     <nav class="container nav-wrapper" aria-label="Main navigation">
       <a href="/" class="logo">
         <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="logo-img">
@@ -123,8 +134,9 @@
         <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener nofollow noreferrer">GitHub</a>
         <a href="https://www.nuget.org/packages/TerraPDF/" class="btn btn-primary" target="_blank" rel="noopener nofollow noreferrer">NuGet</a>
       </div>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
       <button type="button" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">&#x2630;</button>
-    </nav>    
+    </nav>
   </header>
 
     <main id="main-content">

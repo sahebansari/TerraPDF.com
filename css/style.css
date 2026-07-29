@@ -43,6 +43,25 @@
   --code-bg: #f6f8fa;
   --code-text: #1f2328;
   --code-border: #e2e8f0;
+  --code-titlebar-bg: #e9eef5;
+
+  /* Chrome that changes between light/dark */
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --cta-bg: #faf9f6;
+  --chip-icon-bg: #d3e0fc;
+  --table-highlight-bg: #f0f7ff;
+  --sidebar-active-bg: rgba(10, 69, 149, 0.08);
+
+  /* Callouts */
+  --callout-info-bg: #f0f6ff;
+  --callout-info-border: #d3e3f8;
+  --callout-info-text: #1e3a5f;
+  --callout-warning-bg: #fffaf0;
+  --callout-warning-border: #f5e5c8;
+  --callout-warning-text: #713f12;
+  --callout-success-bg: #f0fdf4;
+  --callout-success-border: #d1eddb;
+  --callout-success-text: #14532d;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -67,6 +86,88 @@
   --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
   --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-lg: 0 16px 32px -12px rgba(15, 23, 42, 0.14), 0 4px 8px -4px rgba(15, 23, 42, 0.06);
+}
+
+/* Theme applied via [data-theme], set by js/theme.js before first paint
+   (from the saved preference, or the OS setting if none is saved yet) and
+   flipped by the nav toggle — see initThemeToggle() in js/main.js. */
+:root[data-theme="dark"] {
+  /* Colors - TerraPDF brand palette, rebalanced for contrast on dark surfaces.
+     --primary sits at the highest ratio a single hue can hit for BOTH roles
+     it serves (white text on it, and it as text on --bg) against this --bg —
+     ~4.35:1 is the mathematical ceiling for either role simultaneously here,
+     so --primary lands right at that ceiling rather than passing one role
+     and badly failing the other. --primary-dark/--primary-light stay reserved
+     for contexts that only need one role and can afford to be brighter. */
+  --primary: #3878d8;
+  --primary-dark: #5b9dff;
+  --primary-light: #7db4f5;
+  --secondary: #22c55e;
+  --accent: #f0b429;
+
+  /* Neutrals */
+  --text: #f1f5f9;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --bg: #0b1220;
+  --bg-alt: #111a2e;
+  --bg-subtle: #16213a;
+  --border: #4e6a99;
+  --border-strong: #6482b3;
+
+  /* Dark brand panels */
+  --panel-dark: #0a1730;
+  --panel-dark-2: #102544;
+
+  /* Gradients */
+  --gradient-card: #101a2e;
+  --gradient-card-hover: #16233c;
+
+  /* Code (dark theme, matches vendored atom-one-dark.min.css) */
+  --code-bg: #282c34;
+  --code-text: #abb2bf;
+  --code-border: #3b4048;
+  --code-titlebar-bg: #21252b;
+
+  /* Chrome that changes between light/dark */
+  --header-bg: rgba(11, 18, 32, 0.85);
+  --cta-bg: var(--panel-dark);
+  --chip-icon-bg: rgba(56, 120, 216, 0.18);
+  --table-highlight-bg: rgba(56, 120, 216, 0.12);
+  --sidebar-active-bg: rgba(56, 120, 216, 0.18);
+
+  /* Callouts */
+  --callout-info-bg: #0f2038;
+  --callout-info-border: #1e3a5f;
+  --callout-info-text: #bfdcff;
+  --callout-warning-bg: #2a2113;
+  --callout-warning-border: #4a3a1c;
+  --callout-warning-text: #f0c987;
+  --callout-success-bg: #0f2419;
+  --callout-success-border: #1e4530;
+  --callout-success-text: #8fe0ab;
+
+  /* Shadows — dark-on-white rgba is nearly invisible on a dark bg */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 32px -12px rgba(0, 0, 0, 0.6), 0 4px 8px -4px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .logo {
+  background: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+/* Base prose links get the brighter variant — --primary itself is tuned
+   as a best-effort balance for .btn-primary's white-on-fill contrast (see
+   note above) and reads a little low as body-copy link text on its own. */
+[data-theme="dark"] a {
+  color: var(--primary-light);
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--primary);
 }
 
 html {
@@ -96,8 +197,8 @@ body {
    Header & Navigation
    =========================================== */
 
-.site-header {
-  background: rgba(255, 255, 255, 0.88);
+.site-nav-sticky {
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
@@ -174,6 +275,27 @@ body {
 .nav-cta {
   display: flex;
   gap: var(--space-sm);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary-light);
+  background: var(--bg-alt);
 }
 
 .mobile-menu-toggle {
@@ -290,7 +412,7 @@ a:hover {
   padding: var(--space-3xl) var(--space-xl);
   background:
     radial-gradient(60rem 24rem at 50% -8rem, rgba(47, 111, 206, 0.09), transparent 70%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-3xl);
@@ -412,10 +534,6 @@ a:hover {
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
   box-shadow: var(--shadow-xs);
-}
-
-.badge img {
-  height: 20px;
 }
 
 /* ===========================================
@@ -659,7 +777,7 @@ a:hover {
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background-color: #d3e0fc;
+  background-color: var(--chip-icon-bg);
 }
 
 .feature-chip h3,
@@ -674,6 +792,51 @@ a:hover {
   font-size: 0.92rem;
   line-height: 1.5;
   color: var(--text-muted);
+}
+
+/* "Release spotlight" band — always dark regardless of site theme, reuses
+   the same brand-panel vars as the footer/header-license-bar so it reads
+   as consistent TerraPDF chrome rather than another generic content block. */
+.content-section--spotlight {
+  background: linear-gradient(135deg, var(--panel-dark) 0%, var(--panel-dark-2) 100%);
+  border-radius: var(--radius-lg);
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.content-section--spotlight .section-header h2 {
+  color: #ffffff;
+}
+
+.content-section--spotlight .section-header p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.content-section--spotlight .feature-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.content-section--spotlight .feature-chip:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.content-section--spotlight .feature-chip .feature-icon {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.content-section--spotlight .feature-chip h3 {
+  color: #ffffff;
+}
+
+.content-section--spotlight .feature-chip p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.content-section--spotlight .feature-chip code {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
 /* Vertical stack layout for docs page */
@@ -944,7 +1107,7 @@ pre code.hljs {
 }
 
 .docs-sidebar-link.active {
-  background: rgba(10, 69, 149, 0.08);
+  background: var(--sidebar-active-bg);
   color: var(--primary-dark);
   font-weight: 600;
 }
@@ -1196,24 +1359,24 @@ pre code.hljs {
 }
 
 .callout-info {
-  background: #f0f6ff;
-  border-color: #d3e3f8;
+  background: var(--callout-info-bg);
+  border-color: var(--callout-info-border);
   border-left-color: var(--primary);
-  color: #1e3a5f;
+  color: var(--callout-info-text);
 }
 
 .callout-warning {
-  background: #fffaf0;
-  border-color: #f5e5c8;
+  background: var(--callout-warning-bg);
+  border-color: var(--callout-warning-border);
   border-left-color: var(--accent);
-  color: #713f12;
+  color: var(--callout-warning-text);
 }
 
 .callout-success {
-  background: #f0fdf4;
-  border-color: #d1eddb;
+  background: var(--callout-success-bg);
+  border-color: var(--callout-success-border);
   border-left-color: var(--secondary);
-  color: #14532d;
+  color: var(--callout-success-text);
 }
 
 /* ===========================================
@@ -1489,14 +1652,6 @@ p.footer-signature {
 .mb-lg { margin-bottom: var(--space-lg); }
 .mb-xl { margin-bottom: var(--space-xl); }
 
-/* Syntax highlighting overrides */
-.hljs-keyword { color: #c586c0; }
-.hljs-string { color: #ce9178; }
-.hljs-number { color: #b5cea8; }
-.hljs-comment { color: #6a9955; }
-.hljs-function { color: #dcdcaa; }
-.hljs-class { color: #4ec9b0; }
-
 /* ===========================================
    Skip Link (Accessibility)
    =========================================== */
@@ -1602,7 +1757,7 @@ pre {
 }
 
 .comparison-table tbody tr:first-child {
-  background: #f0f7ff;
+  background: var(--table-highlight-bg);
 }
 
 @media (max-width: 860px) {
@@ -2037,8 +2192,58 @@ a[target="_blank"]::after {
   line-height: 1.4;
 }
 
+/* Compact differentiator row — intro to the merged feature section, sized
+   between a chip and a full card so it doesn't repeat either grid pattern */
+.differentiator-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.differentiator {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.differentiator-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.differentiator h3 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-xs);
+  color: var(--text);
+}
+
+.differentiator p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.features-more-link {
+  margin-top: var(--space-xl);
+  text-align: center;
+}
+
+.features-more-link a {
+  font-weight: 600;
+}
+
 @media (max-width: 640px) {
   .features-showcase {
+    gap: var(--space-lg);
+  }
+
+  .differentiator-strip {
+    grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
 }
@@ -2048,7 +2253,7 @@ a[target="_blank"]::after {
    =========================================== */
 
 .cta-section {
-  background: #faf9f6;
+  background: var(--cta-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   color: var(--text);
@@ -2104,13 +2309,23 @@ a[target="_blank"]::after {
   margin: 0;
 }
 
-.cta-section .btn {
-  padding: 0.7rem 1.5rem;
-  font-size: 0.95rem;
+.cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
   margin-top: var(--space-xs);
 }
 
+.cta-section .btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+}
+
 @media (max-width: 760px) {
+  .cta-buttons {
+    justify-content: center;
+  }
+
   .cta-content {
     flex-direction: column;
     text-align: center;
@@ -2356,7 +2571,7 @@ a[target="_blank"]::after {
   align-items: center;
   gap: 8px;
   padding: 12px 18px;
-  background: #e9eef5;
+  background: var(--code-titlebar-bg);
   border-bottom: 1px solid var(--border);
   color: var(--text-muted);
   font-family: var(--font-mono);
