@@ -137,39 +137,39 @@ Document.Create(doc =&gt;
   <div class="container">
     <div class="section-header">
       <h2>What's new in TerraPDF v{{ site.version }}</h2>
-      <p>Custom font embedding with full Unicode support, including automatic, pure-C# Devanagari-aware shaping — no native dependency, none planned.</p>
+      <p>A table-correctness release. Column and row spans now land where you put them, and tables paginate wherever you place them — no public API changed.</p>
     </div>
 
     <div class="feature-chips-grid">
       <div class="feature-chip">
-        <div class="feature-icon">🔤</div>
+        <div class="feature-icon">⬌</div>
         <div>
-          <h3>Custom Font Embedding</h3>
-          <p><code>FontFamily.Register("Brand", "Brand-Regular.ttf")</code> embeds any TrueType font as a <code>Type0</code>/<code>CIDFontType2</code> composite font — brand typefaces, Cyrillic, Greek, and beyond WinAnsiEncoding.</p>
+          <h3>Column Spans That Don't Overlap</h3>
+          <p><code>row.Cell(columnSpan: 2)</code> now moves the cursor past every column it covers, so the next <code>Cell</code> lands in column 3 — not underneath the span, leaving the last column empty.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">अ</div>
+        <div class="feature-icon">⬍</div>
         <div>
-          <h3>Devanagari-Aware Rendering</h3>
-          <p>Automatic matra reordering, conjunct ligatures (स्व, क्ष, ज्ञ), reph (धर्म, वर्तमान), and below/post-base 'ra' forms (क्र, त्र, प्र) — read straight from the font's own GSUB table.</p>
+          <h3>Row Spans Reserve Their Columns</h3>
+          <p><code>row.Cell(rowSpan: 3)</code> holds its column in the rows beneath it, and a spanned cell is measured like any other — the rows it covers grow to fit its content instead of letting it overflow the table.</p>
         </div>
       </div>
 
       <div class="feature-chip">
-        <div class="feature-icon">📦</div>
+        <div class="feature-icon">📄</div>
         <div>
-          <h3>Embedded Once</h3>
-          <p>Each registered font variant is embedded once per document, no matter how many pages or how many times it's used — with graceful fallback to the closest registered style.</p>
+          <h3>Tables Paginate Anywhere</h3>
+          <p>A table with no <code>HeaderRow</code> now splits across pages, and so does one placed straight into <code>page.Content()</code> with no <code>Column</code> wrapper — both previously ran off the bottom of the page.</p>
         </div>
       </div>
 
       <div class="feature-chip">
         <div class="feature-icon">✂️</div>
         <div>
-          <h3>Character-Boundary Wrap</h3>
-          <p>A single word or token wider than the line now breaks at character boundaries instead of overflowing the container — plus Code128/QR codes and .NET 8/9/10 support from the v1.5 line.</p>
+          <h3>Spans Survive Page Breaks</h3>
+          <p>Data rows are grouped into runs no row span crosses, so a break falls above or below a span — never through it. Half-drawn spanned cells at a page boundary are gone.</p>
         </div>
       </div>
     </div>

@@ -17,6 +17,14 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
+> **New in 2.0.1:** Table cells span columns and rows correctly — `Cell(columnSpan:)` no
+longer overlaps the cell after it, `Cell(rowSpan:)` reserves its columns in the rows below,
+and a spanned cell grows the rows it covers instead of overflowing. Tables also paginate in
+every position: a header-less table splits across pages, a table placed straight into
+`page.Content()` splits, and a page break is never allowed to fall inside a row span.
+No public API changed. See [Layout](/docs/layout/) and the
+[Table Spans sample](/samples/table-spans-showcase/).
+>
 > **New in 2.0.0:** Custom font embedding — `FontFamily.Register(...)` loads a TrueType font
 (brand typefaces, or scripts beyond WinAnsiEncoding like Cyrillic and Greek) and uses it via the
 same `TextStyle.FontFamily(...)` API as the built-in families — including automatic, pure-C#
@@ -40,7 +48,7 @@ runtime packages, and no licensing restrictions.
 - Rounded-corner borders and filled rounded boxes
 - Per-edge borders — `BorderTop`, `BorderBottom`, `BorderLeft`, `BorderRight`
 - Horizontal and vertical alignment
-- Column, Row, and Table layouts
+- Column, Row, and Table layouts — with column- and row-spanning table cells
 - PNG and JPEG image embedding — from file paths, `byte[]`, or `Stream`, with transparency and deduplication
 - Horizontal and vertical rule lines
  - Explicit page breaks via `PageBreak()`

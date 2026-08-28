@@ -8,7 +8,7 @@
       { "url": "/docs/unicode-and-encoding/", "title": "Unicode & Encoding", "icon": "À", "desc": "WinAnsi and Latin-1 text rendering rules." },
       { "url": "/docs/custom-fonts/", "title": "Custom Fonts & Full Unicode", "icon": "🔤", "desc": "Embed TrueType fonts with FontFamily.Register and pure-C# Devanagari-aware shaping." },
       { "url": "/docs/text-and-spans/", "title": "Text & Spans", "icon": "📝", "desc": "Styling, fonts, line spacing, and span composition." },
-      { "url": "/docs/layout/", "title": "Layout", "icon": "📐", "desc": "Rows, columns, tables, spacing, and alignment." },
+      { "url": "/docs/layout/", "title": "Layout", "icon": "📐", "desc": "Rows, columns, tables, cell spans, pagination, spacing, and alignment." },
       { "url": "/docs/decorators/", "title": "Decorators", "icon": "🎨", "desc": "Margins, padding, borders, backgrounds, and page breaks." },
       { "url": "/docs/images/", "title": "Images", "icon": "🖼️", "desc": "PNG/JPEG embedding from files, bytes, or streams." },
       { "url": "/docs/table-of-contents/", "title": "Table of Contents", "icon": "📑", "desc": "Auto-generated TOC with clickable internal links." },

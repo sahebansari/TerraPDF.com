@@ -92,6 +92,14 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
 
+     <h3>v2.0.1 - August 28, 2026</h3>
+     <ul>
+       <li><strong>Table column and row spans</strong> — <code>Cell(columnSpan:)</code> no longer overlaps the cell that follows it, <code>Cell(rowSpan:)</code> reserves its columns in the rows below, and a spanned cell is measured so the rows it covers grow to hold its content.</li>
+       <li><strong>Table pagination</strong> — a table with no <code>HeaderRow</code> now splits across pages, a table placed straight into <code>page.Content()</code> now paginates, and a page break is never allowed to fall inside a row span.</li>
+       <li>No public API change — documents that don't use spans and don't overflow a page are byte-for-byte identical to 2.0.0.</li>
+       <li>New <a href="/samples/table-spans-showcase/">Table Spans &amp; Pagination sample</a> and an expanded <a href="/docs/layout/">Layout guide</a>.</li>
+     </ul>
+
      <h3>v2.0.0 - July 23, 2026</h3>
      <ul>
        <li><strong>Custom font embedding</strong> — <code>FontFamily.Register(...)</code> embeds a TrueType font (regular/bold/italic/bold-italic) as a <code>Type0</code>/<code>CIDFontType2</code> composite font with <code>Identity-H</code> encoding, unlocking full Unicode text beyond the standard fonts' WinAnsiEncoding range — brand typefaces, Cyrillic, Greek, and more.</li>
