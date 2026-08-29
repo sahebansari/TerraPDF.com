@@ -5,59 +5,75 @@ keywords: C# PDF library, .NET PDF generator, PDF generation in C#, create PDF i
 layout: base.njk
 ---
 
-<section class="hero">
-  <div class="container">
-    <h1 class="hero-title">The Free C# PDF Library for .NET Developers</h1>
-    <p class="tagline">
-      Generate professional PDFs entirely from C# — invoices, reports, contracts, and certificates — with a fluent,
-      code-first API. Zero dependencies, no native binaries, MIT-licensed, with tables, images, bookmarks, vector
-      graphics, barcodes, QR codes, custom embedded fonts, and AES-256 encrypted output built in.
-    </p>
-     <p class="hero-use-cases">
-      Built for generating <a href="/samples/invoice/">invoices</a>, <a href="/samples/report-with-toc/">reports</a>,
-      <a href="/samples/company-profile/">business documents</a>, and <a href="/samples/">more</a> — straight from
-      your application, with no design tool in the loop.
-    </p>
-    <div class="hero-cta">
-      <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
-      <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-    </div>
-    <div class="hero-badges">
-      <div class="badge">
-        <span>⚖️ MIT Licensed</span>
+<div class="home-simple">
+  <section class="home-simple-hero">
+    <div class="container home-simple-hero-inner">
+      <p class="home-simple-eyebrow">Free, MIT-licensed PDF generation for .NET</p>
+      <h1 class="hero-title">Create clean PDFs directly from C#.</h1>
+      <p class="tagline">
+        TerraPDF is a lightweight, zero-dependency PDF library for invoices, reports, tables,
+        QR codes, barcodes, bookmarks, custom fonts, and encrypted documents.
+      </p>
+
+      <div class="hero-cta">
+        <a href="/getting-started/" class="btn btn-primary btn-large">Get Started</a>
+        <a href="/samples/" class="btn btn-outline btn-large">View Samples</a>
+        <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline btn-large" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
-      <div class="badge">
-        <span>⚡ Zero Dependencies</span>
-      </div>
-      <div class="badge">
+
+      <div class="home-simple-badges">
+        <span>Zero dependencies</span>
+        <span>Pure C#</span>
         <span>.NET 8 / 9 / 10</span>
-      </div>
-      <div class="badge">
         <span>v{{ site.version }}</span>
-        <span>{{ site.releaseHighlight }}</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="showcase-section">
-  <div class="container">
-    <div class="section-header">
-      <h2>From C# code to a finished PDF</h2>
-      <p>Describe the document with a fluent API — TerraPDF lays it out, paginates it, and writes the file. Write the code on the left; the page on the right is the actual PDF it produces, rendered by TerraPDF v{{ site.version }} — scannable QR code and barcode included.</p>
-    </div>
-
-    <div class="showcase-panel">
-      <div class="showcase-code">
-        <div class="code-titlebar">
-          <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
-          PackingSlip.cs
-          <a class="code-titlebar-link" href="/samples/barcodes-and-qr-showcase/">Full sample &rarr;</a>
+  <section class="home-release-announcement" aria-labelledby="home-release-title">
+    <div class="container">
+      <div class="home-release-card">
+        <span class="home-release-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M4 5h16v14H4z"></path>
+            <path d="M4 10h16"></path>
+            <path d="M9 10v9"></path>
+            <path d="M15 10v9"></path>
+            <path d="M9 5v5"></path>
+          </svg>
+        </span>
+        <div class="home-release-copy">
+          <p class="home-release-kicker">New release</p>
+          <h2 id="home-release-title">TerraPDF {{ site.version }} fixes table spans and pagination.</h2>
+          <p>
+            Column spans, row spans, header-less tables, and tables placed directly in page content now paginate more predictably.
+          </p>
         </div>
-        <pre class="showcase-pre"><code class="language-csharp">var brand = "#1A3C5E";
+        <div class="home-release-actions">
+          <a href="/samples/table-spans-showcase/" class="btn btn-primary">See sample</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase-section home-simple-showcase">
+    <div class="container">
+      <div class="section-header">
+        <h2>From C# code to a finished PDF</h2>
+        <p>Write the document in a fluent API. TerraPDF lays it out, paginates it, and writes the file.</p>
+      </div>
+
+      <div class="showcase-panel">
+        <div class="showcase-code">
+          <div class="code-titlebar">
+            <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            PackingSlip.cs
+            <a class="code-titlebar-link" href="/samples/barcodes-and-qr-showcase/">Full sample &rarr;</a>
+          </div>
+          <pre class="showcase-pre"><code class="language-csharp">var brand = "#1A3C5E";
 (string Item, string Sku, int Qty)[] lines =
 [
-    ("Wireless Mouse — Graphite",   "SKU-10231", 24),
+    ("Wireless Mouse - Graphite",   "SKU-10231", 24),
     ("Mechanical Keyboard, 87-key", "SKU-10456", 12),
     ("USB-C Dock, Dual 4K",         "SKU-10877",  6),
     ("Laptop Stand, Aluminium",     "SKU-10920", 18),
@@ -90,22 +106,21 @@ Document.Create(doc =&gt;
             col.Item().Row(row =&gt;
             {
                 row.RelativeItem().Column(shipTo =&gt; { /* address block */ });
-                row.AutoItem()   // vector QR code — new in v1.5
-                   .QrCode("https://terrapdf.example/track/ORD-2026-1187", size: 88);
+                row.AutoItem().QrCode("https://terrapdf.example/track/ORD-2026-1187", size: 88);
             });
 
             col.Item().Table(table =&gt;
             {
                 table.ColumnsDefinition(c =&gt;
                 {
-                    c.RelativeColumn(5);  // Item
-                    c.RelativeColumn(2);  // SKU
-                    c.RelativeColumn(1);  // Qty
+                    c.RelativeColumn(5);
+                    c.RelativeColumn(2);
+                    c.RelativeColumn(1);
                 });
-                // brand header row + one shaded row per line item
+                // brand header row + line items
             });
 
-            col.Item().AlignCenter()  // vector Code128 — crisp at any zoom
+            col.Item().AlignCenter()
                .Barcode("ORD-2026-1187", height: 46, showCaption: true);
         });
 
@@ -119,287 +134,74 @@ Document.Create(doc =&gt;
     });
 })
 .PublishPdf("packing-slip.pdf");</code></pre>
-      </div>
-
-      <div class="showcase-output">
-        <div class="page-mock-stack">
-          <div class="page-mock behind" aria-hidden="true"></div>
-          <img class="page-shot" src="/images/showcase-packing-slip.png"
-               width="839" height="1190" loading="lazy"
-               alt="The packing slip PDF generated by the code sample: a TerraPDF Logistics header, ship-to address with a QR tracking code, a shaded line-items table, and a Code128 barcode of the order number">
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="content-section content-section--spotlight">
-  <div class="container">
-    <div class="section-header">
-      <h2>What's new in TerraPDF v{{ site.version }}</h2>
-      <p>A table-correctness release. Column and row spans now land where you put them, and tables paginate wherever you place them — no public API changed.</p>
-    </div>
-
-    <div class="feature-chips-grid">
-      <div class="feature-chip">
-        <div class="feature-icon">⬌</div>
-        <div>
-          <h3>Column Spans That Don't Overlap</h3>
-          <p><code>row.Cell(columnSpan: 2)</code> now moves the cursor past every column it covers, so the next <code>Cell</code> lands in column 3 — not underneath the span, leaving the last column empty.</p>
-        </div>
-      </div>
-
-      <div class="feature-chip">
-        <div class="feature-icon">⬍</div>
-        <div>
-          <h3>Row Spans Reserve Their Columns</h3>
-          <p><code>row.Cell(rowSpan: 3)</code> holds its column in the rows beneath it, and a spanned cell is measured like any other — the rows it covers grow to fit its content instead of letting it overflow the table.</p>
-        </div>
-      </div>
-
-      <div class="feature-chip">
-        <div class="feature-icon">📄</div>
-        <div>
-          <h3>Tables Paginate Anywhere</h3>
-          <p>A table with no <code>HeaderRow</code> now splits across pages, and so does one placed straight into <code>page.Content()</code> with no <code>Column</code> wrapper — both previously ran off the bottom of the page.</p>
-        </div>
-      </div>
-
-      <div class="feature-chip">
-        <div class="feature-icon">✂️</div>
-        <div>
-          <h3>Spans Survive Page Breaks</h3>
-          <p>Data rows are grouped into runs no row span crosses, so a break falls above or below a span — never through it. Half-drawn spanned cells at a page boundary are gone.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="content-section" style="background: var(--bg-alt);">
-  <div class="container">
-    <div class="section-header">
-      <h2>How TerraPDF Compares</h2>
-      <p>Choose TerraPDF when you want an open-source .NET PDF library with code-first PDF generation, a small dependency footprint, and permissive licensing.</p>
-    </div>
-
-    <div class="table-wrapper comparison-table-wrapper">
-      <table class="api-table comparison-table">
-        <thead>
-          <tr>
-            <th scope="col">Library</th>
-            <th scope="col">Best fit</th>
-            <th scope="col">Licensing model</th>
-            <th scope="col">Dependency footprint</th>
-            <th scope="col">TerraPDF advantage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Library"><strong>TerraPDF</strong></td>
-            <td data-label="Best fit">Code-first document generation for .NET apps</td>
-            <td data-label="Licensing model">MIT</td>
-            <td data-label="Dependency footprint">Pure C#, zero runtime dependencies</td>
-            <td data-label="TerraPDF advantage">Simple fluent API, tables, links, bookmarks, vector graphics, barcodes/QR codes, and AES-256 encryption in one package</td>
-          </tr>
-          <tr>
-            <td data-label="Library"><a href="https://www.questpdf.com/" target="_blank" rel="noopener noreferrer">QuestPDF</a></td>
-            <td data-label="Best fit">Polished report and document layouts</td>
-            <td data-label="Licensing model">Community and commercial tiers</td>
-            <td data-label="Dependency footprint">Includes native rendering assets</td>
-            <td data-label="TerraPDF advantage">TerraPDF keeps the install smaller and the license story simpler for any project size</td>
-          </tr>
-          <tr>
-            <td data-label="Library"><a href="https://www.pdfsharp.com/PdfSharp" target="_blank" rel="noopener noreferrer">PDFsharp</a></td>
-            <td data-label="Best fit">Lower-level PDF drawing, editing, merging, and splitting</td>
-            <td data-label="Licensing model">MIT</td>
-            <td data-label="Dependency footprint">.NET library with platform-specific build options</td>
-            <td data-label="TerraPDF advantage">TerraPDF focuses on higher-level document layout with tables, TOC, and fluent composition</td>
-          </tr>
-          <tr>
-            <td data-label="Library"><a href="https://itextpdf.com/" target="_blank" rel="noopener noreferrer">iText 7</a></td>
-            <td data-label="Best fit">Enterprise PDF workflows, standards, editing, and add-ons</td>
-            <td data-label="Licensing model">AGPL or commercial</td>
-            <td data-label="Dependency footprint">Full-featured commercial-grade toolkit</td>
-            <td data-label="TerraPDF advantage">TerraPDF is lighter for straightforward generation when you do not need enterprise PDF tooling</td>
-          </tr>
-          <tr>
-            <td data-label="Library"><a href="https://github.com/rdvojmoc/DinkToPdf" target="_blank" rel="noopener noreferrer">DinkToPdf</a></td>
-            <td data-label="Best fit">HTML-to-PDF conversion through wkhtmltopdf</td>
-            <td data-label="Licensing model">MIT</td>
-            <td data-label="Dependency footprint">Requires native wkhtmltopdf binaries</td>
-            <td data-label="TerraPDF advantage">TerraPDF avoids native renderer deployment and builds PDFs directly from C#</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section class="content-section" id="why-terrapdf">
-  <div class="container">
-    <div class="section-header">
-      <h2>Everything You Need to Build Amazing PDFs</h2>
-      <p>A focused PDF toolkit for C# apps: layout, styling, navigation, media, graphics, and security without a heavy runtime footprint.</p>
-    </div>
-
-    <div class="differentiator-strip">
-      <div class="differentiator">
-        <span class="differentiator-icon" aria-hidden="true">⚡</span>
-        <div>
-          <h3>Zero Dependencies</h3>
-          <p>Pure C# implementation with no native binaries, no third-party runtime packages, and no licensing restrictions. Just add the NuGet package and you're ready.</p>
-        </div>
-      </div>
-      <div class="differentiator">
-        <span class="differentiator-icon" aria-hidden="true">🎨</span>
-        <div>
-          <h3>Fluent API</h3>
-          <p>Intuitive, composable builder pattern that makes PDF generation feel natural. Chain methods together to create complex layouts with minimal code.</p>
-        </div>
-      </div>
-      <div class="differentiator">
-        <span class="differentiator-icon" aria-hidden="true">📐</span>
-        <div>
-          <h3>Full Layout Control</h3>
-          <p>Columns, rows, tables, margins, padding, borders, backgrounds, and alignment. Everything you need for professional document layouts.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="features-showcase">
-      <!-- Text & Typography -->
-      <div class="feature-category">
-        <h3 class="category-label">Typography</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">✍️</span>
-            <span class="feature-title">Rich Text Styling</span>
-            <span class="feature-desc">Bold, italic, underline, strikethrough with full font control</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📏</span>
-            <span class="feature-title">Size & Scale</span>
-            <span class="feature-desc">Precise font sizing and line-height control</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🎨</span>
-            <span class="feature-title">Color & Formatting</span>
-            <span class="feature-desc">Per-span formatting with custom colors and styles</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔤</span>
-            <span class="feature-title">Custom Fonts</span>
-            <span class="feature-desc">Embed TrueType fonts for full Unicode, with Devanagari-aware shaping</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Layout & Structure -->
-      <div class="feature-category">
-        <h3 class="category-label">Layout</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Columns & Tables</span>
-            <span class="feature-desc">Flexible column, row, and table layouts</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Margins & Padding</span>
-            <span class="feature-desc">Full unit support: pt, mm, cm, inch</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🖼️</span>
-            <span class="feature-title">Images</span>
-            <span class="feature-desc">Embed PNG and JPEG images directly into your PDFs with proper sizing and positioning support</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Advanced Features -->
-      <div class="feature-category">
-        <h3 class="category-label">Advanced</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">📑</span>
-            <span class="feature-title">Auto Table of Contents</span>
-            <span class="feature-desc">Generate a table of contents automatically from your headings (H1-H6) with clickable internal links and proper page numbering</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔗</span>
-            <span class="feature-title">Links & Bookmarks</span>
-            <span class="feature-desc">URI hyperlinks, internal document links, PDF bookmarks, and hierarchical outline navigation</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📄</span>
-            <span class="feature-title">Headers & Footers</span>
-            <span class="feature-desc">Reusable headers, footers, and page numbers</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🔐</span>
-            <span class="feature-title">PDF Encryption</span>
-            <span class="feature-desc">AES-256 PDF encryption by default with user passwords, owner passwords, and fine-grained permission flags</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📈</span>
-            <span class="feature-title">Vector Canvas</span>
-            <span class="feature-desc">Shapes, paths, grids, charts, and diagrams</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">▦</span>
-            <span class="feature-title">Barcodes & QR Codes</span>
-            <span class="feature-desc">Vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">À</span>
-            <span class="feature-title">WinAnsi Text</span>
-            <span class="feature-desc">Windows-1252 and Latin-1 character coverage</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Styling & Decorators -->
-      <div class="feature-category">
-        <h3 class="category-label">Styling</h3>
-        <div class="features-grid">
-          <div class="feature-item">
-            <span class="feature-icon">🟢</span>
-            <span class="feature-title">Backgrounds & Borders</span>
-            <span class="feature-desc">Full, rounded, per-edge borders with fills</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">📐</span>
-            <span class="feature-title">Alignment</span>
-            <span class="feature-desc">Horizontal and vertical alignment controls</span>
-          </div>
-          <div class="feature-item">
-            <span class="feature-icon">🏗️</span>
-            <span class="feature-title">Components</span>
-            <span class="feature-desc">Reusable components and conditional rendering</span>
+        <div class="showcase-output">
+          <div class="page-mock-stack">
+            <div class="page-mock behind" aria-hidden="true"></div>
+            <img class="page-shot" src="/images/showcase-packing-slip.png"
+                 width="839" height="1190" loading="lazy" decoding="async"
+                 alt="The packing slip PDF generated by the code sample: a TerraPDF Logistics header, ship-to address with a QR tracking code, a shaded line-items table, and a Code128 barcode of the order number">
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <p class="features-more-link"><a href="/features/">See the full feature list &rarr;</a></p>
-  </div>
-</section>
-
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-content">
-      <div class="cta-logo-panel">
-        <img src="/images/tp-logo.png" alt="" class="cta-logo" width="417" height="320" loading="lazy">
-      </div>
-      <div class="cta-text">
-        <h2>Build your next PDF with TerraPDF</h2>
-        <p>Create reports, invoices, tables, images, bookmarks, and encrypted PDF documents in modern .NET apps with a small, MIT-licensed package.</p>
-        <div class="cta-buttons">
-          <a href="/docs/" class="btn btn-primary">View Documentation</a>
-          <a href="https://github.com/sahebansari/TerraPDF" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
+  <section class="content-section home-simple-features">
+    <div class="container">
+      <div class="home-simple-feature-grid">
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M7 8h10M7 12h7M7 16h4"></path>
+              <path d="M6 3h9l3 3v15H6z"></path>
+              <path d="M15 3v4h4"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>No native renderer</h3>
+            <p>Pure C# output with no Chromium, wkhtmltopdf, or runtime deployment surprises.</p>
+          </div>
+        </article>
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 5h16v14H4z"></path>
+              <path d="M4 10h16"></path>
+              <path d="M9 10v9"></path>
+              <path d="M15 10v9"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>Document layout</h3>
+            <p>Rows, columns, tables, spans, headers, footers, page numbers, and precise spacing.</p>
+          </div>
+        </article>
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 3l7 3v5c0 4.6-2.9 8.4-7 10-4.1-1.6-7-5.4-7-10V6z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>Production features</h3>
+            <p>Images, links, bookmarks, metadata, QR codes, barcodes, custom fonts, and AES-256 encryption.</p>
+          </div>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="cta-section home-simple-cta">
+    <div class="container">
+      <h2>Ready to generate your first PDF?</h2>
+      <p>Start with the guide, then adapt one of the samples for your app.</p>
+      <div class="cta-buttons">
+        <a href="/getting-started/" class="btn btn-primary">Read the guide</a>
+        <a href="/docs/" class="btn btn-outline">Open docs</a>
+      </div>
+    </div>
+  </section>
+</div>

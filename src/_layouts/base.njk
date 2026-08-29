@@ -52,11 +52,23 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon/android-chrome-512x512.png">
     <link rel="manifest" href="/images/favicon/site.webmanifest">
 
-   <!-- Fonts: self-hosted Inter & JetBrains Mono (variable, latin + latin-ext) -->
-   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+   <!-- Nav logo is the first image in the DOM on every page; preloading it
+        (on top of fetchpriority=high on the <img> itself) gets the request
+        started before the head even finishes parsing, instead of behind the
+        stylesheets, so it doesn't visibly pop in after the rest of the
+        header has already painted. -->
+   <link rel="preload" href="/images/tp-logo-nav.png" as="image" fetchpriority="high">
+
+   <!-- The only third-party origin the page ever contacts (async gtag.js +
+        the analytics beacons it sends). Preconnecting lets the browser do
+        the DNS/TLS handshake ahead of time instead of when the async
+        script tag is finally reached. -->
+   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/fonts.css">
+    <!-- No web fonts: --font-sans/--font-mono in style.css resolve to the OS's
+         own UI font (Segoe UI / San Francisco / Roboto / etc.), so there's
+         nothing to download and nothing that can swap in after first paint. -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Both syntax-highlight themes load unconditionally and are self-scoped
          via [data-theme="light"/"dark"] selectors, matching the manual toggle
@@ -107,6 +119,7 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="header-license-bar">
     <div class="container header-license-inner">
       <span class="header-license-mark">MIT</span>
@@ -118,7 +131,7 @@
   <header class="site-nav-sticky">
     <nav class="container nav-wrapper" aria-label="Main navigation">
       <a href="/" class="logo">
-        <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="logo-img">
+        <img src="/images/tp-logo-nav.png" alt="TerraPDF Logo" class="logo-img" width="52" height="40" fetchpriority="high" decoding="async">
         <span class="logo-text"></span>
       </a>
       <ul class="nav-links">
@@ -195,7 +208,7 @@
     <div class="container footer-content">
       <div class="footer-section">
         <div class="footer-logo">
-          <img src="/images/tp-logo.png" alt="TerraPDF Logo" class="footer-logo-img">
+          <img src="/images/tp-logo-nav.png" alt="TerraPDF Logo" class="footer-logo-img" width="42" height="32" loading="lazy" decoding="async">
           <h4>TerraPDF</h4>
         </div>
         <p>A lightweight, zero-dependency, pure C# library for generating professional PDF documents.</p>
