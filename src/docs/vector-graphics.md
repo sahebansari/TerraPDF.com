@@ -39,6 +39,43 @@ container.Canvas(120, c =>
 | `StrokeEllipse(cx, cy, rx, ry, color, lineWidth)` | Ellipse outline |
 | `Path(p => ...)` | Arbitrary path with lines and cubic Bezier curves |
 | `Grid(cellWidth, cellHeight, color, lineWidth)` | Full-canvas grid helper |
+| `Text(text, x, y, ...)` | One line of text, baseline-anchored at `(x, y)` |
+| `MeasureTextWidth(...)` (`static`) | Measures a label in the font `Text` would render it in |
+
+Every fill/stroke primitive above takes a trailing `opacity` parameter (`1` = fully opaque, the default). Omitting it costs nothing — no `/ExtGState` resource is emitted unless a document actually uses an opacity below `1`.
+
+## Opacity
+
+```csharp
+container.Canvas(100, c =>
+{
+    c.FillRect(0, 0, 120, 80, Color.Blue.Medium);
+    // A translucent rectangle drawn on top, at 40% opacity
+    c.FillRect(60, 30, 120, 80, Color.Orange.Medium, opacity: 0.4);
+});
+```
+
+Distinct opacity values used anywhere in a document are deduplicated into shared `/ExtGState` resources, the same way repeated images and fonts already are. `PathDescriptor` has a matching `.Opacity(...)` fluent setter for custom paths.
+
+Opacity is wired through `VectorCanvas` primitives and canvas text only — `DrawImage`, flowed text (`TextBlock`), and `Background()`/border colours don't take an opacity parameter yet.
+
+## Canvas Text
+
+`Text` is the one canvas primitive that isn't top-left anchored — its `(x, y)` is the text's baseline, which is what lets a label sit flush against an axis line or the shape it annotates:
+
+```csharp
+container.Canvas(60, c =>
+{
+    c.Line(0, 40, 200, 40, Color.Grey.Lighten1, 0.5);
+    c.Text("Q4 Revenue", 0, 36, fontSize: 10, color: Color.Grey.Darken2);
+
+    // Right-align a value against the axis using MeasureTextWidth
+    double w = VectorCanvas.MeasureTextWidth("$482K", fontSize: 10);
+    c.Text("$482K", 200 - w, 36, fontSize: 10, color: Color.Blue.Darken2);
+});
+```
+
+`Text` renders through a registered custom font when `fontFamily` names one (see [Custom Fonts](/docs/custom-fonts/)), otherwise through the standard-14 families — the same font resolution every other TerraPDF text API uses. It also accepts `opacity`, useful for ghosted or watermark-style canvas labels.
 
 ## Arbitrary Paths
 

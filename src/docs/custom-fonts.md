@@ -59,6 +59,16 @@ The font is embedded **once per document**, no matter how many pages or how many
 
 Characters the font has no glyph for render as the font's `.notdef` glyph (usually a blank box) instead of throwing — the same graceful-fallback behaviour the standard fonts use, substituting `?` for characters they can't map.
 
+## Automatic Glyph Subsetting
+
+Since v2.1.0, embedding a font blanks every glyph outline the document never draws out of the font's `glyf` table, instead of embedding the whole font file. This is fully automatic — there's no new API, and no change to how you call `FontFamily.Register` or `.FontFamily(...)`.
+
+Glyph IDs are never renumbered, so `cmap`, `hmtx`, `GSUB`, and the `Identity-H`/`CIDToGIDMap` encoding all stay valid with no other change. Accented Latin letters and Devanagari conjuncts are commonly **composite glyphs** — built from component glyphs no content stream ever references by ID directly — so subsetting first computes the closure of every shown glyph's composite references, keeping every component a visible glyph depends on alive.
+
+Measured on real samples: a custom-font document mixing Latin, Cyrillic, and Greek text dropped from 718KB to 320KB (55% smaller); a Devanagari report registering two font variants (regular + bold) dropped from 152KB to 77KB (49% smaller). See the [Font Subsetting Showcase](/samples/font-subsetting-showcase/) sample for a document that measures its own savings.
+
+This is stage-1 subsetting: it blanks unused outlines but doesn't renumber glyph IDs or shrink tables sized per glyph regardless of usage (`hmtx`, `loca`, `cmap`, `GSUB`/`GPOS`, `post`, `name`), so the whole-file win is smaller than the `glyf` table's own reduction (which shrinks by over 99% in both cases above). Full re-indexed subsetting may follow in a later version.
+
 ## Devanagari-Aware Rendering
 
 Registering a font that covers Devanagari script gets automatic corrections for any text drawn through it — no opt-in, no public API, purely a font-data-driven substitution done in managed code:
@@ -82,6 +92,6 @@ Every correction reads its substitution rules straight from the registered font'
 ## Known Limitations
 
 - **TrueType outlines only.** `.ttf` files, and `.otf` files that still carry a `glyf`/`loca` table, are supported. CFF-flavoured OpenType (`OTTO`) and TrueType Collections (`.ttc`) throw `NotSupportedException`.
-- **No glyph subsetting.** The whole font file is embedded, so output size scales with the font — future versions may add subsetting.
+- **Subsetting is stage 1.** Unused `glyf` outlines are blanked, but `hmtx`, `loca`, `cmap`, `GSUB`/`GPOS`, `post`, and `name` are still sized for the whole font — see [Automatic Glyph Subsetting](#automatic-glyph-subsetting) above.
 - **No synthetic bold/italic.** An unregistered style falls back to the closest registered variant rather than skewing or thickening glyphs to fake it.
 - **Partial Devanagari shaping.** `blwf` — below-base forms for consonants other than र, used by some fonts for other subjoined forms — relies on contextual GSUB lookups that aren't parsed, so those specific cases may still draw as separate glyphs. This is intentional: TerraPDF stays pure managed C# with no native dependency and won't bundle a full shaping engine (no GPOS mark positioning, no general Indic reordering beyond matra and reph) — this is a scoped, font-data-driven substitution, not a shaping engine.

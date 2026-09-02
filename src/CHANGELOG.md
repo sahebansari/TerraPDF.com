@@ -13,6 +13,71 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - 2026-09-03
+
+Three additions, all backward compatible: font embedding now subsets
+automatically, the vector canvas gained real translucency, and the vector
+canvas can place text. No public API was removed or changed — existing calls
+keep behaving exactly as before.
+
+### Added (automatic font subsetting)
+- **`FontFamily.Register(...)` now embeds only the glyphs a document actually
+  shows**, instead of the whole font file. Every glyph a document never draws
+  is blanked out of the font's `glyf` table — glyph IDs are never renumbered,
+  so `cmap`, `hmtx`, `GSUB`, and `Identity-H`/`CIDToGIDMap` all stay valid
+  with no other change. Fully automatic; no new API.
+- **Composite-glyph closure.** Accented Latin letters and Devanagari
+  conjuncts are commonly composite glyphs — built from component glyphs no
+  content stream ever references by ID directly. Blanking computes the
+  closure of shown glyphs under their composite references first, so an
+  accent or conjunct never loses a component that happens to be otherwise
+  unused.
+- Measured, not assumed: a custom-font sample with mixed Latin/Cyrillic/Greek
+  text dropped from 718KB to 320KB (55% smaller); a Devanagari report using
+  two font variants (regular + bold) dropped from 152KB to 77KB (49%
+  smaller). Tables sized per glyph regardless of usage (`hmtx`, `loca`,
+  `cmap`, `GSUB`/`GPOS`, `post`, `name`) are not yet trimmed — see "Known
+  limitations."
+
+### Added (graphics state / constant alpha)
+- **`/ExtGState` and the `gs` operator** — the first transparency mechanism
+  in the writer beyond per-pixel image `/SMask`. Distinct opacity values used
+  anywhere in a document are deduplicated into shared `/ExtGState` resources,
+  the same way repeated images and fonts already are.
+- Every `VectorCanvas` fill/stroke primitive (`Line`, `FillRect`/`StrokeRect`/
+  `DrawRect`, the rounded-rectangle and ellipse/circle families, `Path`) takes
+  a trailing `opacity` parameter (`1` = fully opaque, the default — omitting
+  it costs nothing, no `/ExtGState` is emitted at all). `PathDescriptor`
+  gained a matching `.Opacity(...)` fluent setter.
+
+### Added (text on the vector canvas)
+- **`VectorCanvas.Text(text, x, y, ...)`** places one line of text with its
+  baseline at `(x, y)` — the one canvas primitive that isn't top-left
+  anchored. Renders through a registered custom font when `fontFamily` names
+  one, otherwise the standard-14 families. Supports `opacity` like every
+  other primitive (ghosted/watermark-style canvas text).
+- **`VectorCanvas.MeasureTextWidth(...)`** (`static`) — measures a label in
+  the same font `Text` would render it in, for centering or right-aligning
+  before placing it.
+
+### Fixed (samples)
+- `10_VectorGraphicsShowcase.cs`: four shapes were repositioned to stop
+  bleeding past the page margin, and the donut chart's doubled-up legend
+  (bare canvas swatches plus a separate, awkwardly wrapped text list) was
+  rebuilt as a single swatch-plus-label pass using the new
+  `VectorCanvas.Text`.
+
+### Known limitations
+- Font subsetting does not renumber glyph IDs or shrink tables sized per
+  glyph regardless of usage, so the size win on a full font is well short of
+  what a 99%+ shrink in `glyf` alone would suggest. Full re-indexed
+  subsetting may follow in a future version.
+- `/ExtGState` opacity is wired through `VectorCanvas` and canvas text only;
+  `DrawImage`, flowed text (`TextBlock`), and `Background()`/border colours
+  do not yet take an opacity parameter.
+
+---
+
 ## [2.0.1] - 2026-08-28
 
 A table-correctness release. Every fix below addresses a case that produced a
@@ -345,7 +410,8 @@ happened to fall inside a spanned pair.
 - CI workflow (GitHub Actions): build, test, coverage.
 - Publish workflow (GitHub Actions): NuGet + symbols on release tag.
 
-[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/sahebansari/TerraPDF/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/sahebansari/TerraPDF/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/sahebansari/TerraPDF/compare/v1.5.1...v2.0.0
 [1.5.1]: https://github.com/sahebansari/TerraPDF/compare/v1.5.0...v1.5.1

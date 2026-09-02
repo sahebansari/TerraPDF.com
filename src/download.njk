@@ -92,6 +92,15 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
 
+     <h3>v2.1.0 - September 3, 2026</h3>
+     <ul>
+       <li><strong>Automatic font subsetting</strong> — <code>FontFamily.Register(...)</code> now embeds only the glyphs a document actually shows instead of the whole font file, with a composite-glyph closure pass so accented Latin letters and Devanagari conjuncts never lose a component glyph. Measured wins: a mixed Latin/Cyrillic/Greek sample dropped 55%, a two-variant Devanagari report dropped 49%.</li>
+       <li><strong>Constant alpha (<code>/ExtGState</code>)</strong> — every <code>VectorCanvas</code> fill/stroke primitive takes a trailing <code>opacity</code> parameter, with a matching <code>PathDescriptor.Opacity(...)</code> setter. Distinct opacity values are deduplicated into shared resources, same as repeated images and fonts.</li>
+       <li><strong><code>VectorCanvas.Text(text, x, y, ...)</code></strong> — baseline-anchored text on the vector canvas, rendered through a registered custom font or the standard-14 families, plus a <code>MeasureTextWidth(...)</code> helper for centering and right-aligning labels.</li>
+       <li>No public API removed or changed — existing calls keep behaving exactly as before.</li>
+       <li>New <a href="/samples/font-subsetting-showcase/">Font Subsetting sample</a>, an updated <a href="/samples/vector-graphics/">Vector Graphics sample</a> with a rebuilt donut-chart legend, and an expanded <a href="/docs/custom-fonts/">Custom Fonts guide</a>.</li>
+     </ul>
+
      <h3>v2.0.1 - August 28, 2026</h3>
      <ul>
        <li><strong>Table column and row spans</strong> — <code>Cell(columnSpan:)</code> no longer overlaps the cell that follows it, <code>Cell(rowSpan:)</code> reserves its columns in the rows below, and a spanned cell is measured so the rows it covers grow to hold its content.</li>

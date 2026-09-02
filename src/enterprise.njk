@@ -109,12 +109,12 @@ permalink: /enterprise/
           <td>Not currently supported</td>
         </tr>
         <tr>
-          <td>Custom TrueType/OpenType font embedding</td>
-          <td>Not yet — built-in standard fonts (Helvetica, Times, Courier) with <a href="/docs/unicode-and-encoding/">WinAnsi character coverage</a></td>
+          <td>Custom TrueType font embedding</td>
+          <td>Supported since v2.0.0 — <a href="/docs/custom-fonts/"><code>FontFamily.Register(...)</code></a> embeds a <code>.ttf</code> (or <code>.otf</code> with a <code>glyf</code> table) as a subsetted <code>Type0</code>/<code>CIDFontType2</code> composite font. CFF-flavoured OpenType (<code>OTTO</code>) and TrueType Collections (<code>.ttc</code>) are not supported</td>
         </tr>
         <tr>
-          <td>Full Unicode text (CJK, Cyrillic, Arabic, …) in page content</td>
-          <td>Not yet — follows from the built-in-font limitation above; metadata and bookmarks do support UTF-16</td>
+          <td>Full Unicode text in page content</td>
+          <td>Supported for any script a registered TrueType font covers (Cyrillic, Greek, Devanagari, and beyond), since v2.0.0. The three built-in standard fonts (Helvetica, Times, Courier) remain limited to <a href="/docs/unicode-and-encoding/">WinAnsi character coverage</a></td>
         </tr>
         <tr>
           <td>Editing, merging, or splitting existing PDFs</td>

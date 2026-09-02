@@ -239,10 +239,14 @@ page.Content().Text("Héllo, Привет, Γειά σου, धर्म").FontS
         <h4>Graceful Fallback</h4>
         <p>Register up to four variants (regular/bold/italic/bold-italic) per family. Requesting an unregistered style falls back to the closest variant instead of throwing.</p>
       </div>
+      <div class="feature-card">
+        <h4>Automatic Subsetting</h4>
+        <p>New in 2.1.0: only the glyphs a document actually shows are embedded — measured 49-55% smaller on real samples, with no API change. See the <a href="/samples/font-subsetting-showcase/">Font Subsetting sample</a>.</p>
+      </div>
     </div>
 
     <div class="callout callout-info">
-      TrueType outlines only (<code>.ttf</code>, or <code>.otf</code> with a <code>glyf</code>/<code>loca</code> table) — no subsetting yet, so file size scales with the embedded font. See the <a href="/docs/custom-fonts/">Custom Fonts guide</a> for the full API and shaping details.
+      TrueType outlines only (<code>.ttf</code>, or <code>.otf</code> with a <code>glyf</code>/<code>loca</code> table). Subsetting is stage 1 — glyph IDs aren't renumbered yet, so the win is smaller than a fully re-indexed subset would give. See the <a href="/docs/custom-fonts/">Custom Fonts guide</a> for the full API and shaping details.
     </div>
   </div>
 
@@ -463,8 +467,12 @@ container.Image(photoBytes, 200);</code></pre>
         .LineTo(120, 110)
         .Close()
         .Fill(Color.Orange.Medium));
+
+    // New in 2.1.0: constant alpha and baseline-anchored text
+    c.FillRect(140, 20, 100, 60, Color.Purple.Medium, opacity: 0.35);
+    c.Text("Q4", 150, 55, fontSize: 14, color: Color.Purple.Darken3);
 });</code></pre>
-    <p>The Canvas API includes lines, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, polygons, and grid helpers for charts and diagrams.</p>
+    <p>The Canvas API includes lines, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, polygons, grid helpers, and baseline-anchored text. Every fill/stroke primitive takes an optional <code>opacity</code> parameter, deduplicated into shared <code>/ExtGState</code> resources — omitting it costs nothing. See the <a href="/docs/vector-graphics/">Vector Graphics guide</a> for the full API.</p>
 
     <h3 id="barcodes-qr-codes">Barcodes & QR Codes</h3>
     <p>Generate Code128 barcodes and ISO/IEC 18004 QR codes directly from data, with no raster image pipeline. Both render as vector-filled rectangles — one per bar, or one per contiguous run of dark QR modules — so they stay crisp at any zoom and can be placed anywhere an <code>IContainer</code> is exposed: <code>Column</code>, <code>Row</code>, a <code>Table</code> cell, header, or footer.</p>
