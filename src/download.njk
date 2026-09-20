@@ -92,6 +92,15 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
 
+     <h3>v2.2.0 - September 20, 2026</h3>
+     <ul>
+       <li><strong>Positioned images on the vector canvas</strong> — <code>canvas.Image(...)</code> places a PNG or JPEG in an absolute rectangle from a file path, <code>byte[]</code>, or <code>Stream</code>, with <code>Stretch</code>, <code>Contain</code>, <code>Cover</code>, <code>CoverTopLeft</code>, and <code>CropTopLeft</code> fit modes. Clipping is scoped, so later canvas commands are unaffected.</li>
+       <li><strong>Elliptical arcs and pie sectors</strong> — <code>PathDescriptor.Arc</code> and <code>Sector</code> take a centre and radii; <code>FillPie</code>, <code>StrokePie</code>, and <code>DrawPie</code> take a bounding box. Angles start at 3 o'clock and increase clockwise.</li>
+       <li><strong>Dashed strokes and rotated text</strong> — dash patterns and phases on canvas lines and stroked rectangles, and an <code>angle</code> parameter that rotates a text label clockwise around its baseline point.</li>
+       <li><strong>Fixes</strong> — 8-bit grayscale-with-alpha PNGs decode correctly, non-finite arc angles are rejected instead of subdividing forever, and rotated text keeps full-precision matrix coefficients so small angles render exactly.</li>
+       <li>New <a href="/samples/canvas-media-showcase/">Canvas Media sample</a>, plus expanded <a href="/docs/vector-graphics/">Vector Graphics</a> and <a href="/docs/images/">Images</a> guides.</li>
+     </ul>
+
      <h3>v2.1.0 - September 3, 2026</h3>
      <ul>
        <li><strong>Automatic font subsetting</strong> — <code>FontFamily.Register(...)</code> now embeds only the glyphs a document actually shows instead of the whole font file, with a composite-glyph closure pass so accented Latin letters and Devanagari conjuncts never lose a component glyph. Measured wins: a mixed Latin/Cyrillic/Greek sample dropped 55%, a two-variant Devanagari report dropped 49%.</li>

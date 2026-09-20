@@ -13,6 +13,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.2.0] - 2026-09-20
+
+The vector canvas gains media and geometry: positioned images with five fit
+modes, dashed strokes, elliptical arcs and pie sectors, and rotated text
+labels. All additions are backward compatible — no public API was removed or
+changed.
+
+### Added
+- **Positioned images on `VectorCanvas`** from file paths, byte arrays, and
+  streams, with `Stretch`, `Contain`, centred or top-left `Cover`, and
+  natural-size `CropTopLeft` modes. Image clipping is isolated with `q`/`Q`,
+  so a shape drawn after a clipped image is unaffected.
+- **Rotated canvas text** — an optional clockwise `angle` around the text
+  baseline point, for standard-14 and registered custom fonts alike.
+- **Elliptical arcs and closed sectors** through `PathDescriptor.Arc` and
+  `Sector` (centre + radii), plus the `FillPie`, `StrokePie`, and `DrawPie`
+  canvas conveniences (bounding box). Angles start at 3 o'clock and increase
+  clockwise; arcs split into cubic Bézier segments of at most 90°.
+- **Native dash patterns and phases** for canvas lines and stroked
+  rectangles. Each dashed command restores the graphics state, so dash state
+  never leaks into a later stroke.
+- New sample: `18_canvas_media_showcase.pdf` — four pages covering every fit
+  mode, PNG soft-mask transparency, constant-alpha layering, image sources and
+  natural sizing, dash phases, pie sectors, elliptical arcs, and rotated text.
+
+### Fixed
+- PNG decoding now supports 8-bit grayscale images with alpha (colour type 4).
+- Elliptical arcs and pies reject non-finite angles instead of subdividing
+  forever; a slice of a zero total (`360 * value / total`) previously hung.
+- Rotated canvas text emits full-precision text-matrix coefficients. Small
+  angles were previously distorted (0.3° rendered as 0.57°) or dropped
+  entirely below ~0.3°, and matrix rounding rescaled glyphs by up to ~0.5%.
+- Canvas dash phases must be nonnegative, as the PDF specification requires.
+- Canvas images with a zero pixel dimension are skipped instead of writing
+  `NaN` operands into the content stream.
+- `VectorCanvas.GetImageSizeInPoints` throws the documented `ArgumentException`
+  for unsupported data instead of `NotSupportedException`, matching
+  `VectorCanvas.Image(byte[], …)`.
+
+### Changed
+- A canvas image is decoded once and reused on every page the canvas is drawn
+  on, rather than re-decoded per page.
+- Updated `Microsoft.SourceLink.GitHub` to `10.0.401` to remove the vulnerable
+  transitive `Microsoft.Build.Tasks.Git` 8.0.0 dependency.
+
+---
+
 ## [2.1.0] - 2026-09-03
 
 Three additions, all backward compatible: font embedding now subsets

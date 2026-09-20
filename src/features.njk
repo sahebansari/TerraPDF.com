@@ -83,8 +83,8 @@ layout: base.njk
       <div class="category-group">
         <h3 class="category-title">Media & Graphics</h3>
         <ul class="category-features">
-          <li><a href="#images">Images</a> — PNG, JPEG from files, bytes, or streams, with aspect ratio and transparency</li>
-          <li><a href="#vector-graphics">Vector graphics</a> — canvas shapes, paths, grids, and charts</li>
+          <li><a href="#images">Images</a> — PNG, JPEG from files, bytes, or streams, flowed or positioned on a canvas with fit and crop modes</li>
+          <li><a href="#vector-graphics">Vector graphics</a> — canvas shapes, dashes, arcs, pie sectors, rotated text, images, grids, and charts</li>
           <li><a href="#barcodes-qr-codes">Barcodes & QR codes</a> — vector-rendered Code128 barcodes and ISO/IEC 18004 QR codes</li>
           <li><a href="#dynamic-components">Dynamic components</a> — defer content generation</li>
           <li><a href="#debugging">Debug visualisation</a> — debug areas and pointers</li>
@@ -452,7 +452,11 @@ container.AlignCenter().Image("logo.png", 120);
 
 // From bytes or a stream — format detected from magic bytes
 byte[] photoBytes = await httpClient.GetByteArrayAsync(photoUrl);
-container.Image(photoBytes, 200);</code></pre>
+container.Image(photoBytes, 200);
+
+// New in 2.2.0: positioned on a canvas, in an absolute rectangle
+container.Canvas(140, c =&gt; c.Image("banner.jpg", 0, 0, 240, 120, ImageFit.Cover));</code></pre>
+    <p>On a canvas, five fit modes decide how the picture meets its target rectangle: <code>Stretch</code> fills it, <code>Contain</code> centres the whole image inside it, <code>Cover</code> and <code>CoverTopLeft</code> fill and clip, and <code>CropTopLeft</code> keeps the natural 96-DPI size and clips the overflow. Clipping is scoped, so anything drawn afterwards is unaffected. See the <a href="/docs/images/">Images guide</a>.</p>
 
     <h3 id="vector-graphics">Vector Graphics Canvas</h3>
     <p>Draw vector graphics directly inside any layout container. The canvas fills the available width and uses a top-left coordinate system in PDF points.</p>
@@ -468,11 +472,16 @@ container.Image(photoBytes, 200);</code></pre>
         .Close()
         .Fill(Color.Orange.Medium));
 
-    // New in 2.1.0: constant alpha and baseline-anchored text
+    // Constant alpha and baseline-anchored text
     c.FillRect(140, 20, 100, 60, Color.Purple.Medium, opacity: 0.35);
-    c.Text("Q4", 150, 55, fontSize: 14, color: Color.Purple.Darken3);
+    c.Text("Q4", 150, 55, fontSize: 14, color: Color.Purple.Darken2);
+
+    // New in 2.2.0: dashes, pie sectors, and rotated labels
+    c.Line(0, 130, 260, 130, Color.Grey.Medium, 1, 1, [8, 4], 0);
+    c.FillPie(280, 10, 90, 90, -90, 120, Color.Blue.Medium);
+    c.Text("share", 300, 118, fontSize: 9, angle: -30);
 });</code></pre>
-    <p>The Canvas API includes lines, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, polygons, grid helpers, and baseline-anchored text. Every fill/stroke primitive takes an optional <code>opacity</code> parameter, deduplicated into shared <code>/ExtGState</code> resources — omitting it costs nothing. See the <a href="/docs/vector-graphics/">Vector Graphics guide</a> for the full API.</p>
+    <p>The Canvas API includes lines and dashed strokes, rectangles, rounded rectangles, circles, ellipses, arbitrary Bezier paths, elliptical arcs and pie sectors, polygons, grid helpers, positioned images, and baseline-anchored text that can rotate around its baseline point. Every fill/stroke primitive takes an optional <code>opacity</code> parameter, deduplicated into shared <code>/ExtGState</code> resources — omitting it costs nothing. See the <a href="/docs/vector-graphics/">Vector Graphics guide</a> for the full API and the <a href="/samples/canvas-media-showcase/">Canvas Media sample</a> for all of it drawn side by side.</p>
 
     <h3 id="barcodes-qr-codes">Barcodes & QR Codes</h3>
     <p>Generate Code128 barcodes and ISO/IEC 18004 QR codes directly from data, with no raster image pipeline. Both render as vector-filled rectangles — one per bar, or one per contiguous run of dark QR modules — so they stay crisp at any zoom and can be placed anywhere an <code>IContainer</code> is exposed: <code>Column</code>, <code>Row</code>, a <code>Table</code> cell, header, or footer.</p>

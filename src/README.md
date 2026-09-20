@@ -17,6 +17,21 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
+> **New in 2.2.0:** The vector canvas places images — PNG and JPEG from a file path,
+`byte[]`, or `Stream`, in an absolute rectangle, with `Stretch`, `Contain`, `Cover`,
+`CoverTopLeft`, and `CropTopLeft` fit modes and scoped clipping. It also draws elliptical
+arcs and pie sectors (`PathDescriptor.Arc`/`Sector`, `FillPie`/`StrokePie`/`DrawPie`),
+dashed strokes with a phase, and text rotated around its baseline point. See
+[Vector Graphics](/docs/vector-graphics/), [Images](/docs/images/), and the
+[Canvas Media sample](/samples/canvas-media-showcase/).
+>
+> **New in 2.1.0:** Font embedding subsets automatically — `FontFamily.Register(...)`
+embeds only the glyphs a document actually shows, with a composite-glyph closure pass so
+accented letters and Devanagari conjuncts keep every component they depend on. The vector
+canvas also gained constant-alpha transparency (`opacity` on every primitive, via
+`/ExtGState`) and baseline-anchored text. See the
+[Font Subsetting sample](/samples/font-subsetting-showcase/).
+>
 > **New in 2.0.1:** Table cells span columns and rows correctly — `Cell(columnSpan:)` no
 longer overlaps the cell after it, `Cell(rowSpan:)` reserves its columns in the rows below,
 and a spanned cell grows the rows it covers instead of overflowing. Tables also paginate in
@@ -61,7 +76,7 @@ runtime packages, and no licensing restrictions.
  - Reusable components via `IComponent`
  - Headers, footers, and page numbers
  - **AES-256 PDF encryption by default** via `container.Encrypt()` — AES-128 remains available as a legacy opt-in
- - **Vector graphics canvas** via `container.Canvas()`
+ - **Vector graphics canvas** via `container.Canvas()` — lines and dashed strokes, shapes, arbitrary Bezier paths, arcs and pie sectors, positioned images with fit/crop modes, rotated text, and grid helpers
  - **Barcodes** — Code128 (Subset B) via `container.Barcode()`
  - **QR codes** — ISO/IEC 18004 via `container.QrCode()`
  - **Custom font embedding** — `FontFamily.Register(...)` embeds a TrueType font (brand typefaces, Cyrillic, Greek, and beyond WinAnsiEncoding) used via the same `FontFamily()` API as the built-in families, with automatic Devanagari-aware shaping

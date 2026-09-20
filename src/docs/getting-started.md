@@ -33,6 +33,14 @@ picks up from there with a guide to every feature area.
 
 ---
 
+## Using an AI coding agent?
+
+Point it at [TerraPDF for AI Agents](/docs/ai-agents/) — the whole API contract
+on one page — or hand it `https://terrapdf.com/llms-full.txt`, which bundles
+that contract with every guide below into a single plain-text fetch.
+
+---
+
 ## Next Steps
 
 Every other guide — layout, styling, images, encryption, vector graphics, barcodes & QR codes, and more — is one click away in the sidebar.

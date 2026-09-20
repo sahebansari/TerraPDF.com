@@ -76,7 +76,7 @@ col.Item().Row(row =>
                 p.Item().PaddingTop(8).Text(name)
                     .Bold().FontSize(12).FontColor(brand).AlignCenter();
                 
-                p.Item().PaddingTop(4).Background(Color.Yellow.Lighten2)
+                p.Item().PaddingTop(4).Background(Color.Yellow.Medium)
                     .Padding(4).AlignCenter()
                     .Text(highlight).FontSize(9).FontColor(Color.Red.Darken1);
                 

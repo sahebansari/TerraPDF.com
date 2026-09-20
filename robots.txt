@@ -7,6 +7,13 @@ Allow: /
 # Sitemap location
 Sitemap: https://terrapdf.com/sitemap.xml
 
+# Machine-readable documentation for AI agents and LLM tooling
+# https://terrapdf.com/llms.txt       - index of every guide and sample
+# https://terrapdf.com/llms-full.txt  - the complete API contract and all guides
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /docs/ai-agents.md
+
 # Disallow admin and private paths (if any)
 Disallow: /_site/
 Disallow: /_includes/

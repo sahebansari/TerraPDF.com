@@ -1,0 +1,41 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# TerraPDF
+
+> A lightweight, zero-dependency, pure C# library for generating PDF 1.7 documents
+> programmatically. Fluent API covering page layout, rich text, tables, images,
+> vector graphics, barcodes, custom font embedding, and AES-256 encryption.
+> MIT licensed. Targets .NET 8, 9, and 10. Current version: {{ site.version }} ({{ site.releaseDate }}).
+
+TerraPDF has no native binaries and no third-party runtime dependencies. Install with
+`dotnet add package TerraPDF`. Documents are composed with `Document.Create(...)` and
+written with `PublishPdf(...)`.
+
+**If you are an AI agent, fetch {{ site.url }}/llms-full.txt instead of this file.**
+It contains the complete API contract plus every guide below, in one request.
+
+## Start here
+
+- [TerraPDF for AI Agents]({{ site.url }}{{ agentCorpus.primer.url }}): The full API contract in one page — entry points, every verified signature, the rules that keep generated code compiling, and a list of the mistakes that break it. Read this before writing any TerraPDF code.
+- [Everything, one file]({{ site.url }}/llms-full.txt): The contract above plus all {{ agentCorpus.guideCount }} documentation guides, concatenated as plain text.
+
+## Documentation
+{% for guide in agentCorpus.guides %}
+- [{{ guide.title | safe }}]({{ site.url }}{{ guide.url }}){% if guide.description %}: {{ guide.description | safe }}{% endif %}
+{%- endfor %}
+
+## Samples
+
+Complete, runnable programs. Each page shows the full C# source and links to the PDF it produces.
+{% for sample in agentCorpus.samples %}
+- [{{ sample.title | safe }}]({{ site.url }}{{ sample.url }}){% if sample.description %}: {{ sample.description | safe }}{% endif %}
+{%- endfor %}
+
+## Optional
+
+- [Changelog]({{ site.url }}/changelog/): Version history and release notes.
+- [README]({{ site.url }}/readme/): Project overview and feature summary.
+- [Source]({{ site.github }}): GitHub repository.
+- [NuGet]({{ site.nuget }}): Package listing.

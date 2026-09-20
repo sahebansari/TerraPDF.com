@@ -1,7 +1,7 @@
 {
-  "version": "2.1.0",
-  "releaseDate": "September 3, 2026",
-  "releaseHighlight": "Automatic Font Subsetting",
+  "version": "2.2.0",
+  "releaseDate": "September 20, 2026",
+  "releaseHighlight": "Canvas Images, Arcs & Rotated Text",
   "url": "https://terrapdf.com",
   "github": "https://github.com/sahebansari/TerraPDF",
   "nuget": "https://www.nuget.org/packages/TerraPDF/",

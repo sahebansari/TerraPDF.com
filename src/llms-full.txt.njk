@@ -1,0 +1,54 @@
+---
+permalink: /llms-full.txt
+eleventyExcludeFromCollections: true
+---
+================================================================================
+TerraPDF {{ site.version }} — COMPLETE DOCUMENTATION FOR AI AGENTS
+================================================================================
+
+Source:     {{ site.url }}
+Package:    dotnet add package TerraPDF --version {{ site.version }}
+Frameworks: net8.0, net9.0, net10.0 — zero dependencies, MIT licensed
+Released:   {{ site.releaseDate }}
+Repository: {{ site.github }}
+
+TerraPDF is a pure C# PDF 1.7 writer. Documents are composed with a fluent API
+and written with PublishPdf(...). No native binaries, no third-party runtime
+packages.
+
+This file contains, in order:
+
+  PART 1 — The API contract: entry points, verified signatures, the rules that
+           keep generated code compiling, and the mistakes that break it.
+  PART 2 — All {{ agentCorpus.guideCount }} documentation guides, in reading order.
+
+Everything here is verified against TerraPDF {{ site.version }}. If an API member is not
+in this file, it does not exist — do not invent one.
+
+================================================================================
+PART 1 — API CONTRACT
+================================================================================
+
+{{ agentCorpus.primer.body | safe }}
+
+================================================================================
+PART 2 — DOCUMENTATION GUIDES
+================================================================================
+{% for guide in agentCorpus.guides %}
+
+================================================================================
+GUIDE {{ loop.index }}/{{ agentCorpus.guideCount }}: {{ guide.title | upper | safe }}
+{{ site.url }}{{ guide.url }}
+================================================================================
+
+{{ guide.body | safe }}
+{% endfor %}
+
+================================================================================
+END OF DOCUMENTATION — TerraPDF {{ site.version }}
+================================================================================
+
+Runnable samples ({{ agentCorpus.sampleCount }}), each with complete source and the PDF it produces:
+{% for sample in agentCorpus.samples %}
+  {{ site.url }}{{ sample.url }}
+{%- endfor %}

@@ -1,6 +1,6 @@
 ---
 title: "Images"
-description: "Embed PNG and JPEG images in TerraPDF PDFs from files, byte arrays, or streams, with transparency, deduplication, and automatic aspect ratio."
+description: "Embed PNG and JPEG images in TerraPDF PDFs from files, byte arrays, or streams — flowed in a layout or positioned on a vector canvas with fit and crop modes, transparency, and deduplication."
 layout: base.njk
 docPage: true
 permalink: /docs/images/
@@ -9,7 +9,9 @@ permalink: /docs/images/
 
 TerraPDF supports **PNG** and **JPEG** image embedding — from a file path, a
 `byte[]`, or a `Stream` — with automatic aspect-ratio preservation, PNG
-transparency, and automatic deduplication of repeated images.
+transparency, and automatic deduplication of repeated images. Images can flow
+in a layout container or be positioned in an absolute rectangle on a
+[vector canvas](#positioned-images-on-a-vector-canvas).
 
 ---
 
@@ -82,6 +84,60 @@ container.Image("icon.png", 32);
 
 ---
 
+## Positioned Images on a Vector Canvas
+
+`VectorCanvas.Image(...)` places an image in an absolute target rectangle.
+Coordinates and dimensions are PDF points relative to the canvas's top-left
+origin, and file paths, raw bytes, and streams are all accepted:
+
+```csharp
+container.Canvas(220, canvas =>
+{
+    canvas.Image("photo.jpg", 0, 0, 180, 120, ImageFit.Contain);
+    canvas.Image(logoBytes, 200, 0, 180, 120, ImageFit.Cover);
+
+    using Stream source = OpenImage();
+    canvas.Image(source, 400, 0, 80, 80, ImageFit.Stretch);
+});
+```
+
+The format is detected from PNG or JPEG magic bytes, not the file extension.
+Byte arrays and remaining stream data are copied when `Image` is called,
+because the canvas is rendered later — a supplied stream is read from its
+current position, stays owned by the caller, and is never disposed by
+TerraPDF.
+
+Use `VectorCanvas.GetImageSizeInPoints(imageData)` when a target rectangle
+should match the image's natural size. Pixel dimensions are converted at
+96 DPI:
+
+```csharp
+var (width, height) = VectorCanvas.GetImageSizeInPoints(logoBytes);
+canvas.Image(logoBytes, 20, 20, width, height);
+```
+
+### Canvas image fit modes
+
+| Mode | Aspect ratio | Position | Clipping |
+|------|--------------|----------|----------|
+| `Stretch` | May distort | Fills the target | No |
+| `Contain` | Preserved | Centred inside the target | No |
+| `Cover` | Preserved | Centred over the target | Yes |
+| `CoverTopLeft` | Preserved | Anchored at the target's top-left | Yes |
+| `CropTopLeft` | Natural 96-DPI size | Anchored at the target's top-left | Yes |
+
+`Cover`, `CoverTopLeft`, and `CropTopLeft` isolate their clip with the PDF
+graphics-state save/restore operators, so a shape or image drawn afterwards is
+unaffected. The clipping rectangle may extend beyond the canvas — it is not
+automatically intersected with the canvas bounds.
+
+A canvas image is decoded once and reused on every page the canvas is drawn
+on. The [Canvas Media sample](/samples/canvas-media-showcase/) renders all
+five modes side by side from one wide banner, together with soft-mask
+transparency and constant-alpha layering.
+
+---
+
 ## Combining with Other Decorators
 
 Images participate in the full decorator chain:
@@ -126,6 +182,9 @@ PNG images with an alpha channel (RGBA) keep their transparency — the alpha
 data is embedded as a PDF `/SMask` soft mask, so the image composites
 correctly over whatever content sits behind it. Fully opaque PNGs skip the
 mask entirely, keeping file size down.
+
+8-bit grayscale PNGs with an alpha channel (colour type 4) are decoded as of
+v2.2.0.
 
 > **Limitation:** indexed-transparency PNGs (palette-based images using a
 > `tRNS` chunk instead of a full alpha channel) are not currently supported
