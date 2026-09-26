@@ -11,6 +11,10 @@ This page is the context an AI coding agent needs to write **correct, compiling
 TerraPDF code on the first try**. It is written to be read by a machine, and it
 is also the page to read yourself if you want the whole API on one screen.
 
+> **New to AI tools?** Follow [Create PDFs with AI: Step-by-Step](/docs/create-pdfs-with-ai/)
+> to set up TerraPDF.Mcp in Claude Desktop, VS Code, or Cursor, or to build
+> a .NET agent with TerraPDF.Agents. This page is the technical reference.
+
 Everything below is verified against **TerraPDF 2.3.0**. Members marked
 **[2.3+]** were added in 2.3.0 and do not compile against older versions.
 
