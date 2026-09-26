@@ -1,7 +1,7 @@
 {
-  "version": "2.2.0",
-  "releaseDate": "September 20, 2026",
-  "releaseHighlight": "Canvas Images, Arcs & Rotated Text",
+  "version": "2.3.0",
+  "releaseDate": "September 26, 2026",
+  "releaseHighlight": "Canvas Gradients, Links & QR Codes",
   "url": "https://terrapdf.com",
   "github": "https://github.com/sahebansari/TerraPDF",
   "nuget": "https://www.nuget.org/packages/TerraPDF/",

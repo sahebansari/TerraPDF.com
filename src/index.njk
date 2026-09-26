@@ -44,13 +44,13 @@ layout: base.njk
         </span>
         <div class="home-release-copy">
           <p class="home-release-kicker">New release</p>
-          <h2 id="home-release-title">TerraPDF {{ site.version }} puts images, arcs, and rotated text on the canvas.</h2>
+          <h2 id="home-release-title">TerraPDF {{ site.version }} adds gradients, links, and QR codes to the canvas.</h2>
           <p>
-            Position PNG and JPEG images with five fit modes, draw pie sectors and elliptical arcs, dash any stroke, and rotate a text label around its baseline.
+            Fill any path with a linear or radial gradient, dash every shape, place clickable links, bookmarks, and vector QR codes anywhere on a canvas.
           </p>
         </div>
         <div class="home-release-actions">
-          <a href="/samples/canvas-media-showcase/" class="btn btn-primary">See sample</a>
+          <a href="/samples/canvas-extras-showcase/" class="btn btn-primary">See sample</a>
         </div>
       </div>
     </div>
@@ -188,6 +188,105 @@ Document.Create(doc =&gt;
           <div>
             <h3>Production features</h3>
             <p>Images, links, bookmarks, metadata, QR codes, barcodes, custom fonts, and AES-256 encryption.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase-section home-simple-showcase home-ai-agents" aria-labelledby="home-ai-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="home-ai-title">Or let an AI agent build the PDF</h2>
+        <p>Ask for a document in plain language. The agent describes it as JSON and calls TerraPDF&rsquo;s <code>create_pdf</code> tool, which validates it, renders it, and returns the file. Mistakes come back with exact JSON paths, so the agent fixes them itself.</p>
+      </div>
+
+      <div class="showcase-panel">
+        <div class="showcase-code">
+          <div class="code-titlebar">
+            <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+            create_pdf &middot; written by the agent
+            <a class="code-titlebar-link" href="/docs/ai-agents/#tooling-for-ai-agents">AI agents guide &rarr;</a>
+          </div>
+          <pre class="showcase-pre"><code class="language-json">{
+  "title": "Q3 Sales Summary",
+  "page": { "size": "A5", "margin": 34 },
+  "theme": { "accentColor": "#1A3C5E", "fontSize": 9 },
+  "content": [
+    { "type": "heading", "level": 1, "text": "Q3 Sales Summary" },
+    { "type": "paragraph",
+      "text": "Revenue grew **18%** quarter over quarter, led by *EMEA*." },
+    { "type": "chart", "chartType": "bar", "height": 150,
+      "labels": ["NA", "EMEA", "APAC", "LATAM"],
+      "series": [
+        { "name": "Q2", "values": [410, 380, 190, 60] },
+        { "name": "Q3", "values": [430, 455, 240, 75] } ] },
+    { "type": "table",
+      "columns": [
+        { "header": "Region", "width": 2 },
+        { "header": "Q3 revenue", "align": "right" },
+        { "header": "Change", "align": "right" } ],
+      "rows": [
+        ["North America", "$430k", "+4.9%"],
+        ["EMEA", "$455k", "+19.7%"],
+        ["APAC", "$240k", "+26.3%"],
+        ["LATAM", "$75k", "+25.0%"] ],
+      "footerRows": [["Total", "$1.2M", "+15.4%"]] },
+    { "type": "callout", "title": "Next step",
+      "text": "Expand the APAC channel team in Q4." }
+  ]
+}</code></pre>
+        </div>
+
+        <div class="showcase-output">
+          <div class="page-mock-stack">
+            <div class="page-mock behind" aria-hidden="true"></div>
+            <img class="page-shot" src="/images/showcase-ai-report.png"
+                 width="839" height="1191" loading="lazy" decoding="async"
+                 alt="The PDF TerraPDF rendered from the agent's JSON: a Q3 Sales Summary heading, a two-series bar chart by region, a revenue table with a bold total row, and a Next step callout">
+          </div>
+        </div>
+      </div>
+
+      <div class="home-simple-feature-grid home-ai-agents-grid">
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M8 7l-5 5 5 5"></path>
+              <path d="M16 7l5 5-5 5"></path>
+              <path d="M14 4l-4 16"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>Coding assistants</h3>
+            <p>The TerraPDF skill gives Copilot, Cursor, and Claude Code the verified API and compiling recipes. <a href="/docs/ai-agents/#the-skill-for-coding-assistants">Add the skill</a></p>
+          </div>
+        </article>
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M5 8h14v11H5z"></path>
+              <path d="M12 4v4"></path>
+              <path d="M9 13h.01M15 13h.01"></path>
+              <path d="M9.5 16h5"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>.NET agents</h3>
+            <p><code>TerraPDF.Agents</code> adds <code>create_pdf</code> to Agent Framework, Semantic Kernel, and any <code>IChatClient</code>. <a href="/docs/ai-agents/#terrapdfagents-for-net-agents">Wire it up</a></p>
+          </div>
+        </article>
+        <article>
+          <span class="home-simple-feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M9 3v5M15 3v5"></path>
+              <path d="M6 8h12v3a6 6 0 0 1-12 0z"></path>
+              <path d="M12 17v4"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>MCP clients</h3>
+            <p><code>dnx TerraPDF.Mcp</code> brings the same tools to Copilot, Cursor, Claude, and LangChain. <a href="/docs/ai-agents/#terrapdfmcp-for-mcp-clients">Connect it</a></p>
           </div>
         </article>
       </div>

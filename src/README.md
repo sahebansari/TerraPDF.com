@@ -17,6 +17,14 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
+> **New in 2.3.0:** Canvas paths take linear and radial gradient fills
+(`FillLinearGradient`, `FillRadialGradient`), every stroked shape and path can be
+dashed, and a canvas can place clickable links (`Link`, `InternalLink`), outline
+entries (`Bookmark`), and vector QR codes (`QrCode`) at absolute positions.
+`Grid()` now fills the canvas and `ShowIf(false)` now hides chained content. See
+[Vector Graphics](/docs/vector-graphics/) and the
+[Canvas Extras sample](/samples/canvas-extras-showcase/).
+>
 > **New in 2.2.0:** The vector canvas places images — PNG and JPEG from a file path,
 `byte[]`, or `Stream`, in an absolute rectangle, with `Stretch`, `Contain`, `Cover`,
 `CoverTopLeft`, and `CropTopLeft` fit modes and scoped clipping. It also draws elliptical

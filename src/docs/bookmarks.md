@@ -183,6 +183,30 @@ Document.Create(c =>
 
 ---
 
+## Bookmarks from a Canvas
+
+A `VectorCanvas` can add outline entries too (from 2.3.0). The entry points at
+the page the canvas is drawn on, at the canvas-relative vertical position `y`,
+so there is no page number to compute. This suits canvases reused in headers or
+repeated layouts.
+
+```csharp
+page.Content().Canvas(200, c =>
+{
+    c.Bookmark("Chapter 1");                              // top of the canvas
+    c.Bookmark("Section 1.1", y: 80, parentTitle: "Chapter 1");
+});
+```
+
+- `parentTitle` nests the entry under an earlier bookmark with that title.
+- A repeated (title, parent) pair is recorded once.
+- A negative `y` is clamped to 0.
+
+See [Vector Graphics: Links and Bookmarks](/docs/vector-graphics/#links-and-bookmarks)
+for the related `Link` and `InternalLink` canvas methods.
+
+---
+
 ## Complete API Reference
 
 The anchor-based `Bookmark(string, string?)` is an `IContainer` extension method; the page-number-based overloads below are defined on `IDocumentContainer` (the parameter passed to `Document.Create`).
@@ -196,6 +220,7 @@ The anchor-based `Bookmark(string, string?)` is an `IContainer` extension method
 | `Bookmark(string title, int pageNumber, double top)` | `title`, `pageNumber`, `top`: Y position in points | Top-level bookmark with `/XYZ` destination at `top` |
 | `Bookmark(string title, int pageNumber, string parentTitle)` | `title`, `pageNumber`, `parentTitle`: existing bookmark title | Child bookmark under `parentTitle`, `/XYZ` destination at the page top |
 | `Bookmark(string title, int pageNumber, string parentTitle, double top)` | `title`, `pageNumber`, `parentTitle`, `top` | Child bookmark with `/XYZ` destination at `top` |
+| `VectorCanvas.Bookmark(string title, double y = 0, string? parentTitle = null)` | `title`, `y`: canvas-relative position, `parentTitle` | Bookmark on the page the canvas is drawn on (2.3.0+) |
 
 ### Exceptions
 
