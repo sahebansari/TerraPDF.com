@@ -92,6 +92,15 @@ dotnet test</code></pre>
     <h2>📋 Version History</h2>
     <p>See what's new in each release:</p>
 
+     <h3>v2.3.0 - September 26, 2026</h3>
+     <ul>
+       <li><strong>Gradient fills</strong>: <code>PathDescriptor.FillLinearGradient</code> (any angle) and <code>FillRadialGradient</code> paint a two-stop PDF shading clipped to the path, and still combine with an outline, even-odd fill, opacity, and dashes.</li>
+       <li><strong>Dashes on every stroke</strong>: dash patterns and phases on ellipses, rounded rectangles, and pie sectors, plus <code>PathDescriptor.Dash(...)</code> for any path, and a new <code>PathDescriptor.RoundedRect(...)</code> subpath.</li>
+       <li><strong>Canvas links, bookmarks, and QR codes</strong>: <code>Link</code>, <code>InternalLink</code>, <code>Bookmark</code>, and <code>QrCode</code> place clickable areas, outline entries, and vector QR codes at absolute canvas positions.</li>
+       <li><strong>Fixes</strong>: <code>VectorCanvas.Grid()</code> now fills the canvas (it drew nothing before), and <code>ShowIf(false)</code> now hides the content chained after it.</li>
+       <li>New <a href="/samples/canvas-extras-showcase/">Canvas Extras sample</a>, and new sections in the <a href="/docs/vector-graphics/">Vector Graphics</a> and <a href="/docs/bookmarks/">Bookmarks</a> guides.</li>
+     </ul>
+
      <h3>v2.2.0 - September 20, 2026</h3>
      <ul>
        <li><strong>Positioned images on the vector canvas</strong> — <code>canvas.Image(...)</code> places a PNG or JPEG in an absolute rectangle from a file path, <code>byte[]</code>, or <code>Stream</code>, with <code>Stretch</code>, <code>Contain</code>, <code>Cover</code>, <code>CoverTopLeft</code>, and <code>CropTopLeft</code> fit modes. Clipping is scoped, so later canvas commands are unaffected.</li>

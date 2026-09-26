@@ -2466,6 +2466,21 @@ a[target="_blank"]::after {
 }
 
 
+/* AI agents section: reuses the showcase panel and feature cards */
+.home-ai-agents-grid {
+  margin-top: var(--space-xl);
+}
+
+.home-ai-agents-grid code {
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+}
+
+.home-ai-agents-grid a {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .home-simple-cta {
   max-width: none;
   margin: 0;

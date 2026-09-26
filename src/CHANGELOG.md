@@ -13,6 +13,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.0] - 2026-09-26
+
+The vector canvas gains gradient fills, dashes on every stroke, and
+interactive content: links, bookmarks, and QR codes placed at canvas
+positions. All additions are backward compatible; the two fixes below change
+behaviour that did not work as documented.
+
+### Added
+- **Gradient fills** through `PathDescriptor.FillLinearGradient(from, to,
+  angle)` and `FillRadialGradient(center, edge)`, written as PDF axial and
+  radial shadings clipped to the path. The gradient spans the path's bounding
+  box; the linear angle is measured clockwise from left-to-right.
+- **Dash patterns and phases** on `StrokeEllipse`/`DrawEllipse`,
+  `StrokeRoundedRect`/`DrawRoundedRect`, and `StrokePie`/`DrawPie`, and on any
+  path through `PathDescriptor.Dash(...)`.
+- **`PathDescriptor.RoundedRect(...)`**, with the radius clamped to half the
+  shorter side.
+- **Canvas links and bookmarks**: `VectorCanvas.Link` (URI),
+  `InternalLink` (page, optional scroll position), and `Bookmark` (outline
+  entry for the current page, nestable by parent title).
+- **Canvas QR codes**: `VectorCanvas.QrCode` draws one filled vector path per
+  symbol, with an optional background and configurable quiet zone. Oversized
+  data fails at the call rather than at render time.
+- New sample: `19_canvas_extras_showcase.pdf`, covering dashed shapes and
+  paths, gradients, links, bookmarks, and QR codes.
+
+### Fixed
+- `VectorCanvas.Grid()` drew nothing, because the canvas callback runs before
+  layout. The grid is now sized when the canvas is drawn and keeps its place in
+  the draw order. `Grid` rejects a non-positive `cellHeight` or `lineWidth`.
+- `ShowIf(false)` did not hide anything: the element chained after it replaced
+  the empty placeholder. Everything chained after `ShowIf(false)` is now
+  discarded, including headings, which no longer reach the table of contents.
+
+---
+
 ## [2.2.0] - 2026-09-20
 
 The vector canvas gains media and geometry: positioned images with five fit
@@ -457,7 +493,9 @@ happened to fall inside a spanned pair.
 - CI workflow (GitHub Actions): build, test, coverage.
 - Publish workflow (GitHub Actions): NuGet + symbols on release tag.
 
-[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/sahebansari/TerraPDF/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/sahebansari/TerraPDF/compare/v2.2.0...v2.3.0
+[2.2.0]: https://github.com/sahebansari/TerraPDF/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/sahebansari/TerraPDF/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/sahebansari/TerraPDF/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/sahebansari/TerraPDF/compare/v1.5.1...v2.0.0

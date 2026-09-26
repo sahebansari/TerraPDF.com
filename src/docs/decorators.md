@@ -301,6 +301,13 @@ container.ShowIf(isAdmin).Text("Admin panel");
 container.ShowIf(invoice.IsPaid).Background(Color.Green.Lighten4).Padding(6).Text("PAID");
 ```
 
+> **Before 2.3.0:** `ShowIf(false)` did not hide the content chained after it; the next element replaced the placeholder and rendered anyway. On 2.2.0 and earlier, wrap the item in a C# `if` instead:
+>
+> ```csharp
+> if (invoice.IsPaid)
+>     col.Item().Background(Color.Green.Lighten4).Padding(6).Text("PAID");
+> ```
+
 ---
 
 ## Chaining Examples

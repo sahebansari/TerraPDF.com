@@ -1,6 +1,6 @@
 ---
 title: "Vector Graphics"
-description: "Draw TerraPDF vector graphics with the Canvas API: lines, dashed strokes, rectangles, circles, ellipses, paths, arcs, pie sectors, positioned images, rotated text, grids, and charts."
+description: "Draw TerraPDF vector graphics with the Canvas API: lines, dashed strokes, rectangles, circles, ellipses, paths, arcs, pie sectors, gradients, positioned images, rotated text, links, bookmarks, QR codes, grids, and charts."
 layout: base.njk
 docPage: true
 permalink: /docs/vector-graphics/
@@ -31,20 +31,25 @@ container.Canvas(120, c =>
 | `StrokeRect(x, y, w, h, color, lineWidth, opacity, dashPattern, dashPhase)` | Solid or dashed rectangle outline |
 | `DrawRect(x, y, w, h, fill, stroke, lineWidth, opacity, dashPattern, dashPhase)` | Filled and stroked rectangle |
 | `FillRoundedRect(x, y, w, h, radius, color)` | Filled rounded rectangle |
-| `StrokeRoundedRect(x, y, w, h, radius, color, lineWidth)` | Rounded rectangle outline |
-| `DrawRoundedRect(x, y, w, h, radius, fill, stroke, lineWidth)` | Filled and stroked rounded rectangle |
+| `StrokeRoundedRect(x, y, w, h, radius, color, lineWidth, opacity, dashPattern, dashPhase)` | Solid or dashed rounded rectangle outline |
+| `DrawRoundedRect(x, y, w, h, radius, fill, stroke, lineWidth, opacity, dashPattern, dashPhase)` | Filled and stroked rounded rectangle |
 | `FillCircle(cx, cy, radius, color)` | Filled circle |
 | `StrokeCircle(cx, cy, radius, color, lineWidth)` | Circle outline |
 | `FillEllipse(cx, cy, rx, ry, color)` | Filled ellipse |
-| `StrokeEllipse(cx, cy, rx, ry, color, lineWidth)` | Ellipse outline |
+| `StrokeEllipse(cx, cy, rx, ry, color, lineWidth, opacity, dashPattern, dashPhase)` | Solid or dashed ellipse outline (use `rx = ry` for a dashed circle) |
+| `DrawEllipse(cx, cy, rx, ry, fill, stroke, lineWidth, opacity, dashPattern, dashPhase)` | Filled and stroked ellipse |
 | `Path(p => ...)` | Arbitrary path with lines, cubic Bezier curves, and arcs |
 | `Image(source, x, y, w, h, fit)` | Positioned PNG/JPEG from a file, bytes, or stream |
 | `FillPie(x, y, w, h, start, sweep, fill)` | Filled elliptical sector |
-| `StrokePie(x, y, w, h, start, sweep, stroke, lineWidth)` | Stroked elliptical sector |
-| `DrawPie(x, y, w, h, start, sweep, fill, stroke, lineWidth)` | Filled and stroked elliptical sector |
-| `Grid(cellWidth, cellHeight, color, lineWidth)` | Full-canvas grid helper |
+| `StrokePie(x, y, w, h, start, sweep, stroke, lineWidth, opacity, dashPattern, dashPhase)` | Solid or dashed elliptical sector |
+| `DrawPie(x, y, w, h, start, sweep, fill, stroke, lineWidth, opacity, dashPattern, dashPhase)` | Filled and stroked elliptical sector |
+| `Grid(cellWidth, cellHeight, color, lineWidth)` | Full-canvas grid helper, sized when the canvas is drawn (before 2.3.0 it drew nothing) |
 | `Text(text, x, y, ..., angle)` | One line of text, baseline-anchored at `(x, y)`, optionally rotated |
 | `MeasureTextWidth(...)` (`static`) | Measures a label in the font `Text` would render it in |
+| `Link(x, y, w, h, url)` | Clickable URI area (draws nothing itself) |
+| `InternalLink(x, y, w, h, pageNumber, top?)` | Clickable link to a page of the document |
+| `Bookmark(title, y, parentTitle?)` | Outline entry for the page the canvas is drawn on |
+| `QrCode(data, x, y, size, level, color, background?, quietZone)` | Vector QR code at an absolute position |
 
 Every fill/stroke primitive above takes a trailing `opacity` parameter (`1` = fully opaque, the default). Omitting it costs nothing — no `/ExtGState` resource is emitted unless a document actually uses an opacity below `1`.
 
@@ -97,7 +102,7 @@ container.Canvas(120, c =>
 
 ## Dashed Strokes
 
-`Line`, `StrokeRect`, and `DrawRect` take a `dashPattern` array and a `dashPhase`. The array alternates painted and skipped lengths in points; the phase offsets where the pattern starts:
+`Line`, `StrokeRect`, `DrawRect`, and (from 2.3.0) `StrokeRoundedRect`, `DrawRoundedRect`, `StrokeEllipse`, `DrawEllipse`, `StrokePie`, and `DrawPie` take a `dashPattern` array and a `dashPhase`. The array alternates painted and skipped lengths in points; the phase offsets where the pattern starts:
 
 ```csharp
 container.Canvas(80, c =>
@@ -110,6 +115,20 @@ container.Canvas(80, c =>
 ```
 
 A pattern must contain at least one positive finite value and no negative values, and the phase must be nonnegative. The array is copied when the command is added, and each dashed command restores the PDF graphics state — a following stroke is solid without resetting anything.
+
+Any path can be dashed with `.Dash(pattern, phase)`, which applies to the path's stroke:
+
+```csharp
+container.Canvas(80, c =>
+{
+    c.StrokeEllipse(45, 40, 40, 28, "#2E6DA4", 1.5, dashPattern: [6, 3]);
+    c.Path(p => p
+        .RoundedRect(100, 12, 80, 56, 16)
+        .Fill("#FFFFFF")
+        .Stroke("#1A3C5E", 1.5)
+        .Dash([4, 4], phase: 2));
+});
+```
 
 ## Positioned Images
 
@@ -179,7 +198,73 @@ container.Canvas(120, c =>
 });
 ```
 
-Path helpers include `MoveTo`, `LineTo`, `CurveTo`, `Close`, `Rect`, `Ellipse`, `Circle`, `Arc`, `Sector`, `Polyline`, `Polygon`, `Fill`, `Stroke`, `Opacity`, and `UseEvenOddFill`.
+Path helpers include `MoveTo`, `LineTo`, `CurveTo`, `Close`, `Rect`, `RoundedRect`, `Ellipse`, `Circle`, `Arc`, `Sector`, `Polyline`, `Polygon`, `Fill`, `FillLinearGradient`, `FillRadialGradient`, `Stroke`, `Dash`, `Opacity`, and `UseEvenOddFill`. `RoundedRect` clamps its radius to half the shorter side.
+
+## Gradient Fills
+
+`FillLinearGradient(from, to, angle = 0)` and `FillRadialGradient(center, edge)` replace a path's flat fill with a two-stop PDF shading clipped to the path:
+
+```csharp
+container.Canvas(90, c =>
+{
+    // Left to right
+    c.Path(p => p.Rect(0, 0, 110, 70).FillLinearGradient("#2E6DA4", "#FFFFFF"));
+
+    // Top to bottom, with an outline
+    c.Path(p => p.RoundedRect(125, 0, 110, 70, 14)
+        .FillLinearGradient("#E87722", "#1A3C5E", angle: 90)
+        .Stroke("#1A3C5E", 1));
+
+    // Radial: centre colour in the middle, edge colour at half the larger side
+    c.Path(p => p.Circle(290, 35, 35).FillRadialGradient("#FFFFFF", "#E87722"));
+});
+```
+
+- The gradient spans the path's bounding box. The linear `angle` is in degrees clockwise from left-to-right: 0 runs left to right, 90 top to bottom.
+- Beyond the gradient axis the end colours extend, so the whole shape is painted.
+- `.Fill(...)` and the gradient methods replace each other: the last call wins.
+- `.Stroke(...)`, `.UseEvenOddFill()`, `.Opacity(...)`, and `.Dash(...)` still apply.
+
+## Links and Bookmarks
+
+A canvas can place interactive regions at absolute positions. They draw nothing themselves: paint a button or label first, then lay the link over the same area.
+
+```csharp
+container.Canvas(90, c =>
+{
+    c.FillRoundedRect(0, 10, 180, 30, 6, "#2E6DA4");
+    c.Text("Open the repository", 12, 29, "#FFFFFF", 9, bold: true);
+    c.Link(0, 10, 180, 30, "https://github.com/sahebansari/TerraPDF");
+
+    c.InternalLink(200, 10, 180, 30, pageNumber: 1);            // fits page 1 in the window
+    c.InternalLink(200, 50, 180, 30, pageNumber: 3, top: 120);  // scrolls to 120 pt from the top
+
+    c.Bookmark("Chapter 1");
+    c.Bookmark("Section 1.1", y: 40, parentTitle: "Chapter 1");
+});
+```
+
+- `pageNumber` is the 1-based physical page. Rendering throws `InvalidOperationException` if the document has fewer pages.
+- `top` is the distance from the top of the target page; `null` fits the whole page.
+- `Bookmark` targets the page the canvas is drawn on, at canvas-relative `y` (negative values clamp to 0). A repeated (title, parent) pair is recorded once, which suits canvases repeated on every page. See [Bookmarks](/docs/bookmarks/).
+
+## QR Codes on the Canvas
+
+`QrCode` draws a QR code inside a square as a single vector path, with runs of dark modules merged into rectangles:
+
+```csharp
+container.Canvas(120, c =>
+{
+    c.QrCode("https://github.com/sahebansari/TerraPDF", 0, 0, 110, backgroundHex: "#FFFFFF");
+    c.QrCode("TerraPDF", 130, 0, 110, QrErrorCorrectionLevel.H, hexColor: "#1A3C5E");
+    c.Link(0, 0, 110, 110, "https://github.com/sahebansari/TerraPDF");   // clickable too
+});
+```
+
+- `size` includes the quiet zone (4 modules by default).
+- `backgroundHex = null` leaves the square transparent.
+- Data too large for the chosen error-correction level throws `NotSupportedException` when `QrCode` is called, not at render time.
+- For a QR code in the layout flow instead, use `container.QrCode(...)`. See [Barcodes & QR Codes](/docs/barcodes-and-qr-codes/).
 
 ## Simple Bar Chart
 
@@ -219,4 +304,4 @@ container.Canvas(120, c =>
 - Use `Path(...).UseEvenOddFill()` for compound shapes such as donuts or cutouts.
 - Prefer vector graphics for crisp charts and diagrams that should scale cleanly in PDF viewers.
 - A canvas image is decoded once and reused on every page the canvas is drawn on.
-- See the [Canvas Media sample](/samples/canvas-media-showcase/) for every fit mode, dash phase, arc, sector, and text angle drawn side by side.
+- See the [Canvas Media sample](/samples/canvas-media-showcase/) for every fit mode, dash phase, arc, sector, and text angle drawn side by side, and the [Canvas Extras sample](/samples/canvas-extras-showcase/) for dashed shapes, gradients, links, bookmarks, and QR codes.
