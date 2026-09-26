@@ -3,6 +3,12 @@
     "group": "For AI Agents",
     "items": [
       {
+        "url": "/docs/create-pdfs-with-ai/",
+        "title": "Create PDFs with AI: Step-by-Step",
+        "icon": "✨",
+        "desc": "Set up TerraPDF.Mcp in Claude Desktop, VS Code, or Cursor, or build a .NET agent with TerraPDF.Agents."
+      },
+      {
         "url": "/docs/ai-agents/",
         "title": "TerraPDF for AI Agents",
         "icon": "🤖",
