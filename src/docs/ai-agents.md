@@ -15,7 +15,7 @@ is also the page to read yourself if you want the whole API on one screen.
 > to set up TerraPDF.Mcp in Claude Desktop, VS Code, or Cursor, or to build
 > a .NET agent with TerraPDF.Agents. This page is the technical reference.
 
-Everything below is verified against **TerraPDF 2.3.0**. Members marked
+Everything below is verified against **TerraPDF 2.4.0**. Members marked
 **[2.3+]** were added in 2.3.0 and do not compile against older versions.
 
 ---
@@ -166,7 +166,7 @@ Image and font paths resolve against the working directory (`--asset-dir` or
 ## Package and namespaces
 
 ```bash
-dotnet add package TerraPDF --version 2.3.0
+dotnet add package TerraPDF --version 2.4.0
 ```
 
 Targets `net8.0`, `net9.0`, and `net10.0`. Zero dependencies, no native
@@ -386,7 +386,7 @@ row.AutoItem()              // Row: width of its content
 
 ## API reference
 
-Verified against 2.3.0. Optional parameters show their defaults.
+Verified against 2.4.0. Optional parameters show their defaults.
 
 ### Entry points
 

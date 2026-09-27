@@ -13,6 +13,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.4.0] - 2026-09-27
+
+A performance release. Documents render 2–30× faster with 60–95% fewer
+allocations, and existing code needs no changes. In a 2-CPU / 1 GB container, a
+one-page invoice went from 356 to about 10,200 pages per second and a 19-page
+annual report from 3,100 to about 25,200. Output is byte-identical apart from
+the text-run, PNG and font-width changes below.
+
+### Performance
+- **Text layout**: each word's width, font and colour are computed once, and
+  wrapped lines and table row heights are reused for the rest of the render.
+  Documents without page numbers skip the second layout pass. Consecutive
+  words in the same style share one `Tj` operator, so PDFs are up to 14%
+  smaller.
+- **Tables**: a page slice of a split table only visits its own rows, and each
+  cell allocates about 70% less.
+- **Images**: PNGs are decoded when the document is saved, once per distinct
+  image, and the result is cached for the life of the process (up to 32 MB),
+  so a logo used in every document is converted once. RGB and palette PNGs
+  are embedded still compressed (`/Predictor 15`), with no decode at all.
+- **Custom fonts**: text without Devanagari shaping takes a fast path, and
+  subsetting no longer copies unchanged tables.
+- **QR codes** generate 2–6× faster, with identical symbols. Canvas QR codes
+  are encoded once, when recorded.
+- **Vector canvas and output**: coordinates use a fixed-point formatter with
+  byte-identical output, content streams are compressed straight from the page
+  buffer, and large documents compress their pages in parallel.
+- New BenchmarkDotNet suite and throughput harness in the repository's
+  `benchmarks/` folder; see
+  [Benchmarks](https://github.com/sahebansari/TerraPDF/blob/master/docs/benchmarks.md).
+
+### Fixed
+- Built-in font widths now match the Adobe AFM metrics; 25 entries were wrong,
+  among them the curly quotes and bullet in Helvetica. Characters a standard
+  font cannot show are measured as the `?` drawn in their place. Text
+  containing these characters may wrap slightly differently.
+- A truncated or corrupt PNG raises `InvalidDataException` instead of being
+  embedded as data a PDF viewer cannot render.
+- `Image(byte[])` keeps its own copy of the bytes, so reusing the buffer before
+  the document is saved no longer changes the image.
+
+### Changed
+- Errors in PNG pixel data are raised when the document is saved
+  (`PublishPdf`) rather than by `Image(...)`. Header errors, such as an
+  unsupported format, are still raised by `Image(...)`.
+
+### Agent packages
+- **TerraPDF.Agents 1.0.1** and **TerraPDF.Mcp 1.0.1** use TerraPDF 2.4.0, and
+  report a malformed PNG as an error the model can act on instead of failing
+  the tool call.
+
+---
+
 ## [2.3.0] - 2026-09-26
 
 The vector canvas gains gradient fills, dashes on every stroke, and

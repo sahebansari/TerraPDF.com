@@ -201,6 +201,13 @@ data once and shares it document-wide, instead of duplicating the bytes for
 every occurrence. This keeps output files small for documents like
 multi-page reports or catalogues with a repeating brand mark.
 
+From 2.4.0, PNG pixels are read when the document is saved, once per distinct
+image, and the converted image is kept in a bounded (32 MB) process-wide cache.
+A service that puts the same logo in every document converts it once, not once
+per document. `Image(byte[])` keeps its own copy of the bytes, so you can reuse
+the buffer straight away. Because pixels are read at save time, a truncated or
+corrupt PNG raises `InvalidDataException` from `PublishPdf`, not from `Image`.
+
 ---
 
 ## Checking File Existence

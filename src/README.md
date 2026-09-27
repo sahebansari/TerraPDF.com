@@ -17,6 +17,13 @@ A free, pure C# library designed for fast and reliable PDF generation.
 
 📚 **Documentation:** https://github.com/sahebansari/TerraPDF/tree/master/docs
 
+> **New in 2.4.0:** Documents render 2–30× faster with 60–95% fewer allocations,
+and existing code needs no changes. Text layout, tables, PNG images, custom fonts,
+QR codes, and the vector canvas are all faster; a logo used in every document is
+converted once per process. Built-in font widths now match the Adobe metrics, so
+text containing curly quotes or bullets may wrap slightly differently. See the
+[Changelog](/changelog/).
+>
 > **New in 2.3.0:** Canvas paths take linear and radial gradient fills
 (`FillLinearGradient`, `FillRadialGradient`), every stroked shape and path can be
 dashed, and a canvas can place clickable links (`Link`, `InternalLink`), outline
