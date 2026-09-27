@@ -1,7 +1,7 @@
 {
-  "version": "2.3.0",
-  "releaseDate": "September 26, 2026",
-  "releaseHighlight": "Canvas Gradients, Links & QR Codes",
+  "version": "2.4.0",
+  "releaseDate": "September 27, 2026",
+  "releaseHighlight": "Faster Rendering, Lower Memory",
   "url": "https://terrapdf.com",
   "github": "https://github.com/sahebansari/TerraPDF",
   "nuget": "https://www.nuget.org/packages/TerraPDF/",
